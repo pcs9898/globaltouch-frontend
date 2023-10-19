@@ -2,15 +2,16 @@ import SignForm from "@/src/components/molecules/signForm";
 import { Flex } from "@chakra-ui/react";
 import Head from "next/head";
 
-export default function SignUp() {
+export default function SignInPage() {
   const onSubmit = (data) => {
     console.log(data);
   };
+
   return (
     <>
-      <Head>Sign Up</Head>
+      <Head>Sign In</Head>
       <Flex>
-        <SignForm isBtnLoading={false} onSignUpSubmit={onSubmit} />
+        <SignForm isBtnLoading={false} onSignInSubmit={onSubmit} />
       </Flex>
     </>
   );
