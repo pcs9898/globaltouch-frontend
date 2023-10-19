@@ -1,7 +1,13 @@
 import moment from "moment";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
-export default function FormatTimeAgo(timestamp: number): string {
+interface IUseFormatTimeAgo {
+  timestamp: string;
+}
+
+export default function useFormatTimeAgo({
+  timestamp,
+}: IUseFormatTimeAgo): string {
   const { t } = useTranslation();
   const date = new Date(timestamp);
   const now = new Date();
