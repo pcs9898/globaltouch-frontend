@@ -35,24 +35,18 @@ interface ICustomCard {
   //   };
   // };
   projectData?: IFetchProjectsTrendingResponseDto;
-  projectDonationData?: IFetchUserLoggedInDonationsResponseDto;
+  //   projectDonationData?: Partial<IFetchUserLoggedInDonationsResponseDto>;
 
-  // 백엔드 부분 사진한장만 보내도록 수정해야야함
-
-  // projectDonationData?: {
-  //   amount: number;
-  //   project: {
-  //     project_id: string;
-  //     title: string;
-  //     created_at: string;
-  //     countryCode: {
-  //       country_code: string;
-  //     };
-  //     projectImages: {
-  //       image_url;
-  //     };
-  //   };
-  // };
+  projectDonationData?: {
+    amount: number;
+    project_image_url: string;
+    created_at: string;
+    project: {
+      project_id: string;
+      title: string;
+      countryCode: { country_code: string };
+    };
+  };
 }
 
 export default function CustomCard({
@@ -65,17 +59,17 @@ export default function CustomCard({
     amount_raised,
     amount_required,
     countryCode: { country_code: country_code_project = null } = {},
-    projectImages: { image_url: image_url_project = null } = {},
+    project_image_url: image_url_project,
   } = projectData ?? {};
 
   const {
     amount,
+    project_image_url: image_url_projectDonation,
+    created_at = null,
     project: {
       project_id: project_id_projectDonation = null,
-      created_at = null,
       title: title_projectDonation = null,
       countryCode: { country_code: country_code_projectDonation = null } = {},
-      projectImages: { image_url: image_url_projectDonation = null } = {},
     } = {},
   } = projectDonationData ?? {};
 

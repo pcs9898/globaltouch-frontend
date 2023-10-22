@@ -138,6 +138,7 @@ export type IFetchProjectResponseDto = {
 export type IFetchProjectsByCountryDto = {
   country_code: Scalars['String']['input'];
   offset: Scalars['Int']['input'];
+  project_category?: IProject_Category_With_All_Enum;
 };
 
 export type IFetchProjectsByCountryResponseDto = {
@@ -145,8 +146,8 @@ export type IFetchProjectsByCountryResponseDto = {
   amount_raised: Scalars['Int']['output'];
   amount_required: Scalars['Int']['output'];
   countryCode: ICountryCode;
-  projectImages: Array<IProjectImage>;
   project_id: Scalars['String']['output'];
+  project_image_url: Scalars['String']['output'];
   title: Scalars['String']['output'];
 };
 
@@ -165,8 +166,8 @@ export type IFetchProjectsNewestResponseDto = {
   amount_raised: Scalars['Int']['output'];
   amount_required: Scalars['Int']['output'];
   countryCode: ICountryCode;
-  projectImages: Array<IProjectImage>;
   project_id: Scalars['String']['output'];
+  project_image_url: Scalars['String']['output'];
   title: Scalars['String']['output'];
 };
 
@@ -185,8 +186,8 @@ export type IFetchProjectsTrendingResponseDto = {
   amount_raised: Scalars['Int']['output'];
   amount_required: Scalars['Int']['output'];
   countryCode: ICountryCode;
-  projectImages: Array<IProjectImage>;
   project_id: Scalars['String']['output'];
+  project_image_url: Scalars['String']['output'];
   title: Scalars['String']['output'];
 };
 
@@ -215,6 +216,7 @@ export type IFetchUserLoggedInDonationsResponseDto = {
   amount: Scalars['Int']['output'];
   created_at: Scalars['DateTime']['output'];
   project: IProject;
+  project_image_url: Scalars['String']['output'];
 };
 
 export type IFetchUserLoggedInDonationsWithTotalResponseDto = {
@@ -232,7 +234,8 @@ export type IFetchUserLoggedInProjectsResponseDto = {
   amount_raised: Scalars['Int']['output'];
   amount_required: Scalars['Int']['output'];
   countryCode: ICountryCode;
-  projectImages: Array<IProjectImage>;
+  project_id: Scalars['String']['output'];
+  project_image_url: Scalars['String']['output'];
   title: Scalars['String']['output'];
 };
 
@@ -376,6 +379,7 @@ export type IProjectDonation = {
 
 export type IProjectImage = {
   __typename?: 'ProjectImage';
+  image_index: Scalars['Int']['output'];
   image_url: Scalars['String']['output'];
   project: IProject;
   projectImage_id: Scalars['String']['output'];
@@ -457,7 +461,8 @@ export type ISearchProjectResponseDto = {
   amount_raised: Scalars['Int']['output'];
   amount_required: Scalars['Int']['output'];
   countryCode: ICountryCode;
-  projectImages: Array<IProjectImage>;
+  project_id: Scalars['String']['output'];
+  project_image_url: Scalars['String']['output'];
   title: Scalars['String']['output'];
 };
 

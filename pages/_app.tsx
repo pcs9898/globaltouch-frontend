@@ -1,21 +1,35 @@
-import { ni18nConfig } from "@/ni18n.config";
 import client from "@/src/commons/libraries/apollo/apollo";
 import { customTheme } from "@/src/commons/theme";
 import chakraColorModeConfig from "@/src/commons/theme/config.theme";
 import { ApolloProvider } from "@apollo/client";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
-import { appWithI18Next, useSyncLanguage } from "ni18n";
+import { appWithTranslation } from "next-i18next";
 import { RecoilRoot } from "recoil";
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
+import nextI18NextConfig from "../next-i18next.config.js";
 import { useEffect } from "react";
+import { useRouter } from "next/router.js";
+import Cookies from "js-cookie";
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const locale =
-    typeof window !== "undefined" && window.localStorage.getItem("language");
+  const router = useRouter();
+  // const preferredLocale = Cookies.get("locale");
 
-  useSyncLanguage(locale);
+  // if (preferredLocale) {
+  //   router.push(router.pathname, router.asPath, {
+  //     locale: preferredLocale,
+  //   });
+  // }
+
+  useEffect(() => {
+    const preferredLocale = Cookies.get("locale");
+
+    if (preferredLocale) {
+      router.push(router.pathname, router.asPath, {
+        locale: preferredLocale,
+      });
+    }
+  }, []);
 
   return (
     <ChakraProvider theme={customTheme}>
@@ -31,4 +45,4 @@ const App = ({ Component, pageProps }: AppProps) => {
   );
 };
 
-export default appWithI18Next(App, ni18nConfig);
+export default appWithTranslation(App, nextI18NextConfig);

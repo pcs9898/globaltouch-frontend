@@ -10,8 +10,6 @@ export default function SignGreetingSection({
 }: ISignGreetingSection) {
   const { t } = useTranslation();
 
-  const isSignIn = signGreetingSectionOption === "signIn";
-
   return (
     <Flex flexDir="column" alignItems="flex-start" w="100%">
       <Image src="logo.svg" alt="logo" w="1.5rem" />

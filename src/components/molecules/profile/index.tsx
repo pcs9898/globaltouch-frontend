@@ -24,9 +24,9 @@ export default function Profile({
     profile_image_url,
     countryCode: { country_code },
   } = profileData;
-  const { t, ready: tReady } = useTranslation();
+  const { t } = useTranslation();
   const countryName = useCountryCodeToLocaleCountryName({ country_code });
-  return tReady ? (
+  return (
     <Flex gap="1rem">
       <Avatar src={profile_image_url} name={name} w="4.25rem" h="4.25rem" />
       <Flex flexDir="column">
@@ -66,7 +66,5 @@ export default function Profile({
         </Flex>
       </Flex>
     </Flex>
-  ) : (
-    <CustomSkeleton skeletonType="profile" />
   );
 }
