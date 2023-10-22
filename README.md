@@ -5,9 +5,9 @@
 ## Commons
 
 - [x] feature1/molecules
-- [ ] feature2/organisms
-- [ ] feature3/templates
-- [ ] feature4/layouts
+- [x] feature2/organisms
+- [ ] feature3/layouts
+- [ ] feature4/templates
 - [ ] feature5/pages
 
 ## Units

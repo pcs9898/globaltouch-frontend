@@ -4,7 +4,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { useTranslation } from "next-i18next";
 import CustomSkeleton from "../customSkeleton";
 
-interface ICustomTabs {
+interface ICustomTabsProps {
   categoryKindOption:
     | "projectListCategory"
     | "projectCategory"
@@ -40,7 +40,7 @@ const getEngCategoryListsForBe = (categoryKindOption: string): string[] =>
 export default function CustomTab({
   categoryKindOption,
   onClickTab,
-}: ICustomTabs) {
+}: ICustomTabsProps) {
   const { t, ready: tReady } = useTranslation();
   const [isOverflowing, setIsOverflowing] = useState(false);
   const overflowCheckRef = useRef<HTMLDivElement>(null);
