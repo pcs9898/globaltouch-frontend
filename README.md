@@ -8,20 +8,23 @@
 - [x] feature2/organisms
 - [x] feature3/layouts
 - [ ] feature4/templates
-- [ ] feature5/pages
 
-## Units
+## Pages
 
-- [ ] feature6/signUp
-- [ ] feature7/signIn
-- [ ] feature8/updateCountryCode
-- [ ] feature9/home
-- [ ] feature10/createProject
-- [ ] feature11/projectsListByCountryCode
-- [ ] feature12/projectDetail
-- [ ] feature13/createUpdatedProject
-- [ ] feature14/projectUpdates
-- [ ] feature15/donation
-- [ ] feature16/search
-- [ ] feature17/editProfile
-- [ ] feature18/settings
+- [ ] feature5/signUp
+- [ ] feature6/signIn
+- [ ] feature7/updateCountryCode
+- [ ] feature8/home
+- [ ] feature9/createProject
+- [ ] feature10/projectsListByCountryCode
+- [ ] feature11/projectDetail
+- [ ] feature12/createUpdatedProject
+- [ ] feature13/projectUpdates
+- [ ] feature14/donation
+- [ ] feature15/search
+- [ ] feature16/editProfile
+- [ ] feature17/settings
+
+## Optimization
+
+- [ ]
