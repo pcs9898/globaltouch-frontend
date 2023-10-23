@@ -6,7 +6,7 @@
 
 - [x] feature1/molecules
 - [x] feature2/organisms
-- [ ] feature3/layouts
+- [x] feature3/layouts
 - [ ] feature4/templates
 - [ ] feature5/pages
 

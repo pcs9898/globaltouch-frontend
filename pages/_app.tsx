@@ -10,6 +10,7 @@ import nextI18NextConfig from "../next-i18next.config.js";
 import { useEffect } from "react";
 import { useRouter } from "next/router.js";
 import Cookies from "js-cookie";
+import Layouts from "@/src/components/layouts/index";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -38,7 +39,9 @@ const App = ({ Component, pageProps }: AppProps) => {
           <ColorModeScript
             initialColorMode={chakraColorModeConfig.initialColorMode}
           />
-          <Component {...pageProps} />
+          <Layouts>
+            <Component {...pageProps} />
+          </Layouts>
         </ApolloProvider>
       </RecoilRoot>
     </ChakraProvider>

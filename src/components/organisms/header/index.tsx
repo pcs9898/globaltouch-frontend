@@ -62,6 +62,7 @@ export default function Header({}: IHeaderProps) {
       h={{ base: "3.5rem", md: "5rem" }}
       justifyContent="space-between"
       px="0.5rem"
+      w="100%"
     >
       {/* have to add shadow up to uri */}
       <Show above="md">

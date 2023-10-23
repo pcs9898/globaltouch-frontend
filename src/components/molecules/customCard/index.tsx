@@ -83,57 +83,62 @@ export default function CustomCard({
   });
 
   return (
-    <Card
-      width="100%"
-      variant="unstyled"
-      as={Link}
-      href={`/project/${project_id_project ?? project_id_projectDonation}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <CardBody width="100%" padding={0}>
-        <Box
-          bgImage={`url(${image_url_project ?? image_url_projectDonation})`}
-          bgSize={isHovered ? "110%" : "100%"}
-          bgRepeat="repeat"
-          bgPosition="center"
-          height="11rem"
-          transition="background-size 0.2s"
-        />
+    (project_id_project || project_id_projectDonation) && (
+      <Card
+        width="100%"
+        variant="unstyled"
+        as={Link}
+        href={`/project/${project_id_project ?? project_id_projectDonation}`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <CardBody width="100%" padding={0}>
+          <Box
+            bgImage={`url(${image_url_project ?? image_url_projectDonation})`}
+            bgSize={isHovered ? "110%" : "100%"}
+            bgRepeat="repeat"
+            bgPosition="center"
+            height="11rem"
+            transition="background-size 0.2s"
+          />
 
-        <Flex padding="0.75rem 0.5rem" gap="0.5rem" flexDir="column">
-          <Flex flexDirection="column">
-            <Heading fontSize="1.125rem" fontWeight="bold">
-              {title_project ?? title_projectDonation}
-            </Heading>
-            <Text fontSize="0.875rem" fontWeight="medium" color="gray">
-              {countryName}
-            </Text>
-          </Flex>
-
-          <Flex flexDir="column" gap="0.25rem">
-            {projectData && (
-              <Progress
-                width="100%"
-                value={CalculatePercentage({
-                  numerator: amount_raised,
-                  denominator: amount_required,
-                })}
-              />
-            )}
-
-            <Flex gap="0.25rem" fontWeight="semibold" fontSize="1rem">
-              <Text fontWeight="semibold">{formattedAmount}</Text>
-              {projectDonationData && <Text>‧</Text>}
-              <Text color={projectData ? "black" : "gray"} fontWeight="medium">
-                {projectData
-                  ? t("projectCardRaised")
-                  : FormatTimeAgo({ timestamp: created_at })}
+          <Flex padding="0.75rem 0.5rem" gap="0.5rem" flexDir="column">
+            <Flex flexDirection="column">
+              <Heading fontSize="1.125rem" fontWeight="bold">
+                {title_project ?? title_projectDonation}
+              </Heading>
+              <Text fontSize="0.875rem" fontWeight="medium" color="gray">
+                {countryName}
               </Text>
             </Flex>
+
+            <Flex flexDir="column" gap="0.25rem">
+              {projectData && (
+                <Progress
+                  width="100%"
+                  value={CalculatePercentage({
+                    numerator: amount_raised,
+                    denominator: amount_required,
+                  })}
+                />
+              )}
+
+              <Flex gap="0.25rem" fontWeight="semibold" fontSize="1rem">
+                <Text fontWeight="semibold">{formattedAmount}</Text>
+                {projectDonationData && <Text>‧</Text>}
+                <Text
+                  color={projectData ? "black" : "gray"}
+                  fontWeight="medium"
+                >
+                  {projectData
+                    ? t("projectCardRaised")
+                    : FormatTimeAgo({ timestamp: created_at })}
+                </Text>
+              </Flex>
+            </Flex>
           </Flex>
-        </Flex>
-      </CardBody>
-    </Card>
+        </CardBody>
+      </Card>
+    )
   );
 }
