@@ -13,17 +13,16 @@
 
 - [ ] feature5/signUpPage
 - [ ] feature6/signInPage
-- [ ] feature7/updateCountryCodePage
-- [ ] feature8/homePage
-- [ ] feature9/createProjectPage
-- [ ] feature10/projectsListByCountryCodePage
-- [ ] feature11/projectDetailPage
-- [ ] feature12/createUpdatedProjectPage
-- [ ] feature13/projectUpdatesPage
-- [ ] feature14/donationPage
-- [ ] feature15/searchPage
-- [ ] feature16/editProfilePage
-- [ ] feature17/settingsPage
+- [ ] feature7/homePage
+- [ ] feature8/createProjectPage
+- [ ] feature9/projectsListByCountryCodePage
+- [ ] feature10/projectDetailPage
+- [ ] feature11/createUpdatedProjectPage
+- [ ] feature12/projectUpdatesPage
+- [ ] feature13/donationPage
+- [ ] feature14/searchPage
+- [ ] feature15/editProfilePage
+- [ ] feature16/settingsPage
 
 ## Optimization
 
