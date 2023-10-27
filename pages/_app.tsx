@@ -14,13 +14,6 @@ import Layouts from "@/src/components/layouts/index";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
-  // const preferredLocale = Cookies.get("locale");
-
-  // if (preferredLocale) {
-  //   router.push(router.pathname, router.asPath, {
-  //     locale: preferredLocale,
-  //   });
-  // }
 
   useEffect(() => {
     const preferredLocale = Cookies.get("locale");
@@ -29,6 +22,8 @@ const App = ({ Component, pageProps }: AppProps) => {
       router.push(router.pathname, router.asPath, {
         locale: preferredLocale,
       });
+    } else {
+      Cookies.set("locale", router.locale);
     }
   }, []);
 

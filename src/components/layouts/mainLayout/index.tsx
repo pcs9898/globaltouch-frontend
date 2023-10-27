@@ -10,13 +10,19 @@ interface IMainLayout {
 export default function MainLayout({ children }: IMainLayout) {
   const { pathname } = useRouter();
 
-  const isCenterLayout = pathname === "/search" || pathname === "/me";
+  const isFullLayout =
+    pathname === "/signIn" ||
+    pathname === "/signUp" ||
+    pathname === "/updateCountryCode" ||
+    pathname === "/" ||
+    /^\/country\/[^/]+$/.test(pathname) ||
+    /^\/project\/[^/]+$/.test(pathname);
 
   return (
     <Container
       as="main"
       w="100%"
-      maxW={isCenterLayout ? "container.md" : "full"}
+      maxW={isFullLayout ? "full" : "container.md"}
       m={0}
       p={0}
     >
