@@ -30,7 +30,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {
   signInSchema,
   signUpSchema,
-  updateCountryCodeSchema,
+  // updateCountryCodeSchema,
 } from "./signForm.yupSchemas";
 
 interface ISignForm {
@@ -59,25 +59,15 @@ export default function SignForm({
     watch,
     formState: { errors, isValid },
   } = useForm({
-    resolver: yupResolver(
-      (onSignInSubmit
-        ? signInSchema
-        : onSignUpSubmit
-        ? signUpSchema
-        : onUpdateCountryCodeSubmit
-        ? updateCountryCodeSchema
-        : undefined) as any
-    ),
+    resolver: yupResolver(onSignInSubmit ? signInSchema : signUpSchema),
     mode: "onChange",
   });
 
   const onSubmit = (data) => {
     if (onSignInSubmit) {
       onSignInSubmit(data);
-    } else if (onSignUpSubmit) {
-      onSignUpSubmit(data);
     } else {
-      onUpdateCountryCodeSubmit(data);
+      onSignUpSubmit(data);
     }
   };
 
@@ -98,7 +88,7 @@ export default function SignForm({
           </FormControl>
         )}
 
-        {(onSignUpSubmit ?? onUpdateCountryCodeSubmit) && (
+        {/* {(onSignUpSubmit ?? onUpdateCountryCodeSubmit) && (
           <FormControl isInvalid={!!errors.country_code}>
             <Select
               placeholder={t("signUpFormCountry")}
@@ -116,7 +106,7 @@ export default function SignForm({
               {String(errors.country_code?.message)}
             </FormErrorMessage>
           </FormControl>
-        )}
+        )} */}
 
         {(onSignUpSubmit ?? onSignInSubmit) && (
           <FormControl isInvalid={!!errors.password}>
@@ -146,8 +136,6 @@ export default function SignForm({
             </FormErrorMessage>
           </FormControl>
         )}
-
-        {onUpdateCountryCodeSubmit && <Divider />}
 
         <Button
           w="100%"
