@@ -27,7 +27,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 
 interface IHeaderProps {}
@@ -43,13 +43,14 @@ const colorProps = {
 };
 
 export default function Header({}: IHeaderProps) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { colorMode, toggleColorMode } = useColorMode();
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const drawerBtnRef = useRef();
 
-  const currentLocale = i18n.language;
+  const currentLocale = router.locale;
+  // const currentLocale = Cookies.get("locale");
 
   const changeLocale = (locale) => {
     Cookies.set("locale", locale);
@@ -71,6 +72,7 @@ export default function Header({}: IHeaderProps) {
             <Box as={Search} fontWeight="semibold" mr="0.25rem" />
             {t("headerSearchBtn")}
           </Button>
+
           <Button {...colorProps} as={Link} href="how-it-works">
             {t("headerHowItWorksBtn")}
           </Button>
@@ -103,7 +105,7 @@ export default function Header({}: IHeaderProps) {
         transform={["translateX(-50%)", null, null, null]} // Centering in mobile view
         zIndex="1"
         as={Link}
-        href="/me"
+        href="/"
         cursor="pointer"
       >
         globalTouch
@@ -111,7 +113,7 @@ export default function Header({}: IHeaderProps) {
 
       <Show above="md">
         <HStack gap={0}>
-          <Menu>
+          <Menu matchWidth={true}>
             {({ isOpen }) => (
               <>
                 <MenuButton
@@ -123,7 +125,7 @@ export default function Header({}: IHeaderProps) {
                 >
                   {localeObg[currentLocale][0]}
                 </MenuButton>
-                <MenuList>
+                <MenuList maxW="150px">
                   <MenuOptionGroup defaultValue={currentLocale} type="radio">
                     <MenuItemOption value={currentLocale} fontWeight="semibold">
                       {localeObg[currentLocale][0]}

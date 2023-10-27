@@ -7,23 +7,23 @@
 - [x] feature1/molecules
 - [x] feature2/organisms
 - [x] feature3/layouts
-- [ ] feature4/templates
+- [x] feature4/templates
 
 ## Pages
 
-- [ ] feature5/signUp
-- [ ] feature6/signIn
-- [ ] feature7/updateCountryCode
-- [ ] feature8/home
-- [ ] feature9/createProject
-- [ ] feature10/projectsListByCountryCode
-- [ ] feature11/projectDetail
-- [ ] feature12/createUpdatedProject
-- [ ] feature13/projectUpdates
-- [ ] feature14/donation
-- [ ] feature15/search
-- [ ] feature16/editProfile
-- [ ] feature17/settings
+- [ ] feature5/signUpPage
+- [ ] feature6/signInPage
+- [ ] feature7/updateCountryCodePage
+- [ ] feature8/homePage
+- [ ] feature9/createProjectPage
+- [ ] feature10/projectsListByCountryCodePage
+- [ ] feature11/projectDetailPage
+- [ ] feature12/createUpdatedProjectPage
+- [ ] feature13/projectUpdatesPage
+- [ ] feature14/donationPage
+- [ ] feature15/searchPage
+- [ ] feature16/editProfilePage
+- [ ] feature17/settingsPage
 
 ## Optimization
 
