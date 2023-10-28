@@ -1,4 +1,3 @@
-import client from "@/src/commons/libraries/apollo/apollo";
 import { customTheme } from "@/src/commons/theme";
 import chakraColorModeConfig from "@/src/commons/theme/config.theme";
 import { ApolloProvider } from "@apollo/client";
@@ -11,6 +10,8 @@ import { useEffect } from "react";
 import { useRouter } from "next/router.js";
 import Cookies from "js-cookie";
 import Layouts from "@/src/components/layouts/index";
+
+import ApolloSetting from "@/src/commons/libraries/apollo/apolloSetting";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -30,14 +31,14 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ChakraProvider theme={customTheme}>
       <RecoilRoot>
-        <ApolloProvider client={client}>
+        <ApolloSetting>
           <ColorModeScript
             initialColorMode={chakraColorModeConfig.initialColorMode}
           />
           <Layouts>
             <Component {...pageProps} />
           </Layouts>
-        </ApolloProvider>
+        </ApolloSetting>
       </RecoilRoot>
     </ChakraProvider>
   );

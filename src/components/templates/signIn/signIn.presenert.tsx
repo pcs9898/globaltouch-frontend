@@ -2,17 +2,17 @@ import { Box, Flex } from "@chakra-ui/react";
 import SignForm from "../../molecules/signForm";
 import SignGreetingSection from "../../molecules/signGreetingSection";
 
-interface ISignUpPresenter {
-  onSignUpSubmit: (data) => void;
-  signUpLoading: boolean;
+interface ISignInPresenter {
+  onSignInSubmit: (data) => void;
   onSignGoogle: () => void;
+  signInLoading: boolean;
 }
 
-export default function SignUpPresenter({
-  onSignUpSubmit,
-  signUpLoading,
+export default function SignInPresenter({
+  onSignInSubmit,
   onSignGoogle,
-}: ISignUpPresenter) {
+  signInLoading,
+}: ISignInPresenter) {
   return (
     <Flex
       flexDir={{ base: "column", md: "row" }}
@@ -44,9 +44,9 @@ export default function SignUpPresenter({
         alignItems={{ base: "flex-start", md: "center" }}
       >
         <SignForm
-          isBtnLoading={signUpLoading}
-          onSignUpSubmit={onSignUpSubmit}
+          onSignInSubmit={onSignInSubmit}
           onSignGoogle={onSignGoogle}
+          isBtnLoading={signInLoading}
         />
       </Flex>
     </Flex>

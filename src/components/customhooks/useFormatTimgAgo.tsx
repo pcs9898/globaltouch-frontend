@@ -5,9 +5,7 @@ interface IUseFormatTimeAgo {
   timestamp: string;
 }
 
-export default function useFormatTimeAgo({
-  timestamp,
-}: IUseFormatTimeAgo): string {
+export const useFormatTimeAgo = ({ timestamp }: IUseFormatTimeAgo) => {
   const { t } = useTranslation();
   const date = new Date(timestamp);
   const now = new Date();
@@ -29,4 +27,4 @@ export default function useFormatTimeAgo({
   } else {
     return moment(date).format("YYYY-MM-DD");
   }
-}
+};

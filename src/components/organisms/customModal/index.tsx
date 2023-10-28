@@ -41,6 +41,7 @@ export default function CustomModal({
       <Modal
         isOpen={isOpen}
         onClose={onClose}
+        /* @ts-ignore */
         scrollBehavior={scrollBehavior}
         size={{ base: "full", md: "xl" }}
       >

@@ -2,7 +2,7 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 
 interface ISignGreetingSection {
-  signGreetingSectionOption: "signIn" | "signUp" | "updateCountryCode";
+  signGreetingSectionOption: "signIn" | "signUp";
 }
 
 export default function SignGreetingSection({
@@ -11,8 +11,13 @@ export default function SignGreetingSection({
   const { t } = useTranslation();
 
   return (
-    <Flex flexDir="column" alignItems="flex-start" w="100%">
+    <Flex
+      flexDir="column"
+      alignItems="flex-start"
+      w={{ base: "100%", md: "max-content" }}
+    >
       <Image src="logo.svg" alt="logo" w="1.5rem" />
+
       <Text
         paddingTop={{ base: "2.5rem", md: "5rem" }}
         pb="1.5rem"
@@ -31,9 +36,7 @@ export default function SignGreetingSection({
           `${
             signGreetingSectionOption === "signIn"
               ? "signInGreeting2"
-              : signGreetingSectionOption === "signUp"
-              ? "signUpGreeting2"
-              : "updateCountryCodeGreeting"
+              : "signUpGreeting2"
           }`
         )}
       </Text>

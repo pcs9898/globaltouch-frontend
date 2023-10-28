@@ -1,8 +1,4 @@
-import {
-  ICreateUserDto,
-  ILoginDto,
-  IUpdateCountryCodeDto,
-} from "@/src/commons/types/generated/types";
+import { ICreateUserDto, ILoginDto } from "@/src/commons/types/generated/types";
 import {
   Box,
   Button,
@@ -36,16 +32,14 @@ import {
 interface ISignForm {
   onSignInSubmit?: (data: ILoginDto) => void;
   onSignUpSubmit?: (data: ICreateUserDto) => void;
-  onUpdateCountryCodeSubmit?: (data: IUpdateCountryCodeDto) => void;
+  onSignGoogle: () => void;
   isBtnLoading: boolean;
 }
-
-const countriesInfo = require("/public/countriesInfo.json");
 
 export default function SignForm({
   onSignInSubmit,
   onSignUpSubmit,
-  onUpdateCountryCodeSubmit,
+  onSignGoogle,
   isBtnLoading,
 }: ISignForm) {
   const { t, i18n } = useTranslation();
@@ -57,6 +51,7 @@ export default function SignForm({
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors, isValid },
   } = useForm({
     resolver: yupResolver(onSignInSubmit ? signInSchema : signUpSchema),
@@ -69,24 +64,35 @@ export default function SignForm({
     } else {
       onSignUpSubmit(data);
     }
+    reset();
   };
 
   return (
     <form style={{ width: "100%" }} onSubmit={handleSubmit(onSubmit)}>
       <VStack gap="0.75rem">
         {onSignUpSubmit && (
+          // @ts-ignore
           <FormControl isInvalid={!!errors.name}>
-            <Input placeholder={t("signUpFormName")} {...register("name")} />
+            {/* @ts-ignore */}
+            <Input
+              placeholder={t("signUpFormName")}
+              // @ts-ignore
+              {...register("name")}
+              variant="filled"
+            />
+            {/* @ts-ignore */}
             <FormErrorMessage>{String(errors.name?.message)}</FormErrorMessage>
           </FormControl>
         )}
 
-        {(onSignUpSubmit ?? onSignInSubmit) && (
-          <FormControl isInvalid={!!errors.email}>
-            <Input placeholder={t("signInFormEmail")} {...register("email")} />
-            <FormErrorMessage>{String(errors.email?.message)}</FormErrorMessage>
-          </FormControl>
-        )}
+        <FormControl isInvalid={!!errors.email}>
+          <Input
+            placeholder={t("signInFormEmail")}
+            {...register("email")}
+            variant="filled"
+          />
+          <FormErrorMessage>{String(errors.email?.message)}</FormErrorMessage>
+        </FormControl>
 
         {/* {(onSignUpSubmit ?? onUpdateCountryCodeSubmit) && (
           <FormControl isInvalid={!!errors.country_code}>
@@ -108,34 +114,31 @@ export default function SignForm({
           </FormControl>
         )} */}
 
-        {(onSignUpSubmit ?? onSignInSubmit) && (
-          <FormControl isInvalid={!!errors.password}>
-            <InputGroup size="md">
-              <Input
-                placeholder={t("signInFormPassword")}
-                type={showPassword ? "text" : "password"}
-                {...register("password")}
-              />
-              {watch("password") && (
-                <InputRightElement
-                  onClick={handleClickShowPassword}
-                  w={
-                    i18n.language === "ko" && !showPassword ? "7rem" : "4.5rem"
-                  }
-                >
-                  <Button h="1.75rem" size="sm" fontWeight="medium">
-                    {showPassword
-                      ? t("signInFormPasswordHideBtn")
-                      : t("signInFormPasswordShowBtn")}
-                  </Button>
-                </InputRightElement>
-              )}
-            </InputGroup>
-            <FormErrorMessage>
-              {String(errors.password?.message)}
-            </FormErrorMessage>
-          </FormControl>
-        )}
+        <FormControl isInvalid={!!errors.password}>
+          <InputGroup size="md">
+            <Input
+              placeholder={t("signInFormPassword")}
+              type={showPassword ? "text" : "password"}
+              {...register("password")}
+              variant="filled"
+            />
+            {watch("password") && (
+              <InputRightElement
+                onClick={handleClickShowPassword}
+                w={i18n.language === "ko" && !showPassword ? "7rem" : "4.5rem"}
+              >
+                <Button h="1.75rem" size="sm" fontWeight="medium">
+                  {showPassword
+                    ? t("signInFormPasswordHideBtn")
+                    : t("signInFormPasswordShowBtn")}
+                </Button>
+              </InputRightElement>
+            )}
+          </InputGroup>
+          <FormErrorMessage>
+            {String(errors.password?.message)}
+          </FormErrorMessage>
+        </FormControl>
 
         <Button
           w="100%"
@@ -148,44 +151,37 @@ export default function SignForm({
           )}
         </Button>
 
-        {(onSignUpSubmit ?? onSignInSubmit) && <Divider />}
+        <Divider />
 
-        {(onSignUpSubmit ?? onSignInSubmit) && (
-          <Button
-            isLoading={isBtnLoading}
-            leftIcon={<FcGoogle />}
-            variant="outline"
-            textColor={textColor}
-            w="100%"
+        <Button
+          isLoading={isBtnLoading}
+          leftIcon={<FcGoogle />}
+          variant="outline"
+          textColor={textColor}
+          w="100%"
+          onClick={onSignGoogle}
+        >
+          {t("continueWithGoogleBtn")}
+        </Button>
+
+        <Flex width="100%" gap="0.5rem">
+          <Text fontWeight="medium">
+            {t(
+              `${onSignInSubmit ? "signInFormSubText1" : "signUpFormSubText1"}`
+            )}
+          </Text>
+
+          <Link
+            color="teal"
+            fontWeight="medium"
+            as={NextLink}
+            href={onSignInSubmit ? "/signUp" : "/signIn"}
           >
-            {t("continueWithGoogleBtn")}
-          </Button>
-        )}
-
-        {(onSignUpSubmit ?? onSignInSubmit) && (
-          <Flex width="100%" gap="0.5rem">
-            <Text fontWeight="medium">
-              {t(
-                `${
-                  onSignInSubmit ? "signInFormSubText1" : "signUpFormSubText1"
-                }`
-              )}
-            </Text>
-
-            <Link
-              color="teal"
-              fontWeight="medium"
-              as={NextLink}
-              href={onSignInSubmit ? "/signUp" : "/signIn"}
-            >
-              {t(
-                `${
-                  onSignInSubmit ? "signInFormSubText2" : "signUpFormSubText2"
-                }`
-              )}
-            </Link>
-          </Flex>
-        )}
+            {t(
+              `${onSignInSubmit ? "signInFormSubText2" : "signUpFormSubText2"}`
+            )}
+          </Link>
+        </Flex>
       </VStack>
     </form>
   );

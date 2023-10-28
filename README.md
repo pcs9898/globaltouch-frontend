@@ -11,7 +11,7 @@
 
 ## Pages
 
-- [ ] feature5/signUpPage
+- [x] feature5/signUpPage
 - [ ] feature6/signInPage
 - [ ] feature7/homePage
 - [ ] feature8/createProjectPage

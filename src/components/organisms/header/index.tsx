@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Button,
   Drawer,
@@ -16,6 +17,11 @@ import {
   MenuItemOption,
   MenuList,
   MenuOptionGroup,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
   Show,
   Text,
   useColorMode,
@@ -29,6 +35,10 @@ import Cookies from "js-cookie";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useEffect, useRef } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
+import { useChangeLocale } from "../../customhooks/useChangeLocale";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { userState } from "@/src/commons/libraries/recoil/global.recoil";
+import Settings from "../settings";
 
 interface IHeaderProps {}
 
@@ -47,16 +57,16 @@ export default function Header({}: IHeaderProps) {
   const { colorMode, toggleColorMode } = useColorMode();
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  // const {
+  //   isOpen: drawerIsOpen,
+  //   onOpen: drawerOnOpen,
+  //   onClose: drawerOnClose,
+  // } = useDisclosure();
   const drawerBtnRef = useRef();
+  const changeLocale = useChangeLocale(); // useChangeLocale 훅을 호출
+  const [userLoggedInInfo, setUserLoggedInInfo] = useRecoilState(userState);
 
   const currentLocale = router.locale;
-  // const currentLocale = Cookies.get("locale");
-
-  const changeLocale = (locale) => {
-    Cookies.set("locale", locale);
-
-    router.push(router.pathname, router.asPath, { locale });
-  };
 
   return (
     <HStack
@@ -113,48 +123,89 @@ export default function Header({}: IHeaderProps) {
 
       <Show above="md">
         <HStack gap={0}>
-          <Menu matchWidth={true}>
-            {({ isOpen }) => (
-              <>
-                <MenuButton
-                  as={Button}
-                  colorScheme="gray"
-                  variant="ghost"
-                  isActive={isOpen}
-                  rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
-                >
-                  {localeObg[currentLocale][0]}
-                </MenuButton>
-                <MenuList maxW="150px">
-                  <MenuOptionGroup defaultValue={currentLocale} type="radio">
-                    <MenuItemOption value={currentLocale} fontWeight="semibold">
-                      {localeObg[currentLocale][0]}
-                    </MenuItemOption>
-                    <MenuItemOption
-                      value={currentLocale === "en" ? "ko" : "en"}
-                      onClick={() =>
-                        changeLocale(currentLocale === "en" ? "ko" : "en")
+          {userLoggedInInfo ? (
+            <>
+              <Button colorScheme="gray" variant="ghost">
+                {t("headerStartANewProjectBtn")}
+              </Button>
+
+              <Popover>
+                <PopoverTrigger>
+                  <Avatar
+                    cursor="pointer"
+                    src={userLoggedInInfo?.profile_image_url}
+                    name={userLoggedInInfo.name}
+                    w="2.5rem"
+                    h="2.5rem"
+                  />
+                </PopoverTrigger>
+                <PopoverContent>
+                  <PopoverArrow />
+                  <PopoverBody p="1rem">
+                    <Settings />
+                  </PopoverBody>
+                </PopoverContent>
+              </Popover>
+            </>
+          ) : (
+            <>
+              <Menu matchWidth={true}>
+                {({ isOpen }) => (
+                  <>
+                    <MenuButton
+                      as={Button}
+                      colorScheme="gray"
+                      variant="ghost"
+                      isActive={isOpen}
+                      rightIcon={
+                        isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />
                       }
-                      fontWeight="semibold"
                     >
-                      {localeObg[currentLocale][1]}
-                    </MenuItemOption>
-                  </MenuOptionGroup>
-                </MenuList>
-              </>
-            )}
-          </Menu>
-          <IconButton
-            aria-label="colorMode"
-            icon={colorMode === "light" ? <DarkMode /> : <LightMode />}
-            onClick={toggleColorMode}
-            colorScheme="gray"
-            variant="ghost"
-            mr="0.5rem"
-          />
-          <Button as={Link} href="/signIn" variant="solid" colorScheme="teal">
-            {t("headerSignInBtn")}
-          </Button>
+                      {localeObg[currentLocale][0]}
+                    </MenuButton>
+                    <MenuList maxW="150px">
+                      <MenuOptionGroup
+                        defaultValue={currentLocale}
+                        type="radio"
+                      >
+                        <MenuItemOption
+                          value={currentLocale}
+                          fontWeight="semibold"
+                        >
+                          {localeObg[currentLocale][0]}
+                        </MenuItemOption>
+                        <MenuItemOption
+                          value={currentLocale === "en" ? "ko" : "en"}
+                          onClick={() =>
+                            changeLocale(currentLocale === "en" ? "ko" : "en")
+                          }
+                          fontWeight="semibold"
+                        >
+                          {localeObg[currentLocale][1]}
+                        </MenuItemOption>
+                      </MenuOptionGroup>
+                    </MenuList>
+                  </>
+                )}
+              </Menu>
+              <IconButton
+                aria-label="colorMode"
+                icon={colorMode === "light" ? <DarkMode /> : <LightMode />}
+                onClick={toggleColorMode}
+                colorScheme="gray"
+                variant="ghost"
+                mr="0.5rem"
+              />
+              <Button
+                as={Link}
+                href="/signIn"
+                variant="solid"
+                colorScheme="teal"
+              >
+                {t("headerSignInBtn")}
+              </Button>
+            </>
+          )}
         </HStack>
       </Show>
 
@@ -180,7 +231,10 @@ export default function Header({}: IHeaderProps) {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton size="lg" />
-          {/* navDrawer넣기 */}
+          <DrawerHeader />
+          <DrawerBody>
+            <Settings drawerOnClose={onClose} />
+          </DrawerBody>
         </DrawerContent>
       </Drawer>
     </HStack>
