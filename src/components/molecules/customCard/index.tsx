@@ -1,4 +1,3 @@
-import FormatTimeAgo from "@/src/components/customhooks/useFormatTimgAgo";
 import {
   Box,
   Card,
@@ -20,6 +19,7 @@ import {
   IFetchProjectsTrendingResponseDto,
   IFetchUserLoggedInDonationsResponseDto,
 } from "@/src/commons/types/generated/types";
+import { useFormatTimeAgo } from "../../customhooks/useFormatTimgAgo";
 
 interface ICustomCard {
   // projectData?: {
@@ -81,6 +81,7 @@ export default function CustomCard({
   const formattedAmount = useAmountToFormatCurrency({
     amount: amount_raised ?? amount,
   });
+  const formatCreatedAt = useFormatTimeAgo({ timestamp: created_at });
 
   return (
     (project_id_project || project_id_projectDonation) && (
@@ -130,9 +131,7 @@ export default function CustomCard({
                   color={projectData ? "black" : "gray"}
                   fontWeight="medium"
                 >
-                  {projectData
-                    ? t("projectCardRaised")
-                    : FormatTimeAgo({ timestamp: created_at })}
+                  {projectData ? t("projectCardRaised") : formatCreatedAt}
                 </Text>
               </Flex>
             </Flex>

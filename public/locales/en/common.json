@@ -102,5 +102,22 @@
   "profilePopoverLanguage": "Language",
   "profilePopoverLanguageBtn1": "ENG",
   "profilePopoverLanguageBtn2": "KOR",
-  "profilePopoverSignOutBtn": "Sign Out"
+  "profilePopoverSignOutBtn": "Sign Out",
+  "profilePopoverSignInBtn": "Sign In",
+  "profilePopoverHowItWorksBtn": "How it works",
+  "profilePopoverForCharitiesBtn": "For charities",
+  "profilePopoverHelpCenterBtn": "Help center",
+  "footerLinkAbout": "About",
+  "footerLinkBlog": "Blog",
+  "footerLinkJobs": "Jobs",
+  "footerLinkHelp": "Help",
+  "footerLinkAPI": "API",
+  "footerLinkPrivacy": "Privacy",
+  "footerLinkTerms": "Terms",
+  "footerLinkLocations": "Locations",
+  "footerLanguageSelectEn": "English",
+  "footerLanguageSelectKo": "Korean",
+  "signPageSignInToastGreeting": "Welcome Back",
+  "signPageSignUpToastGreeting": "Welcome",
+  "signOutButtonToastText": ", you are now logged out. Have a great day!"
 }

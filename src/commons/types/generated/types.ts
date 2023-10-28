@@ -65,11 +65,9 @@ export type ICreateUpdatedProjectResponseDto = {
 };
 
 export type ICreateUserDto = {
-  country_code: Scalars['String']['input'];
   email: Scalars['String']['input'];
   name: Scalars['String']['input'];
   password: Scalars['String']['input'];
-  profile_image_url?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ICreateUserResponseDto = {
@@ -153,7 +151,7 @@ export type IFetchProjectsByCountryResponseDto = {
 
 export type IFetchProjectsByCountryWithTotalResponseDto = {
   __typename?: 'FetchProjectsByCountryWithTotalResponseDTO';
-  projectsByCountry: Array<IFetchProjectsByCountryResponseDto>;
+  projects: Array<IFetchProjectsByCountryResponseDto>;
   total: Scalars['Int']['output'];
 };
 
@@ -173,7 +171,7 @@ export type IFetchProjectsNewestResponseDto = {
 
 export type IFetchProjectsNewestWithTotalResponseDto = {
   __typename?: 'FetchProjectsNewestWithTotalResponseDTO';
-  projectsNewest: Array<IFetchProjectsNewestResponseDto>;
+  projects: Array<IFetchProjectsNewestResponseDto>;
   total: Scalars['Int']['output'];
 };
 
@@ -193,7 +191,7 @@ export type IFetchProjectsTrendingResponseDto = {
 
 export type IFetchProjectsTrendingWithTotalResponseDto = {
   __typename?: 'FetchProjectsTrendingWithTotalResponseDTO';
-  projectsTrending: Array<IFetchProjectsTrendingResponseDto>;
+  projects: Array<IFetchProjectsTrendingResponseDto>;
   total: Scalars['Int']['output'];
 };
 
@@ -221,7 +219,7 @@ export type IFetchUserLoggedInDonationsResponseDto = {
 
 export type IFetchUserLoggedInDonationsWithTotalResponseDto = {
   __typename?: 'FetchUserLoggedInDonationsWithTotalResponseDTO';
-  UserLoggedInDonations: Array<IFetchUserLoggedInDonationsResponseDto>;
+  donations: Array<IFetchUserLoggedInDonationsResponseDto>;
   total: Scalars['Int']['output'];
 };
 
@@ -241,15 +239,15 @@ export type IFetchUserLoggedInProjectsResponseDto = {
 
 export type IFetchUserLoggedInProjectsWithTotalResponseDto = {
   __typename?: 'FetchUserLoggedInProjectsWithTotalResponseDTO';
-  projectsUserLoggedIn: Array<IFetchUserLoggedInProjectsResponseDto>;
+  projects: Array<IFetchUserLoggedInProjectsResponseDto>;
   total: Scalars['Int']['output'];
 };
 
 export type IFetchUserLoggedInResponseDto = {
   __typename?: 'FetchUserLoggedInResponseDTO';
-  countryCode: ICountryCode;
   name: Scalars['String']['output'];
   profile_image_url?: Maybe<Scalars['String']['output']>;
+  user_id: Scalars['String']['output'];
 };
 
 export type ILoginDto = {
@@ -267,7 +265,6 @@ export type IMutation = {
   deleteProjectComment: IDeleteProjectCommentResponseDto;
   loginUser: Scalars['String']['output'];
   restoreAccessToken: Scalars['String']['output'];
-  updateCountryCode: IUpdateCountryCodeResponseDto;
   updateProjectComment: IUpdateProjectCommentResponseDto;
   updateUser: IUpdateUserResponseDto;
 };
@@ -305,11 +302,6 @@ export type IMutationDeleteProjectCommentArgs = {
 
 export type IMutationLoginUserArgs = {
   loginDTO: ILoginDto;
-};
-
-
-export type IMutationUpdateCountryCodeArgs = {
-  updateCountryCodeDTO: IUpdateCountryCodeDto;
 };
 
 
@@ -472,15 +464,6 @@ export type ISearchProjectWithTotalResponseDto = {
   total: Scalars['Int']['output'];
 };
 
-export type IUpdateCountryCodeDto = {
-  country_code: Scalars['String']['input'];
-};
-
-export type IUpdateCountryCodeResponseDto = {
-  __typename?: 'UpdateCountryCodeResponseDTO';
-  accessToken: Scalars['String']['output'];
-};
-
 export type IUpdateProjectCommentDto = {
   content: Scalars['String']['input'];
   projectComment_id: Scalars['String']['input'];
@@ -505,7 +488,6 @@ export type IUpdateUserResponseDto = {
 
 export type IUser = {
   __typename?: 'User';
-  countryCode: ICountryCode;
   created_at: Scalars['DateTime']['output'];
   email: Scalars['String']['output'];
   name: Scalars['String']['output'];

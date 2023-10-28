@@ -12,6 +12,7 @@ import {
   Box,
   MenuItem,
   Card,
+  Spinner,
 } from "@chakra-ui/react";
 import Head from "next/head";
 
@@ -25,6 +26,7 @@ import LoremIpsum from "react-lorem-ipsum";
 import { ArrowBackIosNew } from "@mui/icons-material";
 import Header from "@/src/components/organisms/header";
 import CustomCard from "@/src/components/molecules/customCard";
+import useAuth from "@/src/components/customhooks/useAuth";
 
 const cardListTestData = {
   total: 6,
@@ -116,21 +118,16 @@ export const getStaticProps = withTranslations();
 
 export default function HomePage({ onClose }) {
   const router = useRouter();
-  const { t } = useTranslation();
-  const { colorMode, toggleColorMode } = useColorMode();
+  // const isLoading = useAuth();
 
-  const changeLocale = (locale) => {
-    // Save the selected locale in a cookie
-    Cookies.set("locale", locale);
-    // Redirect to the current page with new locale
-    router.push(router.pathname, router.asPath, { locale });
-  };
-
+  // useAuth();
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+        <title>globalTouch</title>
       </Head>
+
+      {/* {isLoading ? <Spinner /> : <CustomCard projectData={testData2} />} */}
       <CustomCard projectData={testData2} />
     </>
   );
