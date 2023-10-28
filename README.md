@@ -12,7 +12,7 @@
 ## Pages
 
 - [x] feature5/signUpPage
-- [ ] feature6/signInPage
+- [x] feature6/signInPage
 - [ ] feature7/homePage
 - [ ] feature8/createProjectPage
 - [ ] feature9/projectsListByCountryCodePage
