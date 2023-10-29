@@ -1,8 +1,15 @@
 import CustomTab from "../../molecules/customTab";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CustomCard from "../../molecules/customCard";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Spinner, Text, VStack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import {
+  IProject,
+  IProjectDonation,
+} from "@/src/commons/types/generated/types";
+import EndMessage from "../../molecules/infiniteScroll/endMessage";
+import CustomSkeleton from "../../molecules/customSkeleton";
+import { MutableRefObject } from "react";
 
 interface ICardListProps {
   customTabProps: {
@@ -14,56 +21,34 @@ interface ICardListProps {
       | "profileCategory";
   };
   cardListProps: {
-    projectCardList?: {
-      total: number;
-      projects: {
-        amount_raised: number;
-        amount_required: number;
-        countryCode: {
-          country_code: string;
-        };
-        project_id: string;
-        cityName: string;
-        project_image_url: string;
-        title: string;
-      }[];
-    };
-    donationCardList?: {
-      total: number;
-      donations: {
-        amount: number;
-        project_image_url: string;
-        created_at: string;
-        project: {
-          project_id: string;
-          title: string;
-          countryCode: { country_code: string };
-        };
-      }[];
-    };
-    infiniteScrollLoadMore?: () => void;
+    projects?: IProject[];
+    donations?: IProjectDonation[];
+    fetchMore?: () => void;
     loading: boolean;
+    hasMore: boolean;
+    scrollRef: MutableRefObject<any>;
   };
 }
 
 export default function CardList({
   customTabProps,
-  cardListProps,
+  cardListProps: {
+    projects,
+    donations,
+    loading,
+    fetchMore,
+    hasMore,
+    scrollRef,
+  },
 }: ICardListProps) {
   const { onClickTab, categoryKindOption } = customTabProps;
-  const {
-    projectCardList: { total: projectTotal, projects } = {},
-    donationCardList: { total: donationTotal, donations } = {},
-    infiniteScrollLoadMore,
-    loading,
-  } = cardListProps;
   const { pathname } = useRouter();
 
   const isHomeLayout =
     pathname === "/" || pathname === "/country/[countryCode]";
 
   return (
-    <Flex flexDir="column" w="100%" h="calc(100vh - 5rem)" overflow="auto">
+    <Flex flexDir="column" w="100%">
       <Box
         position="fixed"
         top={{ md: "5rem" }}
@@ -80,42 +65,45 @@ export default function CardList({
         />
       </Box>
 
-      {/* <Box
-        overflowY="scroll"
+      <Box
         mt="4.5rem"
-        pb="1rem"
-        gap="1rem"
-        h="100%"
-        display={
-          isHomeLayout
-            ? { base: "flex", lg: "grid" }
-            : { base: "flex", md: "grid" }
-        }
-        flexDir="column"
-        gridTemplateColumns={{ md: "repeat(2, 1fr)" }}
-      > */}
-      <InfiniteScroll
-        dataLength={projectTotal || donationTotal}
-        next={infiniteScrollLoadMore}
-        hasMore={
-          (projects && projects.length < projectTotal) ||
-          (donations && donations.length < donationTotal)
-        }
-        loader={<div>Loading</div>}
-        endMessage={<div>end</div>}
+        w="100%"
+        h="calc(100vh - 8.5rem)"
+        overflow="auto"
+        id="scrollableDiv"
+        ref={scrollRef}
       >
-        {projects
-          ? projects.map((project) => (
-              <CustomCard key={project.project_id} projectData={project} />
-            ))
-          : donations.map((donation) => (
-              <CustomCard
-                key={donation.project.project_id}
-                projectDonationData={donation}
-              />
-            ))}
-      </InfiniteScroll>
-      {/* </Box> */}
+        <InfiniteScroll
+          dataLength={(projects?.length || donations?.length) ?? 0}
+          next={fetchMore}
+          hasMore={hasMore}
+          loader={<Spinner />}
+          endMessage={<EndMessage endMessageOptions="project" />}
+          scrollableTarget="scrollableDiv"
+        >
+          <Box
+            display={{ base: "flex", lg: "grid" }}
+            gridTemplateColumns={{ lg: "repeat(2, 1fr)" }}
+            gap="1rem"
+            flexDirection="column"
+          >
+            {loading
+              ? Array.from({ length: 8 }, (_, i) => (
+                  <CustomSkeleton key={i} skeletonType="projectCard" />
+                ))
+              : projects
+              ? projects?.map((project) => (
+                  <CustomCard key={project.project_id} project={project} />
+                ))
+              : donations?.map((donation) => (
+                  <CustomCard
+                    key={donation.project.project_id}
+                    donation={donation}
+                  />
+                ))}
+          </Box>
+        </InfiniteScroll>
+      </Box>
     </Flex>
   );
 }

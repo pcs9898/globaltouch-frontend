@@ -1,4 +1,4 @@
-import { Tab, TabList, Tabs } from "@chakra-ui/react";
+import { Tab, TabList, TabPanel, Tabs } from "@chakra-ui/react";
 import { Suspense, useEffect, useRef, useState } from "react";
 
 import { useTranslation } from "next-i18next";

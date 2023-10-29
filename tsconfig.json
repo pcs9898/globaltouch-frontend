@@ -18,6 +18,12 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "custom.d.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "custom.d.ts",
+    "**/*.tsx",
+    "ImageLoader.js"
+  ],
   "exclude": ["node_modules"]
 }

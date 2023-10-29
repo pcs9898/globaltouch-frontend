@@ -162,14 +162,6 @@ export type IFetchProjectsByCountryWithTotalResponseDto = {
   total: Scalars['Int']['output'];
 };
 
-export type IFetchProjectsNewestDto = {
-  offset: Scalars['Int']['input'];
-};
-
-export type IFetchProjectsTrendingDto = {
-  offset: Scalars['Int']['input'];
-};
-
 export type IFetchUpdatedProjectsDto = {
   project_id: Scalars['String']['input'];
 };
@@ -360,9 +352,8 @@ export type IQuery = {
   fetchProject: IFetchProjectResponseDto;
   fetchProjectComments: IFetchProjectCommentsWithTotalResponseDto;
   fetchProjectOg: IFetchProjectOgResponseDto;
+  fetchProjects: Array<IProject>;
   fetchProjectsByCountry: IFetchProjectsByCountryWithTotalResponseDto;
-  fetchProjectsNewest: Array<IProject>;
-  fetchProjectsTrending: Array<IProject>;
   fetchUpdatedProjects: Array<IFetchUpdatedProjectsResponseDto>;
   fetchUserLoggedIn: IFetchUserLoggedInResponseDto;
   fetchUserLoggedInDonations: IFetchUserLoggedInDonationsWithTotalResponseDto;
@@ -386,18 +377,14 @@ export type IQueryFetchProjectOgArgs = {
 };
 
 
+export type IQueryFetchProjectsArgs = {
+  fetchProjectsOption: Scalars['String']['input'];
+  offset: Scalars['Float']['input'];
+};
+
+
 export type IQueryFetchProjectsByCountryArgs = {
   fetchProjectsByCountryDTO: IFetchProjectsByCountryDto;
-};
-
-
-export type IQueryFetchProjectsNewestArgs = {
-  fetchProjectsNewestDTO: IFetchProjectsNewestDto;
-};
-
-
-export type IQueryFetchProjectsTrendingArgs = {
-  fetchProjectsTrendingDTO: IFetchProjectsTrendingDto;
 };
 
 

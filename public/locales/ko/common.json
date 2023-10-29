@@ -119,5 +119,7 @@
   "footerLanguageSelectKo": "한국어",
   "signPageSignInToastGreeting": "돌아오신것을 환영합니다",
   "signPageSignUpToastGreeting": "환영합니다",
-  "signOutButtonToastText": "님, 로그아웃이 완료되었습니다. 좋은 하루 되세요!"
+  "signOutButtonToastText": "님, 로그아웃이 완료되었습니다. 좋은 하루 되세요!",
+  "endMessageTextForProject": "더 이상의 프로젝트가 없습니다",
+  "endMessageTextForDonationHistory": "더 이상의 후원기록이 없습니다"
 }

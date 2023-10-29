@@ -1,103 +1,69 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useLazyQuery, useQuery } from "@apollo/client";
 import HomePresenter from "../../templates/home/home.presenert";
 import {
+  IProject,
   IQuery,
-  IQueryFetchProjectsTrendingArgs,
+  IQueryFetchProjectsArgs,
 } from "@/src/commons/types/generated/types";
-import InfiniteScroll from "react-infinite-scroll-component";
-import CustomCard from "../../molecules/customCard";
-import { Box, Flex, Text } from "@chakra-ui/react";
-import CustomTab from "../../molecules/customTab";
-import { useRef, useState } from "react";
-
-const FETCH_PROJECTS_TRENDING = gql`
-  query fetchProjectsTrending(
-    $fetchProjectsTrendingDTO: FetchProjectsTrendingDTO!
-  ) {
-    fetchProjectsTrending(fetchProjectsTrendingDTO: $fetchProjectsTrendingDTO) {
-      project_id
-      title
-      amount_required
-      amount_raised
-      cityName
-      countryCode {
-        country_code
-      }
-      projectImages {
-        image_url
-      }
-    }
-  }
-`;
+import { useEffect, useRef, useState } from "react";
+import { FETCH_PROJECTS } from "./home.quires";
 
 export default function HomeContainer() {
   const [hasMore, setHasMore] = useState(true);
-  const {
-    data,
-    loading: fetchProjectsTrendingLoading,
-    fetchMore: fetchProjectsTrendingFetchMore,
-  } = useQuery<
-    Pick<IQuery, "fetchProjectsTrending">,
-    IQueryFetchProjectsTrendingArgs
-  >(FETCH_PROJECTS_TRENDING, {
+  const [tab, setTab] = useState("Trending");
+  const scrollRef = useRef(null);
+
+  const { data, loading, fetchMore } = useQuery<
+    Pick<IQuery, "fetchProjects">,
+    IQueryFetchProjectsArgs
+  >(FETCH_PROJECTS, {
     variables: {
-      fetchProjectsTrendingDTO: {
-        offset: 1,
-      },
+      offset: 1,
+      fetchProjectsOption: tab,
     },
+    fetchPolicy: "network-only",
   });
 
-  const onClickTab = (tab: string) => {
-    console.log(tab);
+  const onClickTab = (newTab: string) => {
+    setTab(newTab);
+    setHasMore(true);
+    scrollRef?.current?.scrollTo(0, 0);
   };
 
-  const loadMoreProjectsTrending = () => {
-    fetchProjectsTrendingFetchMore({
+  const fetchMoreProjects = () => {
+    if (!data) return;
+
+    fetchMore({
       variables: {
-        fetchProjectsTrendingDTO: {
-          offset: Math.ceil(data.fetchProjectsTrending.length / 8) + 1,
-        },
+        offset: Math.ceil(data?.fetchProjects.length / 8) + 1,
+        fetchProjectsOption: tab,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prev;
-
-        // 반환된 데이터가 10개 미만이면 더 이상 가져올 데이터가 없음을 판단
-        if (fetchMoreResult.fetchProjectsTrending.length < 7) {
-          console.log("jo");
+        if (fetchMoreResult?.fetchProjects.length < 8) {
           setHasMore(false);
         }
+
         return {
-          fetchProjectsTrending: [
-            ...prev.fetchProjectsTrending,
-            ...fetchMoreResult.fetchProjectsTrending,
+          fetchProjects: [
+            ...prev.fetchProjects,
+            ...fetchMoreResult.fetchProjects,
           ],
         };
       },
     });
   };
 
-  return fetchProjectsTrendingLoading ? (
-    <Box>Loading</Box>
-  ) : (
-    <Box w="100%" h="100%">
-      <InfiniteScroll
-        dataLength={data?.fetchProjectsTrending?.length}
-        next={loadMoreProjectsTrending}
-        hasMore={hasMore}
-        loader={
-          <div className="loader" key={0}>
-            Loading ...
-          </div>
-        }
-        endMessage={<div>end</div>}
-      >
-        {data?.fetchProjectsTrending?.map((project, i) => {
-          console.log(project);
-          return <CustomCard key={project.project_id} projectData={project} />;
-        })}
-      </InfiniteScroll>
-    </Box>
+  return (
+    <HomePresenter
+      cardListProps={{
+        projects: data?.fetchProjects,
+        onClickTab,
+        loading: loading,
+        fetchMore: fetchMoreProjects,
+        hasMore: hasMore,
+        scrollRef: scrollRef,
+      }}
+    />
   );
 }
-
-// 홈컨테이너 지도 정보 반으로나누고  적용부분부터 시작!!!!!!!!!
