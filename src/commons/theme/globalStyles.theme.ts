@@ -6,5 +6,8 @@ export const globalStyles = {
       padding: 0,
       borderRadius: "12px",
     },
+    // body: {
+    //   overflow: "hidden",
+    // },
   },
 };

@@ -68,6 +68,20 @@ export default function Header({}: IHeaderProps) {
 
   const currentLocale = router.locale;
 
+  useEffect(() => {
+    const handleRouteChange = () => {
+      if (isOpen) {
+        onClose();
+      }
+    };
+
+    router.events.on("routeChangeStart", handleRouteChange);
+
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+    };
+  }, [router.events]);
+
   return (
     <HStack
       h={{ base: "3.5rem", md: "5rem" }}
@@ -146,6 +160,51 @@ export default function Header({}: IHeaderProps) {
                   </PopoverBody>
                 </PopoverContent>
               </Popover>
+              {/* <Menu matchWidth={true}>
+                {({ isOpen }) => (
+                  <>
+                    <MenuButton
+                      as={Button}
+                      colorScheme="gray"
+                      variant="ghost"
+                      isActive={isOpen}
+                      // rightIcon={
+                      //   isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />
+                      // }
+                    >
+                      <Avatar
+                        cursor="pointer"
+                        src={userLoggedInInfo?.profile_image_url}
+                        name={userLoggedInInfo.name}
+                        w="2.5rem"
+                        h="2.5rem"
+                      />
+                    </MenuButton>
+                    <MenuList maxW="150px">
+                      <MenuOptionGroup
+                        defaultValue={currentLocale}
+                        type="radio"
+                      >
+                        <MenuItemOption
+                          value={currentLocale}
+                          fontWeight="semibold"
+                        >
+                          {localeObg[currentLocale][0]}
+                        </MenuItemOption>
+                        <MenuItemOption
+                          value={currentLocale === "en" ? "ko" : "en"}
+                          onClick={() =>
+                            changeLocale(currentLocale === "en" ? "ko" : "en")
+                          }
+                          fontWeight="semibold"
+                        >
+                          {localeObg[currentLocale][1]}
+                        </MenuItemOption>
+                      </MenuOptionGroup>
+                    </MenuList>
+                  </>
+                )}
+              </Menu> */}
             </>
           ) : (
             <>

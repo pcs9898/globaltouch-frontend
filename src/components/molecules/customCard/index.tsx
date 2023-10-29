@@ -16,8 +16,8 @@ import { useState } from "react";
 import { useAmountToFormatCurrency } from "../../customhooks/useAmountToFormatCurrency";
 import { CalculatePercentage } from "@/src/commons/utils/calculatePercentage";
 import {
-  IFetchProjectsTrendingResponseDto,
   IFetchUserLoggedInDonationsResponseDto,
+  IProject,
 } from "@/src/commons/types/generated/types";
 import { useFormatTimeAgo } from "../../customhooks/useFormatTimgAgo";
 
@@ -34,7 +34,7 @@ interface ICustomCard {
   //     image_url: string;
   //   };
   // };
-  projectData?: IFetchProjectsTrendingResponseDto;
+  projectData?: IProject;
   //   projectDonationData?: Partial<IFetchUserLoggedInDonationsResponseDto>;
 
   projectDonationData?: {
@@ -58,8 +58,9 @@ export default function CustomCard({
     title: title_project,
     amount_raised,
     amount_required,
+    cityName,
     countryCode: { country_code: country_code_project = null } = {},
-    project_image_url: image_url_project,
+    projectImages = {},
   } = projectData ?? {};
 
   const {
@@ -89,13 +90,17 @@ export default function CustomCard({
         width="100%"
         variant="unstyled"
         as={Link}
+        height="100%"
         href={`/project/${project_id_project ?? project_id_projectDonation}`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         <CardBody width="100%" padding={0}>
           <Box
-            bgImage={`url(${image_url_project ?? image_url_projectDonation})`}
+            bgImage={`url(${
+              projectData?.projectImages[0]?.image_url ??
+              image_url_projectDonation
+            })`}
             bgSize={isHovered ? "110%" : "100%"}
             bgRepeat="repeat"
             bgPosition="center"
@@ -109,7 +114,7 @@ export default function CustomCard({
                 {title_project ?? title_projectDonation}
               </Heading>
               <Text fontSize="0.875rem" fontWeight="medium" color="gray">
-                {countryName}
+                {countryName + " ‧ " + cityName}
               </Text>
             </Flex>
 

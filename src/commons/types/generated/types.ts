@@ -32,7 +32,11 @@ export type ICreateProjectCommentResponseDto = {
 
 export type ICreateProjectDto = {
   amount_required: Scalars['Int']['input'];
+  cityName: Scalars['String']['input'];
   content: Scalars['String']['input'];
+  countryCode: Scalars['String']['input'];
+  lat: Scalars['Float']['input'];
+  lng: Scalars['Float']['input'];
   projectImageUrls: Scalars['String']['input'];
   project_category?: IProject_Category_Enum;
   title: Scalars['String']['input'];
@@ -143,7 +147,10 @@ export type IFetchProjectsByCountryResponseDto = {
   __typename?: 'FetchProjectsByCountryResponseDTO';
   amount_raised: Scalars['Int']['output'];
   amount_required: Scalars['Int']['output'];
+  cityName: Scalars['String']['output'];
   countryCode: ICountryCode;
+  lat: Scalars['Float']['output'];
+  lng: Scalars['Float']['output'];
   project_id: Scalars['String']['output'];
   project_image_url: Scalars['String']['output'];
   title: Scalars['String']['output'];
@@ -159,40 +166,8 @@ export type IFetchProjectsNewestDto = {
   offset: Scalars['Int']['input'];
 };
 
-export type IFetchProjectsNewestResponseDto = {
-  __typename?: 'FetchProjectsNewestResponseDTO';
-  amount_raised: Scalars['Int']['output'];
-  amount_required: Scalars['Int']['output'];
-  countryCode: ICountryCode;
-  project_id: Scalars['String']['output'];
-  project_image_url: Scalars['String']['output'];
-  title: Scalars['String']['output'];
-};
-
-export type IFetchProjectsNewestWithTotalResponseDto = {
-  __typename?: 'FetchProjectsNewestWithTotalResponseDTO';
-  projects: Array<IFetchProjectsNewestResponseDto>;
-  total: Scalars['Int']['output'];
-};
-
 export type IFetchProjectsTrendingDto = {
   offset: Scalars['Int']['input'];
-};
-
-export type IFetchProjectsTrendingResponseDto = {
-  __typename?: 'FetchProjectsTrendingResponseDTO';
-  amount_raised: Scalars['Int']['output'];
-  amount_required: Scalars['Int']['output'];
-  countryCode: ICountryCode;
-  project_id: Scalars['String']['output'];
-  project_image_url: Scalars['String']['output'];
-  title: Scalars['String']['output'];
-};
-
-export type IFetchProjectsTrendingWithTotalResponseDto = {
-  __typename?: 'FetchProjectsTrendingWithTotalResponseDTO';
-  projects: Array<IFetchProjectsTrendingResponseDto>;
-  total: Scalars['Int']['output'];
 };
 
 export type IFetchUpdatedProjectsDto = {
@@ -342,10 +317,13 @@ export type IProject = {
   __typename?: 'Project';
   amount_raised: Scalars['Int']['output'];
   amount_required: Scalars['Int']['output'];
+  cityName: Scalars['String']['output'];
   content: Scalars['String']['output'];
   countryCode: ICountryCode;
   created_at: Scalars['DateTime']['output'];
   donation_count: Scalars['Int']['output'];
+  lat: Scalars['Float']['output'];
+  lng: Scalars['Float']['output'];
   projectCategory: IProjectCategory;
   projectImages: Array<IProjectImage>;
   project_id: Scalars['String']['output'];
@@ -383,8 +361,8 @@ export type IQuery = {
   fetchProjectComments: IFetchProjectCommentsWithTotalResponseDto;
   fetchProjectOg: IFetchProjectOgResponseDto;
   fetchProjectsByCountry: IFetchProjectsByCountryWithTotalResponseDto;
-  fetchProjectsNewest: IFetchProjectsNewestWithTotalResponseDto;
-  fetchProjectsTrending: IFetchProjectsTrendingWithTotalResponseDto;
+  fetchProjectsNewest: Array<IProject>;
+  fetchProjectsTrending: Array<IProject>;
   fetchUpdatedProjects: Array<IFetchUpdatedProjectsResponseDto>;
   fetchUserLoggedIn: IFetchUserLoggedInResponseDto;
   fetchUserLoggedInDonations: IFetchUserLoggedInDonationsWithTotalResponseDto;

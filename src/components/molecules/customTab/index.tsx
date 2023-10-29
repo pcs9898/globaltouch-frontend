@@ -17,7 +17,7 @@ const engCategoryListsInfo = require("/public/locales/en/common.json");
 
 const engCategoryListsForBe = {
   projectListCategory: Array.from(
-    { length: 3 },
+    { length: 2 },
     (_, i) => engCategoryListsInfo[`projectListCategory${i + 1}`]
   ),
   projectCategory: Array.from(
@@ -82,16 +82,7 @@ export default function CustomTab({
   const getCategoryList = (categoryKindOption: string): string[] =>
     categoryLists[categoryKindOption];
 
-  return !tReady ? (
-    <CustomSkeleton
-      skeletonType="tab"
-      tabOptions={
-        categoryKindOption === "projectListCategory"
-          ? "tabCenter"
-          : "tabFlexStart"
-      }
-    />
-  ) : (
+  return (
     <Tabs
       borderRadius="0px"
       variant="solid-rounded"

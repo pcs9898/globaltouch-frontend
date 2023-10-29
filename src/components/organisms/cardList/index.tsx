@@ -2,6 +2,7 @@ import CustomTab from "../../molecules/customTab";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CustomCard from "../../molecules/customCard";
 import { Box, Flex } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 interface ICardListProps {
   customTabProps: {
@@ -22,6 +23,7 @@ interface ICardListProps {
           country_code: string;
         };
         project_id: string;
+        cityName: string;
         project_image_url: string;
         title: string;
       }[];
@@ -39,7 +41,8 @@ interface ICardListProps {
         };
       }[];
     };
-    infiniteScrollLoadMore?: () => any;
+    infiniteScrollLoadMore?: () => void;
+    loading: boolean;
   };
 }
 
@@ -52,15 +55,45 @@ export default function CardList({
     projectCardList: { total: projectTotal, projects } = {},
     donationCardList: { total: donationTotal, donations } = {},
     infiniteScrollLoadMore,
+    loading,
   } = cardListProps;
+  const { pathname } = useRouter();
+
+  const isHomeLayout =
+    pathname === "/" || pathname === "/country/[countryCode]";
 
   return (
-    <Flex flexDir="column" w="100%" height="100%">
-      <CustomTab
-        onClickTab={onClickTab}
-        categoryKindOption={categoryKindOption}
-      />
+    <Flex flexDir="column" w="100%" h="calc(100vh - 5rem)" overflow="auto">
+      <Box
+        position="fixed"
+        top={{ md: "5rem" }}
+        left="0px"
+        zIndex={1}
+        p="1rem"
+        width="50%"
+        borderRadius="0"
+        backgroundColor="white"
+      >
+        <CustomTab
+          onClickTab={onClickTab}
+          categoryKindOption={categoryKindOption}
+        />
+      </Box>
 
+      {/* <Box
+        overflowY="scroll"
+        mt="4.5rem"
+        pb="1rem"
+        gap="1rem"
+        h="100%"
+        display={
+          isHomeLayout
+            ? { base: "flex", lg: "grid" }
+            : { base: "flex", md: "grid" }
+        }
+        flexDir="column"
+        gridTemplateColumns={{ md: "repeat(2, 1fr)" }}
+      > */}
       <InfiniteScroll
         dataLength={projectTotal || donationTotal}
         next={infiniteScrollLoadMore}
@@ -68,27 +101,21 @@ export default function CardList({
           (projects && projects.length < projectTotal) ||
           (donations && donations.length < donationTotal)
         }
-        loader={<div>Loading</div>} //have to make loading
-        endMessage={<div>end</div>} //have to end too loading
+        loader={<div>Loading</div>}
+        endMessage={<div>end</div>}
       >
-        <Box
-          gap="1rem"
-          display={{ base: "flex", md: "grid" }}
-          flexDir="column"
-          gridTemplateColumns={{ md: "repeat(2, 1fr)" }}
-        >
-          {projects
-            ? projects.map((project) => (
-                <CustomCard key={project.project_id} projectData={project} />
-              ))
-            : donations.map((donation) => (
-                <CustomCard
-                  key={donation.project.project_id}
-                  projectDonationData={donation}
-                />
-              ))}
-        </Box>
+        {projects
+          ? projects.map((project) => (
+              <CustomCard key={project.project_id} projectData={project} />
+            ))
+          : donations.map((donation) => (
+              <CustomCard
+                key={donation.project.project_id}
+                projectDonationData={donation}
+              />
+            ))}
       </InfiniteScroll>
+      {/* </Box> */}
     </Flex>
   );
 }

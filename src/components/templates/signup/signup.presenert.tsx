@@ -1,12 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
 import SignForm from "../../molecules/signForm";
 import SignGreetingSection from "../../molecules/signGreetingSection";
-
-interface ISignUpPresenter {
-  onSignUpSubmit: (data) => void;
-  signUpLoading: boolean;
-  onSignGoogle: () => void;
-}
+import { ISignUpPresenter } from "./signup.types";
 
 export default function SignUpPresenter({
   onSignUpSubmit,

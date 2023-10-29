@@ -1,4 +1,4 @@
-import { Box, Container } from "@chakra-ui/react";
+import { Box, Container, calc } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import SectionLayout from "./sectionLayout";
 import { useRouter } from "next/router";
@@ -13,10 +13,11 @@ export default function MainLayout({ children }: IMainLayout) {
   const isFullLayout =
     pathname === "/signIn" ||
     pathname === "/signUp" ||
-    pathname === "/updateCountryCode" ||
     pathname === "/" ||
     /^\/country\/[^/]+$/.test(pathname) ||
     /^\/project\/[^/]+$/.test(pathname);
+
+  const isSignLayout = pathname === "/signIn" || pathname === "/signUp";
 
   return (
     <Container
@@ -25,6 +26,7 @@ export default function MainLayout({ children }: IMainLayout) {
       maxW={isFullLayout ? "full" : "container.md"}
       m={0}
       p={0}
+      pt={isSignLayout ? "0px" : { base: "3.5rem", md: "5rem" }}
     >
       <SectionLayout>{children}</SectionLayout>
     </Container>
