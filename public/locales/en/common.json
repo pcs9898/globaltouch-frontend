@@ -119,5 +119,7 @@
   "footerLanguageSelectKo": "Korean",
   "signPageSignInToastGreeting": "Welcome Back",
   "signPageSignUpToastGreeting": "Welcome",
-  "signOutButtonToastText": ", you are now logged out. Have a great day!"
+  "signOutButtonToastText": ", you are now logged out. Have a great day!",
+  "endMessageTextForProject": "No more project found",
+  "endMessageTextForDonationHistory": "No more donation history found"
 }
