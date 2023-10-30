@@ -13,9 +13,9 @@
 
 - [x] feature5/signUpPage
 - [x] feature6/signInPage
-- [x] feature7/homePage
-- [ ] feature8/createProjectPage
-- [ ] feature9/projectsListByCountryCodePage
+- [ ] feature7/homePage --have to do mobile page, and routing between home and country detail
+- [x] feature8/createProjectPage
+- [ ] feature9/projectsListByCountryCodePage --have to do mobile page, and routing between home and country detail
 - [ ] feature10/projectDetailPage
 - [ ] feature11/createUpdatedProjectPage
 - [ ] feature12/projectUpdatesPage
