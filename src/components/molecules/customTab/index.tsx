@@ -7,6 +7,7 @@ import CustomSkeleton from "../customSkeleton";
 interface ICustomTabsProps {
   categoryKindOption:
     | "projectListCategory"
+    | "createProjectCategory"
     | "projectCategory"
     | "searchProjectCategory"
     | "profileCategory";
@@ -19,6 +20,10 @@ const engCategoryListsForBe = {
   projectListCategory: Array.from(
     { length: 2 },
     (_, i) => engCategoryListsInfo[`projectListCategory${i + 1}`]
+  ),
+  createProjectCategory: Array.from(
+    { length: 6 },
+    (_, i) => engCategoryListsInfo[`createProjectCategory${i + 1}`]
   ),
   projectCategory: Array.from(
     { length: 7 },
@@ -67,6 +72,9 @@ export default function CustomTab({
   const categoryLists = {
     projectListCategory: Array.from({ length: 3 }, (_, i) =>
       t(`projectListCategory${i + 1}`)
+    ),
+    createProjectCategory: Array.from({ length: 6 }, (_, i) =>
+      t(`createProjectCategory${i + 1}`)
     ),
     projectCategory: Array.from({ length: 7 }, (_, i) =>
       t(`projectCategory${i + 1}`)

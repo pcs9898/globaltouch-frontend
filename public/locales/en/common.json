@@ -33,8 +33,16 @@
   "createProjectHeaderBtn": "Project",
   "createProjectFormTitle": "Give your project title",
   "createProjectFormAmountRequired": "Your starting goal",
+  "createProjectFormCountry": "Country",
+  "createProjectFormCity": "City",
   "createProjectFormContent": "Tell your story",
   "createProjectFormAddPhotos": "Add photos",
+  "createProjectCategory1": "Medical",
+  "createProjectCategory2": "Emergency",
+  "createProjectCategory3": "Memorial",
+  "createProjectCategory4": "Education",
+  "createProjectCategory5": "Crisis Relief",
+  "createProjectCategory6": "Nonprofit",
   "projectCategory1": "All",
   "projectCategory2": "Medical",
   "projectCategory3": "Emergency",
@@ -121,5 +129,7 @@
   "signPageSignUpToastGreeting": "Welcome",
   "signOutButtonToastText": ", you are now logged out. Have a great day!",
   "endMessageTextForProject": "No more project found",
-  "endMessageTextForDonationHistory": "No more donation history found"
+  "endMessageTextForDonationHistory": "No more donation history found",
+  "countryDetailCardListHeaderText": "'s Projects",
+  "countryDetailCardListNoMoreText": "No ongoing projects in "
 }
