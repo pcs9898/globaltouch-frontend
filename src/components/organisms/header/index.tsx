@@ -39,6 +39,7 @@ import { useChangeLocale } from "../../customhooks/useChangeLocale";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import { userState } from "@/src/commons/libraries/recoil/global.recoil";
 import Settings from "../settings";
+import CreateProjectModalPresenter from "../../templates/createProjectModal/createProjectModal.presenert";
 
 interface IHeaderProps {}
 
@@ -135,14 +136,15 @@ export default function Header({}: IHeaderProps) {
         globalTouch
       </Text>
 
-      <Show above="md">
-        <HStack gap={0}>
+      <HStack gap={0}>
+        {userLoggedInInfo && (
+          <Box mr="1rem">
+            <CreateProjectModalPresenter />
+          </Box>
+        )}
+        <Show above="md">
           {userLoggedInInfo ? (
             <>
-              <Button colorScheme="gray" variant="ghost">
-                {t("headerStartANewProjectBtn")}
-              </Button>
-
               <Popover>
                 <PopoverTrigger>
                   <Avatar
@@ -160,51 +162,6 @@ export default function Header({}: IHeaderProps) {
                   </PopoverBody>
                 </PopoverContent>
               </Popover>
-              {/* <Menu matchWidth={true}>
-                {({ isOpen }) => (
-                  <>
-                    <MenuButton
-                      as={Button}
-                      colorScheme="gray"
-                      variant="ghost"
-                      isActive={isOpen}
-                      // rightIcon={
-                      //   isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />
-                      // }
-                    >
-                      <Avatar
-                        cursor="pointer"
-                        src={userLoggedInInfo?.profile_image_url}
-                        name={userLoggedInInfo.name}
-                        w="2.5rem"
-                        h="2.5rem"
-                      />
-                    </MenuButton>
-                    <MenuList maxW="150px">
-                      <MenuOptionGroup
-                        defaultValue={currentLocale}
-                        type="radio"
-                      >
-                        <MenuItemOption
-                          value={currentLocale}
-                          fontWeight="semibold"
-                        >
-                          {localeObg[currentLocale][0]}
-                        </MenuItemOption>
-                        <MenuItemOption
-                          value={currentLocale === "en" ? "ko" : "en"}
-                          onClick={() =>
-                            changeLocale(currentLocale === "en" ? "ko" : "en")
-                          }
-                          fontWeight="semibold"
-                        >
-                          {localeObg[currentLocale][1]}
-                        </MenuItemOption>
-                      </MenuOptionGroup>
-                    </MenuList>
-                  </>
-                )}
-              </Menu> */}
             </>
           ) : (
             <>
@@ -265,8 +222,8 @@ export default function Header({}: IHeaderProps) {
               </Button>
             </>
           )}
-        </HStack>
-      </Show>
+        </Show>
+      </HStack>
 
       <Show below="md">
         <IconButton

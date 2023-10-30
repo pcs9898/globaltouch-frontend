@@ -15,13 +15,18 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { ArrowBackIosNew, Close } from "@mui/icons-material";
-import { ReactNode, cloneElement, useRef } from "react";
+import { useRouter } from "next/router";
+import { ReactNode, cloneElement, useEffect, useRef } from "react";
 
 interface ICustomModalProps {
   children: ReactNode;
   modalBtnTxt: string;
   modalHeaderTxt: string;
   modalHeaderBtn?: ReactNode;
+  onClickModalHeaderBtn?: any;
+  isMd: boolean;
+  isOnClickModalHeaderBtnValid: boolean;
+  isLoading: boolean;
 }
 
 export default function CustomModal({
@@ -29,27 +34,46 @@ export default function CustomModal({
   modalBtnTxt,
   modalHeaderTxt,
   modalHeaderBtn,
+  onClickModalHeaderBtn,
+  isMd,
+  isOnClickModalHeaderBtnValid,
+  isLoading,
 }: ICustomModalProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const breakpoint = useBreakpointValue({ base: "base", md: "md" });
   const scrollBehavior = useBreakpointValue({ base: "outside", md: "inside" });
+  const router = useRouter();
+
+  useEffect(() => {
+    onClose();
+  }, [router.asPath]);
 
   return (
     <>
-      <Button onClick={onOpen}>{modalBtnTxt}</Button>
-
+      {isMd === true ? (
+        <Show above="md">
+          <Button onClick={onOpen} variant="ghost" colorScheme="gray">
+            {modalBtnTxt}
+          </Button>
+        </Show>
+      ) : (
+        <Show below="md">
+          <Button onClick={onOpen}>{modalBtnTxt}</Button>
+        </Show>
+      )}
       <Modal
         isOpen={isOpen}
         onClose={onClose}
         /* @ts-ignore */
         scrollBehavior={scrollBehavior}
-        size={{ base: "full", md: "xl" }}
+        size={{ base: "full", md: "3xl" }}
       >
         <ModalOverlay />
         <ModalContent
           height={{ md: "auto" }}
-          maxH={{ md: "70%" }}
+          maxH={{ md: "80%" }}
           my={{ md: "auto" }}
+          h={{ base: "100%", md: "80%" }}
         >
           <ModalHeader
             p="1rem"
@@ -85,7 +109,25 @@ export default function CustomModal({
               </Heading>
 
               {modalHeaderBtn ? (
-                <Box marginLeft="auto">{modalHeaderBtn}</Box>
+                <>
+                  <Button
+                    marginLeft="auto"
+                    type="submit"
+                    isDisabled={!isOnClickModalHeaderBtnValid}
+                    isLoading={isLoading}
+                    onClick={onClickModalHeaderBtn}
+                  >
+                    {modalHeaderBtn}
+                  </Button>
+                  {/* <Button
+                    w="100%"
+                    type="submit"
+                    isLoading={isLoading}
+                    isDisabled={!isOnClickModalHeaderBtnValid}
+                  >
+                    submit
+                  </Button> */}
+                </>
               ) : (
                 <Show above="md">
                   <IconButton
@@ -103,7 +145,7 @@ export default function CustomModal({
             </Flex>
           </ModalHeader>
 
-          <ModalBody px="1rem" pt="0px" pb="1rem">
+          <ModalBody px="1rem" pt="0px" pb="1rem" h="100%">
             {children}
           </ModalBody>
         </ModalContent>

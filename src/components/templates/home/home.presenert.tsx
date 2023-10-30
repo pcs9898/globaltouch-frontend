@@ -1,37 +1,49 @@
-import { Box, Flex, Show, Spinner, Text } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Show, Spinner, Text } from "@chakra-ui/react";
 import CardList from "../../organisms/cardList";
 import { IProject } from "@/src/commons/types/generated/types";
 import CustomTab from "../../molecules/customTab";
-import { MutableRefObject, useCallback, useEffect, useState } from "react";
 import {
-  GoogleMap,
-  LoadScript,
-  Marker,
-  MarkerClusterer,
-  MarkerClustererF,
-  MarkerF,
-  useJsApiLoader,
-} from "@react-google-maps/api";
-import { Typography } from "@mui/material";
-import { CircleFlag } from "react-circle-flags";
-const countriesInfo = require("/public/countriesInfo.json");
-const countriesArray: ICountriesArray[] = Object.entries(countriesInfo).map(
-  ([key, value]) => ({
-    country_code: key,
-    // @ts-ignore
-    ...value,
-  })
-);
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+import GoogleMap from "../../molecules/googleMap";
+import InfiniteScroll from "react-infinite-scroll-component";
+import EndMessage from "../../molecules/infiniteScroll/endMessage";
+import CustomSkeleton from "../../molecules/customSkeleton";
+import CustomCard from "../../molecules/customCard";
+import { useCountryCodeToLocaleCountryName } from "../../customhooks/useCountryCodeToLocaleCountryName";
+import { useTranslation } from "next-i18next";
+import ReactCountryFlag from "react-country-flag";
+import { useRouter } from "next/router";
+import { ArrowBackIcon } from "@chakra-ui/icons";
+import { ArrowBackIos } from "@mui/icons-material";
 
 export interface IHomePresenterProps {
-  cardListProps: {
-    onClickTab: (tab: string) => void;
-    loading: boolean;
-    projects: IProject[];
+  cardListProps?: {
+    onClickTab?: (tab: string) => void;
+    loading?: boolean;
+    projects?: IProject[];
     fetchMore?: () => any;
-    hasMore: boolean;
-    scrollRef: MutableRefObject<any>;
+    hasMore?: boolean;
+    scrollRef?: MutableRefObject<any>;
   };
+  cardListByCountryProps?: {
+    loadingByCountry: boolean;
+    projectsByCountry: IProject[];
+    fetchMoreByCountry?: () => any;
+    hasMoreByCountry?: boolean;
+    scrollRefProjectsByCountry?: MutableRefObject<any>;
+    selectedCountryCode: string;
+    setShowProjectsList: Dispatch<SetStateAction<boolean>>;
+  };
+  mapProps?: {
+    onClickCountryFlagMarker: (string) => Promise<IProject[]>;
+  };
+  showProjectsList: boolean;
 }
 
 interface ICountriesArray {
@@ -42,115 +54,6 @@ interface ICountriesArray {
   lng: number;
 }
 
-const containerStyle = {
-  width: "100%",
-  height: "100vh",
-  borderRadius: "0px",
-};
-
-const myStyles = [
-  {
-    featureType: "all",
-    elementType: "geometry.stroke",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "administrative.country",
-    elementType: "geometry.stroke",
-    stylers: [{ color: "#000000" }, { visibility: "on" }],
-  },
-  {
-    featureType: "administrative.country",
-    elementType: "labels.text",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "administrative.province",
-    elementType: "labels",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "water",
-    stylers: [{ color: "#ffffff" }],
-  },
-  {
-    featureType: "landscape",
-    stylers: [{ color: "#CCCCCC" }],
-  },
-  {
-    featureType: "poi",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "road",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "transit",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "administrative.locality",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "administrative.neighborhood",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "administrative.land_parcel",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "water",
-    elementType: "labels",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "administrative",
-    elementType: "geometry.fill",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "transit.line",
-    elementType: "geometry",
-    stylers: [
-      {
-        visibility: "off",
-      },
-    ],
-  },
-  {
-    featureType: "transit.line",
-    elementType: "labels",
-    stylers: [
-      {
-        visibility: "off",
-      },
-    ],
-  },
-];
-
-const myOptions = {
-  maxZoom: 6,
-  minZoom: 2.5,
-  disableDefaultUI: true,
-  restriction: {
-    latLngBounds: {
-      north: 85,
-      south: -85,
-      west: -180,
-      east: 180,
-    },
-    strictBounds: true,
-  },
-};
-
-const center = {
-  lat: 37.5575,
-  lng: 126.924,
-};
-
 export default function HomePresenter({
   cardListProps: {
     onClickTab,
@@ -160,45 +63,25 @@ export default function HomePresenter({
     hasMore,
     scrollRef,
   },
+  cardListByCountryProps: {
+    loadingByCountry,
+    projectsByCountry,
+    fetchMoreByCountry,
+    hasMoreByCountry,
+    scrollRefProjectsByCountry,
+    selectedCountryCode,
+    setShowProjectsList,
+  },
+  mapProps: { onClickCountryFlagMarker },
+  showProjectsList,
 }: IHomePresenterProps) {
-  const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey,
+  const countryName = useCountryCodeToLocaleCountryName({
+    country_code: selectedCountryCode,
   });
+  const { t } = useTranslation();
+  const { locale, replace } = useRouter();
 
-  const [map, setMap] = useState<google.maps.Map | null>(null);
-  const [activeCountryCode, setActiveCountryCode] = useState<string | null>(
-    null
-  );
-
-  const onLoad = useCallback(function callback(map: any) {
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
-
-    setMap(map);
-  }, []);
-
-  const onUnmount = useCallback(function callback(map) {
-    setMap(null);
-  }, []);
-
-  const handleClick = ({ lat, lng, country_code }) => {
-    if (activeCountryCode === country_code) {
-      setActiveCountryCode(null);
-    } else {
-      setActiveCountryCode(country_code);
-    }
-
-    setMap((prev) => {
-      if (prev) {
-        prev.setCenter({ lat, lng });
-        prev.setZoom(6);
-      }
-      return prev;
-    });
-  };
-
+  // console.log(showProjectsList);
   return (
     <Flex>
       <Show above="md">
@@ -210,65 +93,141 @@ export default function HomePresenter({
           px="1rem"
           zIndex={1}
         >
-          <CardList
-            customTabProps={{
-              onClickTab,
-              categoryKindOption: "projectListCategory",
-            }}
-            cardListProps={{ projects, loading, fetchMore, hasMore, scrollRef }}
-          />
-        </Box>
-        <Box id="map" w="50%" borderRadius="0px">
-          {isLoaded ? (
-            <GoogleMap
-              mapContainerStyle={containerStyle}
-              center={center}
-              zoom={15}
-              onLoad={onLoad}
-              onUnmount={onUnmount}
-              options={{ ...myOptions, styles: myStyles }}
-            >
-              <MarkerClusterer options={{ maxZoom: 5 }}>
-                {(clusterer) => (
-                  <>
-                    {countriesArray.map(
-                      (country) =>
-                        country.country_code !== activeCountryCode && (
-                          <MarkerF
-                            key={country.country_code}
-                            position={{
-                              lat: Number(country.lat),
-                              lng: Number(country.lng),
-                            }}
-                            icon={{
-                              url: `/countriesFlagSvg/${country.country_code}.svg`,
-                              scaledSize: new google.maps.Size(30, 30),
-                            }}
-                            clusterer={clusterer}
-                            onClick={() =>
-                              handleClick({
-                                lat: Number(country.lat),
-                                lng: Number(country.lng),
-                                country_code: country.country_code,
-                              })
-                            }
-                          />
-                        )
-                    )}
-                  </>
-                )}
-              </MarkerClusterer>
-            </GoogleMap>
+          {showProjectsList ? (
+            <CardList
+              customTabProps={{
+                onClickTab,
+                categoryKindOption: "projectListCategory",
+              }}
+              cardListProps={{
+                projects,
+                loading,
+                fetchMore,
+                hasMore,
+                scrollRef,
+              }}
+            />
           ) : (
-            <Flex
-              height="100%"
-              w="100%"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Spinner size="xl" colorScheme="teal" />
+            <Flex flexDir="column" w="100%">
+              <Box
+                position="fixed"
+                top={{ md: "5rem" }}
+                left="0px"
+                zIndex={1}
+                p="1rem"
+                width="50%"
+                borderRadius="0"
+                backgroundColor="white"
+              >
+                <Flex
+                  w="100%"
+                  h="100%"
+                  // justifyContent="center"
+                  fontSize="1.25rem"
+                  fontWeight="Bold"
+                  alignItems="center"
+                  gap="0.5rem"
+                  position="relative"
+                >
+                  <IconButton
+                    aria-label="arrowBack"
+                    // marginRight="auto"
+                    onClick={() => {
+                      replace("/", `/`, { shallow: true });
+                      setShowProjectsList(true);
+                    }}
+                    zIndex={1}
+                    variant="ghost"
+                    colorScheme="gray"
+                    icon={<ArrowBackIos />}
+                  />
+                  <Flex
+                    gap="0.5rem"
+                    textAlign="center"
+                    position="absolute"
+                    left="0"
+                    right="0"
+                    justifyContent="center" // 추가된 코드
+                    alignItems="center" // 추가된 코드
+                  >
+                    <ReactCountryFlag
+                      countryCode={selectedCountryCode}
+                      className="emojiFlag"
+                      // svg
+                      // style={{
+                      //   width: "2rem",
+                      //   height: "2rem",
+                      // }}
+                      style={{
+                        fontSize: "2rem",
+                      }}
+                    />
+
+                    {countryName + t("countryDetailCardListHeaderText")}
+                  </Flex>
+                </Flex>
+              </Box>
+
+              <Box
+                mt="4.5rem"
+                w="100%"
+                h="calc(100vh - 8.5rem)"
+                overflow="auto"
+                id="scrollableDiv"
+                ref={scrollRefProjectsByCountry}
+              >
+                <InfiniteScroll
+                  dataLength={projectsByCountry?.length ?? 0}
+                  next={fetchMoreByCountry}
+                  hasMore={hasMoreByCountry}
+                  loader={loadingByCountry && <Spinner />}
+                  endMessage={<EndMessage endMessageOptions="project" />}
+                  scrollableTarget="scrollableDiv"
+                >
+                  <Box
+                    display={{ base: "flex", lg: "grid" }}
+                    gridTemplateColumns={{ lg: "repeat(2, 1fr)" }}
+                    gap="1rem"
+                    flexDirection="column"
+                  >
+                    {loadingByCountry ? (
+                      Array.from({ length: 8 }, (_, i) => (
+                        <CustomSkeleton key={i} skeletonType="projectCard" />
+                      ))
+                    ) : projectsByCountry.length > 0 ? (
+                      projectsByCountry?.map((project) => (
+                        <CustomCard
+                          key={project.project_id}
+                          project={project}
+                        />
+                      ))
+                    ) : (
+                      <Flex
+                        w="50%"
+                        position="absolute"
+                        h="calc(100vh - 8.5rem)"
+                        justifyContent="center"
+                        alignItems="center"
+                        fontSize="1.25rem"
+                        fontWeight="semibold"
+                        color="gray"
+                      >
+                        {locale === "en"
+                          ? t("countryDetailCardListNoMoreText") + countryName
+                          : countryName + t("countryDetailCardListNoMoreText")}
+                      </Flex>
+                    )}
+                  </Box>
+                </InfiniteScroll>
+              </Box>
             </Flex>
           )}
+        </Box>
+        <Box id="map" w="50%" borderRadius="0px">
+          <GoogleMap
+            onClickCountryFlagMarker={onClickCountryFlagMarker}
+            showProjectsList={showProjectsList}
+          />
         </Box>
       </Show>
     </Flex>

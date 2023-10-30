@@ -137,31 +137,6 @@ export type IFetchProjectResponseDto = {
   user: IUser;
 };
 
-export type IFetchProjectsByCountryDto = {
-  country_code: Scalars['String']['input'];
-  offset: Scalars['Int']['input'];
-  project_category?: IProject_Category_With_All_Enum;
-};
-
-export type IFetchProjectsByCountryResponseDto = {
-  __typename?: 'FetchProjectsByCountryResponseDTO';
-  amount_raised: Scalars['Int']['output'];
-  amount_required: Scalars['Int']['output'];
-  cityName: Scalars['String']['output'];
-  countryCode: ICountryCode;
-  lat: Scalars['Float']['output'];
-  lng: Scalars['Float']['output'];
-  project_id: Scalars['String']['output'];
-  project_image_url: Scalars['String']['output'];
-  title: Scalars['String']['output'];
-};
-
-export type IFetchProjectsByCountryWithTotalResponseDto = {
-  __typename?: 'FetchProjectsByCountryWithTotalResponseDTO';
-  projects: Array<IFetchProjectsByCountryResponseDto>;
-  total: Scalars['Int']['output'];
-};
-
 export type IFetchUpdatedProjectsDto = {
   project_id: Scalars['String']['input'];
 };
@@ -353,7 +328,7 @@ export type IQuery = {
   fetchProjectComments: IFetchProjectCommentsWithTotalResponseDto;
   fetchProjectOg: IFetchProjectOgResponseDto;
   fetchProjects: Array<IProject>;
-  fetchProjectsByCountry: IFetchProjectsByCountryWithTotalResponseDto;
+  fetchProjectsByCountry: Array<IProject>;
   fetchUpdatedProjects: Array<IFetchUpdatedProjectsResponseDto>;
   fetchUserLoggedIn: IFetchUserLoggedInResponseDto;
   fetchUserLoggedInDonations: IFetchUserLoggedInDonationsWithTotalResponseDto;
@@ -384,7 +359,8 @@ export type IQueryFetchProjectsArgs = {
 
 
 export type IQueryFetchProjectsByCountryArgs = {
-  fetchProjectsByCountryDTO: IFetchProjectsByCountryDto;
+  country_code: Scalars['String']['input'];
+  offset: Scalars['Float']['input'];
 };
 
 

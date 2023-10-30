@@ -33,8 +33,16 @@
   "createProjectHeaderBtn": "프로젝트",
   "createProjectFormTitle": "프로젝트 제목 입력",
   "createProjectFormAmountRequired": "시작 목표 금액",
+  "createProjectFormCountry": "국가",
+  "createProjectFormCity": "도시",
   "createProjectFormContent": "프로젝트 소개",
   "createProjectFormAddPhotos": "사진 추가",
+  "createProjectCategory1": "의료",
+  "createProjectCategory2": "긴급",
+  "createProjectCategory3": "기념",
+  "createProjectCategory4": "교육",
+  "createProjectCategory5": "위기 구호",
+  "createProjectCategory6": "비영리",
   "projectCategory1": "전체",
   "projectCategory2": "의료",
   "projectCategory3": "긴급",
@@ -121,5 +129,7 @@
   "signPageSignUpToastGreeting": "환영합니다",
   "signOutButtonToastText": "님, 로그아웃이 완료되었습니다. 좋은 하루 되세요!",
   "endMessageTextForProject": "더 이상의 프로젝트가 없습니다",
-  "endMessageTextForDonationHistory": "더 이상의 후원기록이 없습니다"
+  "endMessageTextForDonationHistory": "더 이상의 후원기록이 없습니다",
+  "countryDetailCardListHeaderText": "의 프로젝트들",
+  "countryDetailCardListNoMoreText": "에서 진행 중인 프로젝트가 없습니다"
 }

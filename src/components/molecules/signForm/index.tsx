@@ -94,26 +94,6 @@ export default function SignForm({
           <FormErrorMessage>{String(errors.email?.message)}</FormErrorMessage>
         </FormControl>
 
-        {/* {(onSignUpSubmit ?? onUpdateCountryCodeSubmit) && (
-          <FormControl isInvalid={!!errors.country_code}>
-            <Select
-              placeholder={t("signUpFormCountry")}
-              variant="outline"
-              textColor="gray"
-              {...register("country_code")}
-            >
-              {Object.entries(countriesInfo).map(([key, value]: any) => (
-                <option value={key} key={key}>
-                  {value.engName}
-                </option>
-              ))}
-            </Select>
-            <FormErrorMessage>
-              {String(errors.country_code?.message)}
-            </FormErrorMessage>
-          </FormControl>
-        )} */}
-
         <FormControl isInvalid={!!errors.password}>
           <InputGroup size="md">
             <Input
