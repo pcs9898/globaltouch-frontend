@@ -45,11 +45,12 @@ import {
 } from "@/src/commons/types/generated/types";
 import { useRouter } from "next/router";
 import { debounce } from "lodash";
+import { FETCH_PROJECTS } from "../../pages/home/home.queries";
 
 export const createProjectSchema = yup.object().shape({
-  title: yup.string().required("Title is required").max(29).min(2),
+  title: yup.string().required("Title is required").max(50).min(2),
   amount_required: yup.number().required("Your goal is required").min(1),
-  content: yup.string().required("Story is required").max(29).min(2),
+  content: yup.string().required("Story is required").max(10000).min(2),
   project_category: yup
     .string()
     .required("Category is required")
@@ -127,6 +128,34 @@ export default function CreateProjectModalPresenter() {
             title: data.title,
             project_category: data.project_category,
           },
+        },
+        update(cache, { data }) {
+          const newProject = data?.createProject;
+          const existingNewProjectList = cache.readQuery({
+            query: FETCH_PROJECTS,
+            variables: {
+              offset: 1,
+              fetchProjectsOption: "Newest",
+            },
+          });
+
+          console.log(existingNewProjectList);
+
+          if (existingNewProjectList) {
+            cache.writeQuery({
+              query: FETCH_PROJECTS,
+              variables: {
+                offset: 1,
+                fetchProjectsOption: "Newest",
+              },
+              data: {
+                fetchProjects: [
+                  newProject,
+                  ...existingNewProjectList?.fetchProjects,
+                ],
+              },
+            });
+          }
         },
       });
 
@@ -207,7 +236,6 @@ export default function CreateProjectModalPresenter() {
       setValue("lng", parseFloat(lng));
       setValue("countryCode", countryCode);
 
-      console.log(countryCode);
       trigger("cityName");
       trigger("lat");
       trigger("lng");

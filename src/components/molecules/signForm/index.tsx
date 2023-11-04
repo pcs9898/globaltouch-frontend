@@ -52,6 +52,7 @@ export default function SignForm({
     handleSubmit,
     watch,
     reset,
+    trigger,
     formState: { errors, isValid },
   } = useForm({
     resolver: yupResolver(onSignInSubmit ? signInSchema : signUpSchema),
@@ -61,10 +62,11 @@ export default function SignForm({
   const onSubmit = (data) => {
     if (onSignInSubmit) {
       onSignInSubmit(data);
+      reset();
     } else {
       onSignUpSubmit(data);
+      reset();
     }
-    reset();
   };
 
   return (

@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router.js";
 import Cookies from "js-cookie";
 import Layouts from "@/src/components/layouts/index";
+import "../src/commons/styles/styles.css";
 
 import ApolloSetting from "@/src/commons/libraries/apollo/apolloSetting";
 

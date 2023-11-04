@@ -137,7 +137,7 @@ export default function HomePresenter({
                       setShowProjectsList(true);
                     }}
                     zIndex={1}
-                    variant="ghost"
+                    variant="unstyled"
                     colorScheme="gray"
                     icon={<ArrowBackIos />}
                   />

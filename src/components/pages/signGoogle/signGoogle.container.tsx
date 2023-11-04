@@ -4,7 +4,7 @@ import {
 } from "@/src/commons/libraries/recoil/auth.recoil";
 import { userState } from "@/src/commons/libraries/recoil/global.recoil";
 import { IQuery } from "@/src/commons/types/generated/types";
-import { FETCH_USER_LOGGED_IN_QUERY } from "@/src/components/pages/signIn/signIn.quries";
+import { FETCH_USER_LOGGED_IN_QUERY } from "@/src/components/pages/signIn/signIn.queries";
 import { useApolloClient } from "@apollo/client";
 import { Spinner, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";

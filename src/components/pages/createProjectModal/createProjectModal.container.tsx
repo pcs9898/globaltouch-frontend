@@ -1,4 +1,4 @@
-import CreateProjectModalPresenter from "../../templates/createProjectModal/createProjectModal.presenert";
+import CreateProjectModalPresenter from "../../templates/createProjectModal/createProjectModal.presnter";
 
 export default function CreateProjectModalContainer() {
   return <CreateProjectModalPresenter />;

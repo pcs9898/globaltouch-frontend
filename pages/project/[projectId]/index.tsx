@@ -1,6 +1,8 @@
 import { withTranslations } from "@/src/commons/utils/withTranslations";
+import ProjectContainer from "@/src/components/pages/project/project.container";
 import { Box, Container } from "@chakra-ui/react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
 
 export async function getServerSideProps({ locale }) {
   return {
@@ -10,14 +12,13 @@ export async function getServerSideProps({ locale }) {
   };
 }
 
-export default function ProjectDetailPage() {
-  // const router = useRouter();
-
-  // console.log(router);
+export default function ProjectPage() {
   return (
-    <Box>
-      <h1>Hello, this is the Project Detail Page!</h1>
-      {/* Add more components or content here */}
-    </Box>
+    <>
+      <Head>
+        <title>Project</title>
+      </Head>
+      <ProjectContainer />
+    </>
   );
 }

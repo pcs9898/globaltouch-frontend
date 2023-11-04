@@ -16,13 +16,14 @@
 - [ ] feature7/homePage --have to do mobile page, and routing between home and country detail
 - [x] feature8/createProjectPage
 - [ ] feature9/projectsListByCountryCodePage --have to do mobile page, and routing between home and country detail
-- [ ] feature10/projectDetailPage
-- [ ] feature11/createUpdatedProjectPage
-- [ ] feature12/projectUpdatesPage
-- [ ] feature13/donationPage
-- [ ] feature14/searchPage
-- [ ] feature15/editProfilePage
-- [ ] feature16/settingsPage
+- [x] feature10/settingsPage
+- [x] feature11/projectPage -- need to change branch name
+- [ ] feature12/createUpdatedProjectPage
+- [ ] feature13/projectUpdatesPage
+- [ ] feature14/donationPage
+- [ ] feature15/searchPage
+- [ ] feature16/mePage
+- [ ] feature17/editProfilePage
 
 ## Optimization
 

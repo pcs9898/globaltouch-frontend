@@ -13,8 +13,8 @@ import { accessTokenState } from "@/src/commons/libraries/recoil/auth.recoil";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { userState } from "@/src/commons/libraries/recoil/global.recoil";
-import { FETCH_USER_LOGGED_IN_QUERY } from "../signIn/signIn.quries";
-import { SIGN_UP_MUTATION } from "./signUp.quries";
+import { FETCH_USER_LOGGED_IN_QUERY } from "../signIn/signIn.queries";
+import { SIGN_UP_MUTATION } from "./signUp.queries";
 import { useState } from "react";
 
 export default function SignUpContainer() {

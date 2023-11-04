@@ -50,6 +50,10 @@ export default function CustomCard({ project, donation }: ICustomCard) {
         href={`/project/${project.project_id ?? donation.project.project_id}`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        bgColor={isHovered ? "gray.100" : "null"}
+        style={{
+          transition: "all 0.1s ease-in-out",
+        }}
       >
         <CardBody width="100%" padding={0}>
           <Box
@@ -61,11 +65,13 @@ export default function CustomCard({ project, donation }: ICustomCard) {
                 .filter((image) => image.image_index === 0)
                 .map((image) => image.image_url)
             })`}
-            bgSize={isHovered ? "110%" : "100%"}
-            bgRepeat="repeat"
+            bgSize={isHovered ? "110%" : "cover"}
+            // bgRepeat="repeat"
             bgPosition="center"
             height="11rem"
-            transition="background-size 0.2s"
+            style={{
+              transition: "all 3s ease-in-out",
+            }}
           />
 
           <Flex padding="0.75rem 0.5rem" gap="0.5rem" flexDir="column">
@@ -74,7 +80,7 @@ export default function CustomCard({ project, donation }: ICustomCard) {
                 {project.title ?? donation.projectDonation_id}
               </Heading>
               <Text fontSize="0.875rem" fontWeight="medium" color="gray">
-                {countryName} {project && " ‧ " + project.cityName}
+                {countryName} &bull; {project?.cityName}
               </Text>
             </Flex>
 

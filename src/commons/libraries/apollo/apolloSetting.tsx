@@ -23,13 +23,13 @@ import { getAccessToken } from "./getAccessToken";
 import { createUploadLink } from "apollo-upload-client";
 import Cookie from "js-cookie";
 import { IQuery } from "../../types/generated/types";
-import { FETCH_USER_LOGGED_IN_QUERY } from "@/src/components/pages/signIn/signIn.quries";
+import { FETCH_USER_LOGGED_IN_QUERY } from "@/src/components/pages/signIn/signIn.queries";
 import { userState } from "../recoil/global.recoil";
 import { useToast } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
-const GLOBAL_STATE = new InMemoryCache();
+const GLOBAL_STATE = new InMemoryCache({});
 
 export default function ApolloSetting(props) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
@@ -65,10 +65,12 @@ export default function ApolloSetting(props) {
             user_id,
           });
 
-          toast({
-            status: "success",
-            title: t("signPageSignInToastGreeting") + ` ${name}`,
-          });
+          if (window.history.state.url !== "/payment/complete") {
+            toast({
+              status: "success",
+              title: t("signPageSignInToastGreeting") + ` ${name}`,
+            });
+          }
         };
         fetchUserLoggedIn();
       });
