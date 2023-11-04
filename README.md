@@ -20,7 +20,7 @@
 - [x] feature11/projectPage -- need to change branch name
 - [x] feature12/createUpdatedProjectPage
 - [x] feature13/projectUpdatesPage
-- [ ] feature14/donationPage
+- [x] feature14/donationPage
 - [ ] feature15/searchPage
 - [ ] feature16/mePage
 - [ ] feature17/editProfilePage
