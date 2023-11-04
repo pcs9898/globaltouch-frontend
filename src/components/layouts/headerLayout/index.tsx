@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import Header from "../../organisms/header";
-import { Box, Container } from "@chakra-ui/react";
+import { Box, Container, Flex } from "@chakra-ui/react";
 
 export default function HeaderLayout() {
   const { pathname } = useRouter();
@@ -8,13 +8,15 @@ export default function HeaderLayout() {
     pathname === "/" || pathname === "/country/[countryCode]";
 
   return (
-    <Box
+    <Flex
       as="header"
       w="100%"
+      maxW={isHomeLayout ? "full" : "71.875rem"}
       m="0px"
       p="0px"
       position="fixed"
-      left="0px"
+      left={["50%", null, null, null]} // Centering view when fix
+      transform={["translateX(-50%)", null, null, null]} // Centering view when
       top="0px"
       bg="white"
       zIndex={2}
@@ -22,6 +24,6 @@ export default function HeaderLayout() {
       borderRadius="0px"
     >
       <Header />
-    </Box>
+    </Flex>
   );
 }

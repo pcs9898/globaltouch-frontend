@@ -23,7 +23,7 @@ export default function MainLayout({ children }: IMainLayout) {
     <Container
       as="main"
       w="100%"
-      maxW={isFullLayout ? "full" : "container.md"}
+      maxW={isFullLayout ? "full" : "71.875rem"}
       m={0}
       p={0}
       pt={isSignLayout ? "0px" : { base: "3.5rem", md: "5rem" }}

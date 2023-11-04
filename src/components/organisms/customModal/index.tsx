@@ -11,6 +11,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Show,
+  Text,
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -20,13 +21,16 @@ import { ReactNode, cloneElement, useEffect, useRef } from "react";
 
 interface ICustomModalProps {
   children: ReactNode;
-  modalBtnTxt: string;
+  modalTxtBtnTxt?: string;
+  modalBtnTxt?: string;
   modalHeaderTxt: string;
   modalHeaderBtn?: ReactNode;
   onClickModalHeaderBtn?: any;
-  isMd: boolean;
-  isOnClickModalHeaderBtnValid: boolean;
-  isLoading: boolean;
+  isMd?: boolean;
+  isOnClickModalHeaderBtnValid?: boolean;
+  isLoading?: boolean;
+  isTealColorBtn?: boolean;
+  closeModalBoolean?: boolean;
 }
 
 export default function CustomModal({
@@ -38,6 +42,9 @@ export default function CustomModal({
   isMd,
   isOnClickModalHeaderBtnValid,
   isLoading,
+  modalTxtBtnTxt,
+  isTealColorBtn,
+  closeModalBoolean,
 }: ICustomModalProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const breakpoint = useBreakpointValue({ base: "base", md: "md" });
@@ -48,17 +55,44 @@ export default function CustomModal({
     onClose();
   }, [router.asPath]);
 
+  useEffect(() => {
+    onClose();
+  }, [closeModalBoolean]);
+
   return (
     <>
-      {isMd === true ? (
+      {modalTxtBtnTxt ? (
+        <Text
+          mt="0.5rem"
+          decoration="underline"
+          onClick={onOpen}
+          cursor="pointer"
+          fontSize="1rem"
+          fontWeight="semibold"
+        >
+          {modalTxtBtnTxt}
+        </Text>
+      ) : isMd === true ? (
         <Show above="md">
-          <Button onClick={onOpen} variant="ghost" colorScheme="gray">
+          <Button
+            onClick={onOpen}
+            variant={isTealColorBtn ? "solid" : "ghost"}
+            colorScheme={isTealColorBtn ? "teal" : "gray"}
+          >
             {modalBtnTxt}
           </Button>
         </Show>
       ) : (
         <Show below="md">
-          <Button onClick={onOpen}>{modalBtnTxt}</Button>
+          <Button
+            onClick={onOpen}
+            variant={isTealColorBtn ? "solid" : "ghost"}
+            colorScheme={isTealColorBtn ? "teal" : "gray"}
+            w="100%"
+            h="100%"
+          >
+            {modalBtnTxt}
+          </Button>
         </Show>
       )}
       <Modal
@@ -73,7 +107,8 @@ export default function CustomModal({
           height={{ md: "auto" }}
           maxH={{ md: "80%" }}
           my={{ md: "auto" }}
-          h={{ base: "100%", md: "80%" }}
+          h={{ base: "100vh", md: "80%" }}
+          position="relative"
         >
           <ModalHeader
             p="1rem"
@@ -145,7 +180,7 @@ export default function CustomModal({
             </Flex>
           </ModalHeader>
 
-          <ModalBody px="1rem" pt="0px" pb="1rem" h="100%">
+          <ModalBody px="1rem" pt="0px" pb="1rem" h="100%" overflow="hidden">
             {children}
           </ModalBody>
         </ModalContent>

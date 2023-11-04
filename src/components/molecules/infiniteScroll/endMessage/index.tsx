@@ -2,7 +2,7 @@ import { Flex, Text } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 
 interface IEndMessageProps {
-  endMessageOptions: "project" | "donationHistory";
+  endMessageOptions: "project" | "donationHistory" | "comment";
 }
 
 export default function EndMessage({ endMessageOptions }: IEndMessageProps) {
@@ -11,13 +11,15 @@ export default function EndMessage({ endMessageOptions }: IEndMessageProps) {
   return (
     <Flex w="100%" justifyContent="center" p="3rem">
       <Text fontSize="1.25rem" fontWeight="semibold" color="gray">
-        {t(
-          `${
-            endMessageOptions === "project"
-              ? "endMessageTextForProject"
-              : "endMessageTextForDonationHistory"
-          }`
-        )}
+        {endMessageOptions === "comment"
+          ? "No more comments"
+          : t(
+              `${
+                endMessageOptions === "project"
+                  ? "endMessageTextForProject"
+                  : "endMessageTextForDonationHistory"
+              }`
+            )}
       </Text>
     </Flex>
   );

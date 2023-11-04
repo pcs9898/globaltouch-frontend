@@ -17,6 +17,7 @@ import { useTranslation } from "next-i18next";
 import { useChangeLocale } from "../../customhooks/useChangeLocale";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
+import { useApolloClient } from "@apollo/client";
 
 interface ISettingsProps {
   drawerOnClose?: () => void;
@@ -29,6 +30,7 @@ export default function Settings({ drawerOnClose }: ISettingsProps) {
   const changeLocale = useChangeLocale();
   const router = useRouter();
   const toast = useToast();
+  const client = useApolloClient();
 
   const onClickRouterPushNCloseDrawer = (path: string) => {
     if (drawerOnClose) {
@@ -49,6 +51,7 @@ export default function Settings({ drawerOnClose }: ISettingsProps) {
       title: userLoggedInInfo.name + t("signOutButtonToastText"),
     });
     router.push("/");
+    client.clearStore();
   };
 
   return (
@@ -61,7 +64,12 @@ export default function Settings({ drawerOnClose }: ISettingsProps) {
         <Flex fontWeight="semibold" alignItems="center">
           {t("settingsModalDarkMode")}
         </Flex>
-        <Switch size="lg" onChange={toggleColorMode} colorScheme="teal" />
+        <Switch
+          size="lg"
+          defaultChecked={colorMode === "dark" ? true : false}
+          onChange={toggleColorMode}
+          colorScheme="teal"
+        />
       </Flex>
 
       <Flex w="100%" justifyContent="space-between">

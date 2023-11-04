@@ -10,6 +10,21 @@ interface ILayouts {
   children: ReactNode;
 }
 
+const pageListNeedFooter = [
+  "signIn",
+  "signUp",
+  "about",
+  "api",
+  "blog",
+  "for-charities",
+  "help-center",
+  "how-it-works",
+  "jobs",
+  "locations",
+  "privacy",
+  "terms",
+];
+
 export default function Layouts({ children }: ILayouts) {
   const { pathname } = useRouter();
 
@@ -18,9 +33,14 @@ export default function Layouts({ children }: ILayouts) {
   const isHomeLayout =
     pathname === "/" || pathname === "/country/[countryCode]";
 
-  const isSignGoogleLayout = pathname === "/sign-google";
+  const isSignGoogleNPaymentCompleteLayout =
+    pathname === "/sign-google" || pathname === "/payment/complete";
 
-  return isSignGoogleLayout ? (
+  const isNeedFooterLayout = pageListNeedFooter.some(
+    (item) => pathname === `/${item}`
+  );
+
+  return isSignGoogleNPaymentCompleteLayout ? (
     <Flex
       as="main"
       w="100vw"
@@ -34,6 +54,10 @@ export default function Layouts({ children }: ILayouts) {
     <Container
       maxW={isSignLayout || isHomeLayout ? "full" : "71.875rem"}
       p="0"
+      px={{
+        base: isSignLayout || isHomeLayout ? "0" : "0.5rem",
+        md: isSignLayout || isHomeLayout ? "0" : "1rem",
+      }}
       centerContent
     >
       {!isSignLayout && <HeaderLayout />}

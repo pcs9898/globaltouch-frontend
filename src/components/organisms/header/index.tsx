@@ -2,6 +2,7 @@ import {
   Avatar,
   Box,
   Button,
+  Center,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -39,7 +40,8 @@ import { useChangeLocale } from "../../customhooks/useChangeLocale";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import { userState } from "@/src/commons/libraries/recoil/global.recoil";
 import Settings from "../settings";
-import CreateProjectModalPresenter from "../../templates/createProjectModal/createProjectModal.presenert";
+import CreateProjectModalPresenter from "../../templates/createProjectModal/createProjectModal.presnter";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 
 interface IHeaderProps {}
 
@@ -58,11 +60,6 @@ export default function Header({}: IHeaderProps) {
   const { colorMode, toggleColorMode } = useColorMode();
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const {
-  //   isOpen: drawerIsOpen,
-  //   onOpen: drawerOnOpen,
-  //   onClose: drawerOnClose,
-  // } = useDisclosure();
   const drawerBtnRef = useRef();
   const changeLocale = useChangeLocale(); // useChangeLocale 훅을 호출
   const [userLoggedInInfo, setUserLoggedInInfo] = useRecoilState(userState);
@@ -87,8 +84,9 @@ export default function Header({}: IHeaderProps) {
     <HStack
       h={{ base: "3.5rem", md: "5rem" }}
       justifyContent="space-between"
-      px="0.5rem"
+      px={{ base: "0px", md: "1rem" }}
       w="100%"
+      borderRadius="0px"
     >
       {/* have to add shadow up to uri */}
       <Show above="md">
@@ -110,15 +108,11 @@ export default function Header({}: IHeaderProps) {
       </Show>
 
       <Show below="md">
-        <IconButton
-          aria-label="searchIcon"
-          icon={<Search />}
-          as={Link}
-          href="/search"
-          variant="ghost"
-          colorScheme="gray"
-          fontWeight="extrabold"
-        />
+        <Button p="0.5rem" variant="unstyled" as={Link} href="/search">
+          <Center fontSize="1.5rem">
+            <Search />
+          </Center>
+        </Button>
       </Show>
 
       <Text
@@ -126,8 +120,9 @@ export default function Header({}: IHeaderProps) {
         fontWeight="bold"
         fontSize={{ base: "1.5rem", md: "1.75rem" }}
         position="absolute"
-        left={["50%", null, null, null]} // Centering in mobile view
-        transform={["translateX(-50%)", null, null, null]} // Centering in mobile view
+        top="50%" // centering in view
+        left="50%" // centering in view
+        transform="translate(-50%, -50%)" // centering in view
         zIndex="1"
         as={Link}
         href="/"
@@ -138,13 +133,20 @@ export default function Header({}: IHeaderProps) {
 
       <HStack gap={0}>
         {userLoggedInInfo && (
-          <Box mr="1rem">
+          <Box>
             <CreateProjectModalPresenter />
           </Box>
         )}
         <Show above="md">
           {userLoggedInInfo ? (
             <>
+              <IconButton
+                icon={<NotificationsNoneOutlinedIcon />}
+                aria-label="notification icon"
+                colorScheme="gray"
+                variant="ghost"
+                mr="0.5rem"
+              />
               <Popover>
                 <PopoverTrigger>
                   <Avatar
@@ -229,7 +231,7 @@ export default function Header({}: IHeaderProps) {
         <IconButton
           aria-label="searchIcon"
           icon={<MenuIcon />}
-          variant="ghost"
+          variant={{ base: "unstyled", md: "ghost" }}
           colorScheme="gray"
           fontWeight="extrabold"
           ref={drawerBtnRef}

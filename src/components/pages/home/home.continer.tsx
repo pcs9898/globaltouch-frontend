@@ -1,5 +1,5 @@
 import { gql, useLazyQuery, useQuery } from "@apollo/client";
-import HomePresenter from "../../templates/home/home.presenert";
+import HomePresenter from "../../templates/home/home.presenter";
 import {
   IProject,
   IQuery,
@@ -7,7 +7,7 @@ import {
   IQueryFetchProjectsByCountryArgs,
 } from "@/src/commons/types/generated/types";
 import { useEffect, useRef, useState } from "react";
-import { FETCH_PROJECTS, FETCH_PROJECTS_BY_COUNTRY } from "./home.quires";
+import { FETCH_PROJECTS, FETCH_PROJECTS_BY_COUNTRY } from "./home.queries";
 import { useRouter } from "next/router";
 
 export default function HomeContainer() {

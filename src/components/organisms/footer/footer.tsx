@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useChangeLocale } from "../../customhooks/useChangeLocale";
 import { useTranslation } from "next-i18next";
+import { useEffect, useState } from "react";
 
 const localeObg = {
   en: ["🇺🇸 English", "🇰🇷 Korean"],
@@ -13,6 +14,14 @@ export default function Footer() {
   const router = useRouter();
   const changeLocale = useChangeLocale();
   const { t } = useTranslation();
+
+  const [currentLocale, setCurrentLocale] = useState(router.locale);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCurrentLocale(router.locale);
+    }, 100);
+  }, [router.locale]);
 
   const year = new Date().getFullYear();
 
@@ -29,7 +38,6 @@ export default function Footer() {
       flexDir="column"
       gap="1rem"
       bg="white"
-      shadow="base"
     >
       <Flex gap="0.5rem" justifyContent="center" fontSize="0.75rem">
         <Link href="/about">{t("footerLinkAbout")}</Link>
@@ -48,8 +56,9 @@ export default function Footer() {
           fontSize="0.75rem"
           onChange={(e) => change(e)}
           w="max-content"
+          cursor="pointer"
         >
-          {router.locale === "en" ? (
+          {currentLocale === "en" ? (
             <>
               <option value="en">{t("footerLanguageSelectEn")}</option>
               <option value="ko">{t("footerLanguageSelectKo")}</option>

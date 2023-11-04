@@ -174,6 +174,7 @@ export default function GoogleMap({
     if (showProjectsList && newMap) {
       // 클릭된 마커를 다시 표시
       if (activeCounty && markersRef.current[activeCounty]) {
+        // @ts-ignore
         markersRef.current[activeCounty].setMap(newMap);
       }
 

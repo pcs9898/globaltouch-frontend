@@ -1,5 +1,6 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 interface ISignGreetingSection {
   signGreetingSectionOption: "signIn" | "signUp";
@@ -10,13 +11,21 @@ export default function SignGreetingSection({
 }: ISignGreetingSection) {
   const { t } = useTranslation();
 
+  const router = useRouter();
+
   return (
     <Flex
       flexDir="column"
       alignItems="flex-start"
       w={{ base: "100%", md: "max-content" }}
     >
-      <Image src="logo.svg" alt="logo" w="1.5rem" />
+      <Image
+        src="logo.svg"
+        alt="logo"
+        w="1.5rem"
+        onClick={() => router.push("/")}
+        cursor="pointer"
+      />
 
       <Text
         paddingTop={{ base: "2.5rem", md: "5rem" }}

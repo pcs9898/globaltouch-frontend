@@ -1,5 +1,7 @@
 import {
   Box,
+  Card,
+  Divider,
   Flex,
   Skeleton,
   SkeletonCircle,
@@ -9,7 +11,13 @@ import {
 } from "@chakra-ui/react";
 
 interface ICustomSkeletonProps {
-  skeletonType: "projectCard" | "donationCard" | "tab" | "profile";
+  skeletonType:
+    | "projectCard"
+    | "donationCard"
+    | "tab"
+    | "profile"
+    | "projectDetail"
+    | "projectDetailAsideCard";
   tabOptions?: "tabFlexStart" | "tabCenter";
 }
 
@@ -76,6 +84,56 @@ export default function CustomSkeleton({
           >
             <Skeleton w="50%" h="100%" />
             <Skeleton w="20%" h="100%" />
+          </Flex>
+        </Flex>
+      );
+
+    case "projectDetail":
+      return (
+        <Box width="100%">
+          <Skeleton height="40vh" borderRadius={{ base: "0px", md: "12px" }} />
+          <Flex
+            padding="0.75rem 0.5rem"
+            gap="1rem"
+            flexDir="column"
+            width="100%"
+          >
+            <Flex flexDir="column" gap="1rem">
+              <Skeleton height="2rem" width="80%" />
+              <Skeleton height="1rem" width="35%" />
+              <Skeleton height="1rem" width="100%" />
+              <Skeleton height="1rem" width="35%" />
+              <Skeleton height="1rem" width="35%" />
+            </Flex>
+            <Divider />
+            <Flex flexDir="column" gap="1rem">
+              <Skeleton height="1.5rem" width="30%" />
+              <Skeleton height="1rem" width="50%" />
+            </Flex>
+            <Divider />
+            <Flex flexDir="column" gap="1rem">
+              <Skeleton height="1.5rem" width="30%" />
+              <Skeleton height="1rem" width="100%" />
+              <Skeleton height="1rem" width="100%" />
+              <Skeleton height="1rem" width="100%" />
+              <Skeleton height="1rem" width="100%" />
+              <Skeleton height="1rem" width="100%" />
+              <Skeleton height="1rem" width="100%" />D
+            </Flex>
+          </Flex>
+        </Box>
+      );
+
+    case "projectDetailAsideCard":
+      return (
+        <Flex w="100%" gap="1rem" flexDir="column">
+          <Skeleton height="1.5rem" width="40%" />
+          <Skeleton height="1rem" width="100%" />
+          <Skeleton height="1rem" width="100%" />
+          <Skeleton height="1rem" width="70%" />
+          <Flex gap="0.5rem" flexDir="column">
+            <Skeleton height="2rem" width="100%" />
+            <Skeleton height="2rem" width="100%" />
           </Flex>
         </Flex>
       );
