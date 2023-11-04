@@ -18,7 +18,7 @@
 - [ ] feature9/projectsListByCountryCodePage --have to do mobile page, and routing between home and country detail
 - [x] feature10/settingsPage
 - [x] feature11/projectPage -- need to change branch name
-- [ ] feature12/createUpdatedProjectPage
+- [x] feature12/createUpdatedProjectPage
 - [ ] feature13/projectUpdatesPage
 - [ ] feature14/donationPage
 - [ ] feature15/searchPage
