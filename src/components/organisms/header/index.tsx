@@ -169,7 +169,7 @@ export default function Header({}: IHeaderProps) {
                     h="2.5rem"
                   />
                 </PopoverTrigger>
-                <PopoverContent>
+                <PopoverContent zIndex={2}>
                   <PopoverArrow />
                   <PopoverBody p="1rem">
                     <Settings />

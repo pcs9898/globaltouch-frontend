@@ -74,16 +74,12 @@ export default function CustomSkeleton({
       );
     case "profile":
       return (
-        <Flex gap="1rem">
+        <Flex gap="1rem" w="100%">
           <SkeletonCircle w="4.25rem" h="4.25rem" />
-          <Flex
-            flexDir="column"
-            w="calc(100% - 5.25rem)"
-            h="100%"
-            gap="0.25rem"
-          >
-            <Skeleton w="50%" h="100%" />
-            <Skeleton w="20%" h="100%" />
+
+          <Flex w="calc(100% - 4.25rem)" flexDir="column" gap="0.5rem">
+            <Skeleton w="35%" h="40%" />
+            <Skeleton w="15%" h="40%" />
           </Flex>
         </Flex>
       );
