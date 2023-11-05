@@ -22,7 +22,7 @@
 - [x] feature13/projectUpdatesPage
 - [x] feature14/donationPage
 - [x] feature15/searchPage
-- [ ] feature16/mePage
+- [x] feature16/mePage
 - [ ] feature17/editProfilePage
 
 ## Optimization
