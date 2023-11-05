@@ -60,6 +60,11 @@ export default function Header({}: IHeaderProps) {
   const { colorMode, toggleColorMode } = useColorMode();
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenPop,
+    onOpen: onOpenPop,
+    onClose: onClosePop,
+  } = useDisclosure();
   const drawerBtnRef = useRef();
   const changeLocale = useChangeLocale(); // useChangeLocale 훅을 호출
   const [userLoggedInInfo, setUserLoggedInInfo] = useRecoilState(userState);
@@ -71,6 +76,9 @@ export default function Header({}: IHeaderProps) {
       if (isOpen) {
         onClose();
       }
+      if (isOpenPop) {
+        onClosePop();
+      }
     };
 
     router.events.on("routeChangeStart", handleRouteChange);
@@ -78,7 +86,7 @@ export default function Header({}: IHeaderProps) {
     return () => {
       router.events.off("routeChangeStart", handleRouteChange);
     };
-  }, [router.events]);
+  }, [router.events, isOpen, isOpenPop]);
 
   return (
     <HStack
@@ -147,7 +155,11 @@ export default function Header({}: IHeaderProps) {
                 variant="ghost"
                 mr="0.5rem"
               />
-              <Popover>
+              <Popover
+                isOpen={isOpenPop}
+                onOpen={onOpenPop}
+                onClose={onClosePop}
+              >
                 <PopoverTrigger>
                   <Avatar
                     cursor="pointer"
