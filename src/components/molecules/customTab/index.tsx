@@ -1,8 +1,6 @@
 import { Tab, TabList, TabPanel, Tabs } from "@chakra-ui/react";
-import { Suspense, useEffect, useRef, useState } from "react";
-
+import { MutableRefObject, Suspense, useEffect, useRef, useState } from "react";
 import { useTranslation } from "next-i18next";
-import CustomSkeleton from "../customSkeleton";
 
 interface ICustomTabsProps {
   categoryKindOption:
@@ -12,6 +10,7 @@ interface ICustomTabsProps {
     | "searchProjectCategory"
     | "profileCategory";
   onClickTab: (tab: string) => void;
+  tabBtnRef?: any;
 }
 
 const engCategoryListsInfo = require("/public/locales/en/common.json");
@@ -30,7 +29,7 @@ const engCategoryListsForBe = {
     (_, i) => engCategoryListsInfo[`projectCategory${i + 1}`]
   ),
   searchProjectCategory: Array.from(
-    { length: 3 },
+    { length: 2 },
     (_, i) => engCategoryListsInfo[`searchProjectCategory${i + 1}`]
   ),
   profileCategory: Array.from(
@@ -45,8 +44,9 @@ const getEngCategoryListsForBe = (categoryKindOption: string): string[] =>
 export default function CustomTab({
   categoryKindOption,
   onClickTab,
+  tabBtnRef,
 }: ICustomTabsProps) {
-  const { t, ready: tReady } = useTranslation();
+  const { t } = useTranslation();
   const [isOverflowing, setIsOverflowing] = useState(false);
   const overflowCheckRef = useRef<HTMLDivElement>(null);
 
@@ -92,6 +92,7 @@ export default function CustomTab({
 
   return (
     <Tabs
+      defaultIndex={0}
       borderRadius="0px"
       variant="solid-rounded"
       colorScheme="teal"
@@ -138,6 +139,7 @@ export default function CustomTab({
         {getEngCategoryListsForBe(categoryKindOption).map(
           (engCategoryName, i) => (
             <Tab
+              ref={i === 0 ? tabBtnRef : null}
               key={engCategoryName}
               borderRadius="12px"
               onClick={() => onClickTab(engCategoryName)}

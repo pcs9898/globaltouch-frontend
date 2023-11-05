@@ -55,7 +55,7 @@ export default function Layouts({ children }: ILayouts) {
       maxW={isSignLayout || isHomeLayout ? "full" : "71.875rem"}
       p="0"
       px={{
-        base: isSignLayout || isHomeLayout ? "0" : "0.5rem",
+        base: isSignLayout || isHomeLayout ? "0" : "1rem",
         md: isSignLayout || isHomeLayout ? "0" : "1rem",
       }}
       centerContent
