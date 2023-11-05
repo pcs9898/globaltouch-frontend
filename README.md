@@ -21,7 +21,7 @@
 - [x] feature12/createUpdatedProjectPage
 - [x] feature13/projectUpdatesPage
 - [x] feature14/donationPage
-- [ ] feature15/searchPage
+- [x] feature15/searchPage
 - [ ] feature16/mePage
 - [ ] feature17/editProfilePage
 

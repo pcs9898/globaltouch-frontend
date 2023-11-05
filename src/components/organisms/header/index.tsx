@@ -84,7 +84,7 @@ export default function Header({}: IHeaderProps) {
     <HStack
       h={{ base: "3.5rem", md: "5rem" }}
       justifyContent="space-between"
-      px={{ base: "0px", md: "1rem" }}
+      px={{ base: "0.5rem", md: "1rem" }}
       w="100%"
       borderRadius="0px"
     >
