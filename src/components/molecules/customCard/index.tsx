@@ -16,7 +16,6 @@ import { useState } from "react";
 import { useAmountToFormatCurrency } from "../../customhooks/useAmountToFormatCurrency";
 import { CalculatePercentage } from "@/src/commons/utils/calculatePercentage";
 import {
-  IFetchUserLoggedInDonationsResponseDto,
   IProject,
   IProjectDonation,
 } from "@/src/commons/types/generated/types";
@@ -47,7 +46,7 @@ export default function CustomCard({ project, donation }: ICustomCard) {
         variant="unstyled"
         as={Link}
         height="100%"
-        href={`/project/${project.project_id ?? donation.project.project_id}`}
+        href={`/project/${project?.project_id ?? donation?.project.project_id}`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         bgColor={isHovered ? "gray.100" : "null"}
@@ -77,10 +76,11 @@ export default function CustomCard({ project, donation }: ICustomCard) {
           <Flex padding="0.75rem 0.5rem" gap="0.5rem" flexDir="column">
             <Flex flexDirection="column">
               <Heading fontSize="1rem" fontWeight="bold">
-                {project.title ?? donation.projectDonation_id}
+                {project?.title ?? donation?.project.title}
               </Heading>
               <Text fontSize="0.875rem" fontWeight="medium" color="gray">
-                {countryName} &bull; {project?.cityName}
+                {countryName} &bull;{" "}
+                {project?.cityName ?? donation?.project.cityName}
               </Text>
             </Flex>
 

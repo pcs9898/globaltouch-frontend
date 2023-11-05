@@ -92,24 +92,6 @@ export type IFetchUserDonatedNCommentedResponseDto = {
   id: Scalars['String']['output'];
 };
 
-export type IFetchUserLoggedInDonationsDto = {
-  offset: Scalars['Int']['input'];
-};
-
-export type IFetchUserLoggedInDonationsResponseDto = {
-  __typename?: 'FetchUserLoggedInDonationsResponseDTO';
-  amount: Scalars['Int']['output'];
-  created_at: Scalars['DateTime']['output'];
-  project: IProject;
-  project_image_url: Scalars['String']['output'];
-};
-
-export type IFetchUserLoggedInDonationsWithTotalResponseDto = {
-  __typename?: 'FetchUserLoggedInDonationsWithTotalResponseDTO';
-  donations: Array<IFetchUserLoggedInDonationsResponseDto>;
-  total: Scalars['Int']['output'];
-};
-
 export type IFetchUserLoggedInResponseDto = {
   __typename?: 'FetchUserLoggedInResponseDTO';
   name: Scalars['String']['output'];
@@ -263,7 +245,7 @@ export type IQuery = {
   fetchUpdatedProjects: Array<IUpdatedProject>;
   fetchUserDonatedNCommented: IFetchUserDonatedNCommentedResponseDto;
   fetchUserLoggedIn: IFetchUserLoggedInResponseDto;
-  fetchUserLoggedInDonations: IFetchUserLoggedInDonationsWithTotalResponseDto;
+  fetchUserLoggedInDonations: Array<IProjectDonation>;
   fetchUserLoggedInProjects: Array<IProject>;
   searchProjects: Array<IProject>;
 };
@@ -308,7 +290,7 @@ export type IQueryFetchUserDonatedNCommentedArgs = {
 
 
 export type IQueryFetchUserLoggedInDonationsArgs = {
-  fetchUserLoggedInDonationsDTO: IFetchUserLoggedInDonationsDto;
+  offset: Scalars['Float']['input'];
 };
 
 

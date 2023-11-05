@@ -18,8 +18,8 @@ export default function SearchContainer() {
   const [searchTerm, setSearchTerm] = useState("");
   const scrollRefSearchCardList = useRef(null);
   const scrollRefBasicCardList = useRef(null);
-  const tabBtnRef = useRef();
-  const inputRef = useRef();
+  const tabBtnRef = useRef<HTMLButtonElement>();
+  const inputRef = useRef<HTMLInputElement>();
 
   // tabs state부터 하기
   const { data: basicTabsData, loading: basicTabLoading } = useQuery<
