@@ -177,7 +177,6 @@ export default function SearchPresenter({
                     md: "repeat(2, 1fr)",
                   }}
                   gap="1rem"
-                  flexDirection="column"
                 >
                   {loading
                     ? Array.from({ length: 8 }, (_, i) => (

@@ -10,21 +10,6 @@ interface ILayouts {
   children: ReactNode;
 }
 
-const pageListNeedFooter = [
-  "signIn",
-  "signUp",
-  "about",
-  "api",
-  "blog",
-  "for-charities",
-  "help-center",
-  "how-it-works",
-  "jobs",
-  "locations",
-  "privacy",
-  "terms",
-];
-
 export default function Layouts({ children }: ILayouts) {
   const { pathname } = useRouter();
 
@@ -35,10 +20,6 @@ export default function Layouts({ children }: ILayouts) {
 
   const isSignGoogleNPaymentCompleteLayout =
     pathname === "/sign-google" || pathname === "/payment/complete";
-
-  const isNeedFooterLayout = pageListNeedFooter.some(
-    (item) => pathname === `/${item}`
-  );
 
   return isSignGoogleNPaymentCompleteLayout ? (
     <Flex

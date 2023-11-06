@@ -158,6 +158,7 @@ export default function ProjectContainer() {
               data: {
                 fetchProjectComments: [
                   newComment,
+                  // @ts-ignore
                   ...existingComments.fetchProjectComments,
                 ],
               },
@@ -208,6 +209,7 @@ export default function ProjectContainer() {
 
           if (existingComments) {
             const updatedComments =
+              // @ts-ignore
               existingComments.fetchProjectComments.filter(
                 (item) => item.projectComment_id !== projectComment_id
               );

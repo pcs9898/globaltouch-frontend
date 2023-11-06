@@ -1,3 +1,3 @@
 export default function HelpCenterPresenter() {
-  return "help center";
+  return "hi";
 }

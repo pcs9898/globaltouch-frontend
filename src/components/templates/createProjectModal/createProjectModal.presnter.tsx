@@ -139,8 +139,6 @@ export default function CreateProjectModalPresenter() {
             },
           });
 
-          console.log(existingNewProjectList);
-
           if (existingNewProjectList) {
             cache.writeQuery({
               query: FETCH_PROJECTS,
@@ -151,6 +149,7 @@ export default function CreateProjectModalPresenter() {
               data: {
                 fetchProjects: [
                   newProject,
+                  // @ts-ignore
                   ...existingNewProjectList?.fetchProjects,
                 ],
               },
