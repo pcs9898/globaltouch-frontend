@@ -23,7 +23,8 @@
 - [x] feature14/donationPage
 - [x] feature15/searchPage
 - [x] feature16/mePage
-- [ ] feature17/editProfilePage
+- [x] feature17/editProfileModal
+- [ ] feature18/footerOrganisms -- using for all page without sign
 
 ## Optimization
 

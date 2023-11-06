@@ -1,11 +1,20 @@
 import {
+  Avatar,
   Box,
   Button,
   Center,
   Flex,
   Heading,
+  IconButton,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
   Skeleton,
   Spinner,
+  useBreakpointValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import StickyBox from "react-sticky-box";
@@ -23,6 +32,7 @@ import CustomCard from "../../molecules/customCard";
 import { userState } from "@/src/commons/libraries/recoil/global.recoil";
 import { useRecoilValue } from "recoil";
 import CustomModal from "../../organisms/customModal";
+import { ArrowBackIosNew } from "@mui/icons-material";
 
 interface IMePresenterProps {
   onClickTab: (tab: string) => void;
@@ -60,6 +70,8 @@ export default function MePresenter({
 }: IMePresenterProps) {
   const { t } = useTranslation();
   const user = useRecoilValue(userState);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const scrollBehavior = useBreakpointValue({ base: "outside", md: "inside" });
 
   return (
     <Box
@@ -89,15 +101,7 @@ export default function MePresenter({
               {!user ? (
                 <CustomSkeleton skeletonType="profile" />
               ) : (
-                <>
-                  <Profile
-                    onClickEditProfileBtn={onClickOpenEditProfileModal}
-                  />
-                  <CustomModal modalHeaderTxt=""></CustomModal>
-                  <Button display="none" ref={buttonRef}>
-                    edit profile
-                  </Button>
-                </>
+                <Profile onClickEditProfileBtn={true} />
               )}
               <CustomTab
                 onClickTab={onClickTab}
@@ -123,7 +127,6 @@ export default function MePresenter({
                     md: "repeat(2, 1fr)",
                   }}
                   gap="1rem"
-                  flexDirection="column"
                 >
                   {donationLoading ? (
                     Array.from({ length: 8 }, (_, i) => (
@@ -169,7 +172,6 @@ export default function MePresenter({
                     md: "repeat(2, 1fr)",
                   }}
                   gap="1rem"
-                  flexDirection="column"
                 >
                   {projectLoading ? (
                     Array.from({ length: 8 }, (_, i) => (

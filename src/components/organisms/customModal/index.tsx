@@ -31,6 +31,8 @@ interface ICustomModalProps {
   isLoading?: boolean;
   isTealColorBtn?: boolean;
   closeModalBoolean?: boolean;
+  isBoth?: boolean;
+  isHide?: boolean;
 }
 
 export default function CustomModal({
@@ -45,6 +47,8 @@ export default function CustomModal({
   modalTxtBtnTxt,
   isTealColorBtn,
   closeModalBoolean,
+  isBoth,
+  isHide,
 }: ICustomModalProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const breakpoint = useBreakpointValue({ base: "base", md: "md" });
@@ -85,6 +89,7 @@ export default function CustomModal({
       ) : (
         <Show below="md">
           <Button
+            display={isHide && "none"}
             onClick={onOpen}
             variant={isTealColorBtn ? "solid" : "ghost"}
             colorScheme={isTealColorBtn ? "teal" : "gray"}
@@ -94,6 +99,17 @@ export default function CustomModal({
             {modalBtnTxt}
           </Button>
         </Show>
+      )}
+      {isBoth === true && (
+        <Button
+          onClick={onOpen}
+          // variant={isTealColorBtn ? "solid" : "ghost"}
+          colorScheme={isTealColorBtn ? "teal" : "gray"}
+          // w="100%"
+          // h="100%"
+        >
+          {modalBtnTxt}
+        </Button>
       )}
       <Modal
         isOpen={isOpen}
