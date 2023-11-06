@@ -17,7 +17,13 @@ import {
 } from "@chakra-ui/react";
 import { ArrowBackIosNew, Close } from "@mui/icons-material";
 import { useRouter } from "next/router";
-import { ReactNode, cloneElement, useEffect, useRef } from "react";
+import {
+  MutableRefObject,
+  ReactNode,
+  cloneElement,
+  useEffect,
+  useRef,
+} from "react";
 
 interface ICustomModalProps {
   children: ReactNode;
@@ -33,6 +39,7 @@ interface ICustomModalProps {
   closeModalBoolean?: boolean;
   isBoth?: boolean;
   isHide?: boolean;
+  btnRefFromParents?: MutableRefObject<any>;
 }
 
 export default function CustomModal({
@@ -49,6 +56,7 @@ export default function CustomModal({
   closeModalBoolean,
   isBoth,
   isHide,
+  btnRefFromParents,
 }: ICustomModalProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const breakpoint = useBreakpointValue({ base: "base", md: "md" });
@@ -95,6 +103,7 @@ export default function CustomModal({
             colorScheme={isTealColorBtn ? "teal" : "gray"}
             w="100%"
             h="100%"
+            ref={btnRefFromParents ? btnRefFromParents : null}
           >
             {modalBtnTxt}
           </Button>

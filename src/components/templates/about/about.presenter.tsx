@@ -1,3 +1,10 @@
+import FooterForStatic from "../../organisms/footerForStatic";
+
 export default function AboutPresenter() {
-  return "about";
+  return (
+    <>
+      About
+      <FooterForStatic />
+    </>
+  );
 }

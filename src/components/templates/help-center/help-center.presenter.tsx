@@ -1,3 +1,10 @@
+import FooterForStatic from "../../organisms/footerForStatic";
+
 export default function HelpCenterPresenter() {
-  return "hi";
+  return (
+    <>
+      Help Center
+      <FooterForStatic />
+    </>
+  );
 }

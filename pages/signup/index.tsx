@@ -4,14 +4,12 @@ import Head from "next/head";
 import { withTranslations } from "@/src/commons/utils/withTranslations";
 
 import SignUpContainer from "@/src/components/pages/signUp/signUp.container";
+import useWithoutAuth from "@/src/components/customhooks/useWithoutAuth";
 
 export const getStaticProps = withTranslations();
 
 export default function SignUp() {
-  const onSubmit = (data) => {
-    console.log(data);
-  };
-
+  useWithoutAuth();
   return (
     <>
       <Head>

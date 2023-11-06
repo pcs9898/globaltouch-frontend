@@ -1,3 +1,10 @@
+import FooterForStatic from "../../organisms/footerForStatic";
+
 export default function PrivacyPresenter() {
-  return "privacy";
+  return (
+    <>
+      Privacy
+      <FooterForStatic />
+    </>
+  );
 }

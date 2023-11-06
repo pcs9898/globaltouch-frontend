@@ -229,22 +229,33 @@ export default function GoogleMap({
   // 마커 생성
   const createMarker = async (map) => {
     // 기존 국가 마커 생성 로직
+    let markersArray = [];
 
     countriesArray.forEach((country) => {
-      markersRef.current[country.country_code] = new window.google.maps.Marker({
+      let marker = new window.google.maps.Marker({
         position: { lat: Number(country.lat), lng: Number(country.lng) },
         map,
         icon: {
-          url: `/countriesFlagSvg/${country.country_code}.svg`,
+          url: `${
+            process.env.NEXT_PUBLIC_GOOGLE_STORAGE_IMAGE_URL
+          }/countriesFlagSvg/${country.country_code.toLowerCase()}.svg`,
           scaledSize: new window.google.maps.Size(30, 30),
         },
       });
+      markersRef.current[country.country_code] = marker;
 
       markersRef.current[country.country_code].addListener("click", () =>
         handleMarkerClick(country.country_code)
       );
+
+      markersArray.push(marker);
+    });
+    new MarkerClusterer(map, markersArray, {
+      imagePath:
+        "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
     });
   };
+
   // 마커 클릭 이벤트 핸들러
   let activeCountryCode;
 
@@ -323,7 +334,7 @@ export default function GoogleMap({
     <div
       id="google-map"
       ref={googleMapRef}
-      style={{ width: "50vw", height: "100%", borderRadius: "0px" }}
+      style={{ width: "100%", height: "100%", borderRadius: "0px" }}
     />
   );
 }
