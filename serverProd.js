@@ -10,7 +10,7 @@ const start = process.env.NODE_ENV !== "development";
 const app = next({ start });
 const handle = app.getRequestHandler();
 
-const PORT = 3008;
+const PORT = 3002;
 
 const httpsOptions = {
   key: fs.readFileSync("./ssl/localhost-key.pem"),

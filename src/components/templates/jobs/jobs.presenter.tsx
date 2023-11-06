@@ -1,3 +1,10 @@
+import FooterForStatic from "../../organisms/footerForStatic";
+
 export default function JobsPresenter() {
-  return "jobs";
+  return (
+    <>
+      Jobs
+      <FooterForStatic />
+    </>
+  );
 }

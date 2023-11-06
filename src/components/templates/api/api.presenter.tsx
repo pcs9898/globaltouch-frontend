@@ -1,3 +1,10 @@
+import FooterForStatic from "../../organisms/footerForStatic";
+
 export default function ApiPresenter() {
-  return "api";
+  return (
+    <>
+      Api
+      <FooterForStatic />
+    </>
+  );
 }

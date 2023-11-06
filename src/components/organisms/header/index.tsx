@@ -142,7 +142,7 @@ export default function Header({}: IHeaderProps) {
       <HStack gap={0}>
         {userLoggedInInfo && (
           <Box>
-            <CreateProjectModalPresenter />
+            <CreateProjectModalPresenter isMd={true} />
           </Box>
         )}
         <Show above="md">
@@ -259,7 +259,7 @@ export default function Header({}: IHeaderProps) {
         finalFocusRef={drawerBtnRef}
       >
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent zIndex={4}>
           <DrawerCloseButton size="lg" />
           <DrawerHeader />
           <DrawerBody>

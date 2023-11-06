@@ -53,6 +53,7 @@ export default function CustomCard({ project, donation }: ICustomCard) {
         style={{
           transition: "all 0.1s ease-in-out",
         }}
+        shadow="none"
       >
         <CardBody width="100%" padding={0}>
           <Box

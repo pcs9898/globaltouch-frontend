@@ -1,3 +1,10 @@
+import FooterForStatic from "../../organisms/footerForStatic";
+
 export default function TermsPresenter() {
-  return "terms";
+  return (
+    <>
+      Terms
+      <FooterForStatic />
+    </>
+  );
 }

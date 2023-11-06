@@ -19,6 +19,7 @@ interface ICardListProps {
       | "projectCategory"
       | "searchProjectCategory"
       | "profileCategory";
+    isFixed?: boolean;
   };
   cardListProps: {
     projects?: IProject[];
@@ -41,7 +42,7 @@ export default function CardList({
     scrollRef,
   },
 }: ICardListProps) {
-  const { onClickTab, categoryKindOption } = customTabProps;
+  const { onClickTab, categoryKindOption, isFixed } = customTabProps;
   const { pathname } = useRouter();
 
   const isHomeLayout =
@@ -82,8 +83,8 @@ export default function CardList({
           scrollableTarget="scrollableDiv"
         >
           <Box
-            display={{ base: "flex", lg: "grid" }}
-            gridTemplateColumns={{ lg: "repeat(2, 1fr)" }}
+            display={{ base: "flex", xl: "grid" }}
+            gridTemplateColumns={{ xl: "repeat(2, 1fr)" }}
             gap="1rem"
             flexDirection="column"
           >

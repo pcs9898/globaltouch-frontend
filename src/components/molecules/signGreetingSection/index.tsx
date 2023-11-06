@@ -20,7 +20,7 @@ export default function SignGreetingSection({
       w={{ base: "100%", md: "max-content" }}
     >
       <Image
-        src="logo.svg"
+        src={`${process.env.NEXT_PUBLIC_GOOGLE_STORAGE_IMAGE_URL}/logo.svg`}
         alt="logo"
         w="1.5rem"
         onClick={() => router.push("/")}

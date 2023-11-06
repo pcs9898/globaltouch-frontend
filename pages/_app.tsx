@@ -13,6 +13,7 @@ import Layouts from "@/src/components/layouts/index";
 import "../src/commons/styles/styles.css";
 
 import ApolloSetting from "@/src/commons/libraries/apollo/apolloSetting";
+import Head from "next/head.js";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -30,18 +31,26 @@ const App = ({ Component, pageProps }: AppProps) => {
   }, []);
 
   return (
-    <ChakraProvider theme={customTheme}>
-      <RecoilRoot>
-        <ApolloSetting>
-          <ColorModeScript
-            initialColorMode={chakraColorModeConfig.initialColorMode}
-          />
-          <Layouts>
-            <Component {...pageProps} />
-          </Layouts>
-        </ApolloSetting>
-      </RecoilRoot>
-    </ChakraProvider>
+    <>
+      <Head>
+        <link
+          rel="icon"
+          href={`${process.env.NEXT_PUBLIC_GOOGLE_STORAGE_IMAGE_URL}/favicon.ico`}
+        />
+      </Head>
+      <ChakraProvider theme={customTheme}>
+        <RecoilRoot>
+          <ApolloSetting>
+            <ColorModeScript
+              initialColorMode={chakraColorModeConfig.initialColorMode}
+            />
+            <Layouts>
+              <Component {...pageProps} />
+            </Layouts>
+          </ApolloSetting>
+        </RecoilRoot>
+      </ChakraProvider>
+    </>
   );
 };
 

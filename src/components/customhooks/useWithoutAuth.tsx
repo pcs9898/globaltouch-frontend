@@ -15,7 +15,7 @@ import {
 import { userState } from "@/src/commons/libraries/recoil/global.recoil";
 import { useToast } from "@chakra-ui/react";
 
-export default function useAuth() {
+export default function useWithoutAuth() {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
   const router = useRouter();
@@ -24,12 +24,12 @@ export default function useAuth() {
   useEffect(() => {
     if (!accessToken) {
       void restoreAccessToken.toPromise().then((newAccessToken) => {
-        if (newAccessToken === undefined) {
+        if (newAccessToken !== undefined) {
           toast({
             status: "info",
-            title: "You should sign in first",
+            title: "You already sign in",
           });
-          router.push("/signIn");
+          router.push("/");
         }
       });
     }

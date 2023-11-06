@@ -32,7 +32,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import CustomTab from "../../molecules/customTab";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import axios from "axios";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
@@ -70,7 +76,15 @@ const CREATE_PROJECT_MUTATION = gql`
   }
 `;
 
-export default function CreateProjectModalPresenter() {
+interface ICreateProjectModalPresenterProps {
+  isMd?: boolean;
+  btnRefFromParents?: MutableRefObject<any>;
+}
+
+export default function CreateProjectModalPresenter({
+  isMd,
+  btnRefFromParents,
+}: ICreateProjectModalPresenterProps) {
   const { t } = useTranslation();
   const btnRef = useRef<HTMLButtonElement>();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -262,7 +276,8 @@ export default function CreateProjectModalPresenter() {
       onClickModalHeaderBtn={onClickBtnRef}
       isOnClickModalHeaderBtnValid={!!(isValid && previewImage)}
       isLoading={createProjectLoading}
-      isMd={true}
+      isMd={isMd}
+      btnRefFromParents={btnRefFromParents ? btnRefFromParents : null}
     >
       <form
         style={{ width: "100%", height: "100%" }}

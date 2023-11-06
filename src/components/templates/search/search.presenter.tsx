@@ -178,16 +178,17 @@ export default function SearchPresenter({
                   }}
                   gap="1rem"
                 >
-                  {loading
-                    ? Array.from({ length: 8 }, (_, i) => (
-                        <CustomSkeleton key={i} skeletonType="projectCard" />
-                      ))
-                    : projects?.map((project) => (
-                        <CustomCard
-                          key={project.project_id}
-                          project={project}
-                        />
-                      ))}
+                  {loading ? (
+                    Array.from({ length: 8 }, (_, i) => (
+                      <CustomSkeleton key={i} skeletonType="projectCard" />
+                    ))
+                  ) : projects.length > 0 ? (
+                    projects?.map((project) => (
+                      <CustomCard key={project.project_id} project={project} />
+                    ))
+                  ) : (
+                    <Flex>No results</Flex>
+                  )}
                 </Box>
               </InfiniteScroll>
             </Box>

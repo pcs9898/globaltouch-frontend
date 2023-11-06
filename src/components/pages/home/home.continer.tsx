@@ -17,7 +17,9 @@ export default function HomeContainer() {
   const [showProjectsList, setShowProjectsList] = useState(true);
   const [countryCode, setCountryCode] = useState(null);
   const scrollRef = useRef(null);
+  const scrollRefMobile = useRef(null);
   const scrollRefProjectsByCountry = useRef(null);
+  const scrollRefProjectsByCountryMobile = useRef(null);
   const router = useRouter();
 
   const {
@@ -107,6 +109,7 @@ export default function HomeContainer() {
   const onClickCountryFlagMarker = async (
     country_code
   ): Promise<IProject[]> => {
+    scrollRefProjectsByCountryMobile?.current?.scrollTo(0, 0);
     router.replace("/", `country/${country_code}`, { shallow: true });
 
     scrollRefProjectsByCountry?.current?.scrollTo(0, 0);
@@ -123,6 +126,15 @@ export default function HomeContainer() {
     return result.data.fetchProjectsByCountry;
   };
 
+  const onClickArrowBack = () => {
+    router.replace("/", `/`, { shallow: true });
+
+    scrollRefMobile?.current?.scrollTo(0, 0);
+    scrollRefProjectsByCountryMobile?.current?.scrollTo(0, 0);
+
+    setShowProjectsList(true);
+  };
+
   return (
     <HomePresenter
       cardListProps={{
@@ -132,6 +144,7 @@ export default function HomeContainer() {
         fetchMore: fetchMoreProjects,
         hasMore: hasMore,
         scrollRef: scrollRef,
+        scrollRefMobile: scrollRefMobile,
       }}
       cardListByCountryProps={{
         loadingByCountry: fetchProjectsByCountryLoading,
@@ -139,6 +152,8 @@ export default function HomeContainer() {
         hasMoreByCountry: hasMoreByCountry,
         fetchMoreByCountry: fetchMoreProjectsByCountry,
         scrollRefProjectsByCountry: scrollRefProjectsByCountry,
+
+        scrollRefProjectsByCountryMobile: scrollRefProjectsByCountryMobile,
         selectedCountryCode: countryCode,
         setShowProjectsList: setShowProjectsList,
       }}
@@ -146,6 +161,7 @@ export default function HomeContainer() {
         onClickCountryFlagMarker,
       }}
       showProjectsList={showProjectsList}
+      onClickArrowBack={onClickArrowBack}
     />
   );
 }

@@ -1,7 +1,9 @@
 import { userState } from "@/src/commons/libraries/recoil/global.recoil";
 import {
+  Box,
   Button,
   Flex,
+  Show,
   Switch,
   Tab,
   TabList,
@@ -18,6 +20,8 @@ import { useChangeLocale } from "../../customhooks/useChangeLocale";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 import { useApolloClient } from "@apollo/client";
+import CreateProjectModalPresenter from "../../templates/createProjectModal/createProjectModal.presnter";
+import { useRef } from "react";
 
 interface ISettingsProps {
   drawerOnClose?: () => void;
@@ -31,6 +35,7 @@ export default function Settings({ drawerOnClose }: ISettingsProps) {
   const router = useRouter();
   const toast = useToast();
   const client = useApolloClient();
+  const btnRef = useRef<HTMLButtonElement>();
 
   const onClickRouterPushNCloseDrawer = (path: string) => {
     if (drawerOnClose) {
@@ -60,7 +65,39 @@ export default function Settings({ drawerOnClose }: ISettingsProps) {
         onClickMyProfileBtn={() => onClickRouterPushNCloseDrawer("/me")}
       />
 
-      <Flex w="100%" justifyContent="space-between" mt="0.5rem">
+      <Show below="md">
+        {userLoggedInInfo && (
+          <>
+            <Flex w="100%" justifyContent="flex-start" display="none">
+              <CreateProjectModalPresenter
+                isMd={false}
+                btnRefFromParents={btnRef}
+              />
+            </Flex>
+            <Button
+              w="100%"
+              fontWeight="semibold"
+              variant="ghost"
+              colorScheme="gray"
+              p={0}
+              justifyContent="flex-start"
+              onClick={() => {
+                btnRef?.current.click();
+                // drawerOnClose();
+              }}
+              mt="0.5rem"
+            >
+              {t("headerStartANewProjectBtn")}
+            </Button>
+          </>
+        )}
+      </Show>
+
+      <Flex
+        w="100%"
+        justifyContent="space-between"
+        mt={{ base: !userLoggedInInfo && "0.5rem", md: "0.5rem" }}
+      >
         <Flex fontWeight="semibold" alignItems="center">
           {t("settingsModalDarkMode")}
         </Flex>

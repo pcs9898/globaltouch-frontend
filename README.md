@@ -24,7 +24,8 @@
 - [x] feature15/searchPage
 - [x] feature16/mePage
 - [x] feature17/editProfileModal
-- [x] feature18/footerOrganisms -- using for all page without sign
+- [x] feature18/footerOrganisms
+- [x] feature19/staticPages
 
 ## Optimization
 
