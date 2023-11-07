@@ -14,6 +14,13 @@ export default function SignUp() {
     <>
       <Head>
         <title>Sign Up | globalTouch</title>
+
+        <meta property="og:title" content="Sign Up" />
+        <meta property="og:description" content="Sign Up globalTouch" />
+        <meta
+          property="og:image"
+          content="https://storage.googleapis.com/uyvugugihohonodjiwqd/logo.svg"
+        />
       </Head>
       <SignUpContainer />
     </>
