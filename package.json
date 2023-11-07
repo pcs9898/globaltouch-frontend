@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3003",
+    "dev:docker": "next dev",
     "dev:https": "node server.js",
     "build": "next build",
     "start": "next start -p 3003",
+    "start:docker": "next start",
     "start:https": "node serverProd.js",
     "lint": "next lint",
     "generate": "graphql-codegen"
