@@ -18,7 +18,7 @@ const FETCH_PROJECT_OG = gql`
 export default function ProjectPage(props: any) {
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>{props?.qqq?.title}</title>
         <meta property="og:title" content={props?.qqq?.title} />
         <meta property="og:description" content={props?.qqq?.content} />
@@ -26,7 +26,7 @@ export default function ProjectPage(props: any) {
           property="og:image"
           content="https://storage.googleapis.com/uyvugugihohonodjiwqd/logo.svg"
         />
-      </Head>
+      </Head> */}
       <ProjectContainer />
     </>
   );
@@ -35,21 +35,23 @@ export default function ProjectPage(props: any) {
 export async function getServerSideProps(context) {
   const { locale, query } = context;
 
-  const graphqlClient = new GraphQLClient(process.env.NEXT_PUBLIC_BACKEND_URI);
+  // const graphqlClient = new GraphQLClient(process.env.NEXT_PUBLIC_BACKEND_URI);
 
-  const result = await graphqlClient.request(FETCH_PROJECT_OG, {
-    project_id: query.projectId,
-  });
+  // const result = await graphqlClient.request(FETCH_PROJECT_OG, {
+  //   project_id: query.projectId,
+  // });
+
+  // console.log(result);
 
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "footer"])),
-      qqq: {
-        //@ts-ignore
-        title: result?.fetchProjectOg.title,
-        //@ts-ignore
-        content: result?.fetchProjectOg.content,
-      },
+      // qqq: {
+      //   //@ts-ignore
+      //   title: result?.fetchProjectOg.title,
+      //   //@ts-ignore
+      //   content: result?.fetchProjectOg.content,
+      // },
     },
   };
 }

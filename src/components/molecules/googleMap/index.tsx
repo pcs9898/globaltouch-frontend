@@ -230,9 +230,10 @@ export default function GoogleMap({
   const createMarker = async (map) => {
     // 기존 국가 마커 생성 로직
     let markersArray = [];
+    let marker;
 
     countriesArray.forEach((country) => {
-      let marker = new window.google.maps.Marker({
+      marker = new window.google.maps.Marker({
         position: { lat: Number(country.lat), lng: Number(country.lng) },
         map,
         icon: {
@@ -253,6 +254,7 @@ export default function GoogleMap({
     new MarkerClusterer(map, markersArray, {
       imagePath:
         "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+      ignoreHidden: true,
     });
   };
 
@@ -265,10 +267,10 @@ export default function GoogleMap({
     setActiveCounty(countryCode);
 
     if (activeCountryCode && markersRef.current[activeCountryCode])
-      markersRef.current[activeCountryCode].setMap(map);
+      markersRef.current[activeCountryCode].setVisible(true);
 
     if (markersRef.current[countryCode])
-      markersRef.current[countryCode].setMap(null);
+      markersRef.current[countryCode].setVisible(false);
 
     activeCountryCode = countryCode;
 
