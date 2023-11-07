@@ -14,6 +14,13 @@ export default function SignInPage() {
     <>
       <Head>
         <title>Sign In | globalTouch</title>
+
+        <meta property="og:title" content="Sign In" />
+        <meta property="og:description" content="Sign In globalTouch" />
+        <meta
+          property="og:image"
+          content="https://storage.googleapis.com/uyvugugihohonodjiwqd/logo.svg"
+        />
       </Head>
 
       <SignInContainer />

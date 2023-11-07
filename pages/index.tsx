@@ -9,6 +9,16 @@ export default function HomePage({ onClose }) {
     <>
       <Head>
         <title>globalTouch</title>
+
+        <meta property="og:title" content="globalTouch" />
+        <meta
+          property="og:description"
+          content="Start a new project in globalTouch"
+        />
+        <meta
+          property="og:image"
+          content="https://storage.googleapis.com/uyvugugihohonodjiwqd/logo.svg"
+        />
       </Head>
 
       <HomeContainer />
