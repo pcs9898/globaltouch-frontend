@@ -40,6 +40,7 @@ import CommentInput from "./components/commentInput/commentInput";
 import CommentList from "./components/commentList/commentList";
 import StickyBox from "react-sticky-box";
 import Head from "next/head";
+import ReactCountryFlag from "react-country-flag";
 
 interface IProjectPresenter {
   projectProps: {
@@ -83,6 +84,9 @@ export default function ProjectPresenter({
   const formattedAmount = useAmountToFormatCurrency({
     amount: project?.amount_raised ?? 0,
   });
+  const formattedAmountGoal = useAmountToFormatCurrency({
+    amount: Number(project?.amount_required) ?? 0,
+  });
   const formatCreatedAt = useFormatTimeAgo({ timestamp: project?.created_at });
 
   const formatCreatedAtForUpdatedProject = useFormatTimeAgo({
@@ -94,6 +98,8 @@ export default function ProjectPresenter({
   const toast = useToast();
   const [isSticky, setSticky] = useState(false);
 
+  console.log(formattedAmount);
+  console.log(formattedAmountGoal);
   const checkStickiness = () => setSticky(window.scrollY > 500); // 200을 원하는 스크롤 위치로 변경
 
   useEffect(() => {
@@ -143,7 +149,14 @@ export default function ProjectPresenter({
                       {project?.title}
                     </Heading>
                     <Text fontSize="1rem" fontWeight="medium" color="gray">
-                      {`${countryName}, ${project?.cityName}`} &bull;{" "}
+                      <ReactCountryFlag
+                        countryCode={project?.countryCode.country_code}
+                        className="emojiFlag"
+                        style={{
+                          fontSize: "1.5rem",
+                        }}
+                      />
+                      {` ${countryName}, ${project?.cityName}`} &bull;{" "}
                       {project?.projectCategory.project_category} &bull;{" "}
                       {formatCreatedAt}
                     </Text>
@@ -399,10 +412,9 @@ export default function ProjectPresenter({
                           {t("asideDonationCardTitle1") +
                             " " +
                             t("currency") +
-                            " " +
-                            project?.amount_required +
-                            " " +
-                            t("asideDonationCardTitle2")}
+                            " "}
+                          {formattedAmountGoal}
+                          {" " + t("asideDonationCardTitle2")}
                         </Flex>
                       </Flex>
                     </Flex>
