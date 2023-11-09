@@ -15,10 +15,8 @@ import {
 } from "@/src/commons/types/generated/types";
 import { myStyles } from "./googleMap.styles";
 import { FETCH_MARKERS } from "./googleMap.queries";
-import { IHoveredMarker } from "./googleMap.interface";
-import OverlayMdMapCard from "../overlayMdMapCard";
-import PulseLoader from "react-spinners/PulseLoader";
-import { debounce } from "lodash";
+import { ISelectedMarker } from "./googleMap.interface";
+import OverlayMdMapCard from "../mapCard";
 import MapMarkerLoader from "../mapMarkerLoader";
 
 const markerIconUrls = {
@@ -40,8 +38,8 @@ export default function GoogleMapMd() {
   });
   const [center, setCenter] = useState({ lat: 37.5665, lng: 126.978 });
   const [markers, setMarkers] = useState<IProject[]>();
-  const [hoveredMarker, setHoveredMarker] = useState<IHoveredMarker>();
-  const [zoom, setZoom] = useState(10);
+  const [selectedMarker, setSelectedMarker] = useState<ISelectedMarker>();
+  const [zoom, setZoom] = useState(6);
   const [markerLoadingVisible, setMarkerLoadingVisible] = useState(false);
 
   const {
@@ -76,10 +74,6 @@ export default function GoogleMapMd() {
     }
   }, [data]);
 
-  const handleLoad = (map) => {
-    mapRef.current = map; // 지도 인스턴스 저장
-  };
-
   useEffect(() => {
     if (!markerLoading) {
       const timer = setTimeout(() => {
@@ -89,6 +83,26 @@ export default function GoogleMapMd() {
       return () => clearTimeout(timer); // 컴포넌트 unmount 시 타이머 제거
     }
   }, [markerLoading]);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setCenter({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      },
+      (error) => {
+        // 위치 정보를 가져오는 데 실패했을 때의 처리
+        console.error("Error getting geolocation", error);
+      },
+      { enableHighAccuracy: true }
+    );
+  }, []);
+
+  const handleLoad = (map) => {
+    mapRef.current = map; // 지도 인스턴스 저장
+  };
 
   const handleBoundsChanged = () => {
     setMarkerLoadingVisible(true);
@@ -109,10 +123,21 @@ export default function GoogleMapMd() {
     if (mapRef.current) {
       const newZoom = mapRef.current.getZoom();
       if (newZoom === 4) {
-        setHoveredMarker(null);
+        setSelectedMarker(null);
       }
       setZoom(newZoom);
     }
+  };
+
+  const handleMarkerClick = ({ project, position }) => {
+    setSelectedMarker({ project: project, position });
+
+    if (window.innerWidth <= 1300) {
+      setCenter({ ...position, lng: position.lng + 1.5 });
+    } else {
+      setCenter(position);
+    }
+    setZoom(6);
   };
 
   if (loadError) {
@@ -141,7 +166,7 @@ export default function GoogleMapMd() {
         position: "relative",
       }}
       center={center}
-      zoom={6}
+      zoom={zoom}
       options={{
         styles: myStyles,
 
@@ -162,7 +187,7 @@ export default function GoogleMapMd() {
       onLoad={handleLoad} // 지도가 로드되었을 때의 이벤트 핸들러
       onBoundsChanged={handleBoundsChanged}
       onZoomChanged={handleZoomChanged}
-      onClick={() => setHoveredMarker(null)}
+      onClick={() => setSelectedMarker(null)}
     >
       {markerLoadingVisible && <MapMarkerLoader />}
       <MarkerClustererF
@@ -194,36 +219,37 @@ export default function GoogleMapMd() {
               return (
                 <MarkerF
                   key={`${marker.project_id}-${
-                    hoveredMarker?.project.project_id === marker.project_id
+                    selectedMarker?.project.project_id === marker.project_id
                   }`}
                   position={position}
                   icon={
-                    hoveredMarker?.project.project_id === marker.project_id
+                    selectedMarker?.project.project_id === marker.project_id
                       ? selectedIcon
                       : basicIcon
                   } // 텍스트를 원하는 값으로 교체하세요.
                   clusterer={clusterer}
-                  onMouseOver={() => {
-                    setHoveredMarker({ project: marker, position });
-                  }}
+                  onClick={() =>
+                    handleMarkerClick({ project: marker, position })
+                  }
                 />
               );
             })}
           </>
         )}
       </MarkerClustererF>
-      {hoveredMarker && (
+      {selectedMarker && (
         <OverlayViewF
           position={{
-            lat: hoveredMarker.position.lat,
-            lng: hoveredMarker.position.lng,
+            lat: selectedMarker.position.lat,
+            lng: selectedMarker.position.lng,
           }}
           mapPaneName="floatPane"
+          // getPixelPositionOffset={(width, height) => ({
+          //   x: -(width / 2),
+          //   y: -(height + 60),
+          // })}
         >
-          <OverlayMdMapCard
-            //@ts-ignore
-            project={hoveredMarker.project}
-          />
+          <OverlayMdMapCard project={selectedMarker.project} isMd={true} />
         </OverlayViewF>
       )}
     </GoogleMap>

@@ -61,25 +61,6 @@ export default function CustomCard({ project, donation }: ICustomCard) {
             overflow="hidden"
             p="0"
           >
-            {/* <Image
-              alt="project image"
-              src={
-                project?.projectImages
-                  .filter((image) => image.image_index === 0)
-                  .map((image) => image.image_url) ??
-                donation.project.projectImages
-                  .filter((image) => image.image_index === 0)
-                  .map((image) => image.image_url)
-              }
-              w="100%"
-              h="100%"
-              bgSize="cover"
-              bgPosition="center"
-              style={{
-                transition: "all 0.1s ease-in-out",
-                transform: isHovered ? "scale(1.1)" : "none",
-              }}
-            /> */}
             <Box
               bgImage={`url(${
                 project?.projectImages
