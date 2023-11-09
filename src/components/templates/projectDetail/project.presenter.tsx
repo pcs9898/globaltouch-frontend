@@ -148,18 +148,19 @@ export default function ProjectPresenter({
                     <Heading fontSize="2rem" fontWeight="bold" pb="0.25rem">
                       {project?.title}
                     </Heading>
-                    <Text fontSize="1rem" fontWeight="medium" color="gray">
+                    <Flex fontSize="1rem" fontWeight="medium" color="gray">
                       <ReactCountryFlag
                         countryCode={project?.countryCode.country_code}
                         className="emojiFlag"
                         style={{
                           fontSize: "1.5rem",
+                          marginRight: "0.25rem",
                         }}
                       />
                       {` ${countryName}, ${project?.cityName}`} &bull;{" "}
                       {project?.projectCategory.project_category} &bull;{" "}
                       {formatCreatedAt}
-                    </Text>
+                    </Flex>
                   </Flex>
 
                   <Flex flexDir="column" gap="0.25rem">

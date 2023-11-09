@@ -8,7 +8,7 @@ export default function MapMarkerLoader() {
       top="2rem"
       left="50%"
       transform="translate(-50%, -50%)"
-      height="2.5rem" // 높이를 원하는 값으로 조절하세요.
+      height="2.5rem"
       bgColor="white"
       justifyContent="center"
       alignItems="center"

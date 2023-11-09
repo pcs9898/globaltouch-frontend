@@ -12,6 +12,7 @@ import {
   HStack,
   Hide,
   IconButton,
+  Image,
   Input,
   Menu,
   MenuButton,
@@ -135,7 +136,17 @@ export default function Header({}: IHeaderProps) {
         as={Link}
         href="/"
         cursor="pointer"
+        display="flex"
+        flexDir="row"
+        gap="0.4rem"
       >
+        <Image
+          src={`${process.env.NEXT_PUBLIC_GOOGLE_STORAGE_IMAGE_URL}/logo.svg`}
+          alt="logo"
+          w="0.8rem"
+          onClick={() => router.push("/")}
+          cursor="pointer"
+        />
         globalTouch
       </Text>
 
@@ -253,7 +264,6 @@ export default function Header({}: IHeaderProps) {
 
       <Drawer
         isOpen={isOpen}
-        // placement="end"
         size="full"
         onClose={onClose}
         finalFocusRef={drawerBtnRef}

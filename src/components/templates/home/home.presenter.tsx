@@ -31,8 +31,7 @@ import { useRouter } from "next/router";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { ArrowBackIos } from "@mui/icons-material";
 import { useRef } from "react";
-import { BottomSheet, BottomSheetRef } from "react-spring-bottom-sheet";
-import Sheet from "react-modal-sheet";
+import Sheet, { SheetRef } from "react-modal-sheet";
 import styled from "@emotion/styled";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import GoogleMapMd from "../../molecules/googleMap/googleMap.md";
@@ -79,6 +78,9 @@ export default function HomePresenter({
   showProjectsList,
 }: IHomePresenterProps) {
   const [height, setHeight] = useState(0);
+  const [isOpen, setOpen] = useState(true);
+  const ref = useRef<SheetRef>();
+  const snapTo = (i: number) => ref.current?.snapTo(i);
 
   useEffect(() => {
     setHeight(window.innerHeight);
@@ -119,49 +121,68 @@ export default function HomePresenter({
       </Show>
 
       <Show below="md">
-        <Box id="map" w="100%" h="45%" borderRadius="0px">
-          <GoogleMapBase />
+        <Box id="map" w="100%" h="100%" borderRadius="0px">
+          <GoogleMapBase sheetSnapTo={snapTo} />
         </Box>
-        <Card w="100%" h="55%" shadow="dark-lg" borderRadius="0px">
-          <Box pt="1rem">
-            <CustomTab
-              categoryKindOption="projectListCategory"
-              onClickTab={onClickTab}
-            />
-          </Box>
-          <Box
-            mt="1rem"
-            w="100%"
-            overflow="auto"
-            id="scrollableDiv"
-            ref={scrollRefMobile}
-            px="1rem"
+        <Sheet
+          ref={ref}
+          isOpen={isOpen}
+          onClose={() => setOpen(false)}
+          snapPoints={[450, 40]}
+          initialSnap={0}
+          style={{ zIndex: 2 }}
+        >
+          <Sheet.Container
+            style={{
+              borderRadius: "12px",
+            }}
           >
-            <InfiniteScroll
-              dataLength={projects?.length ?? 0}
-              next={fetchMore}
-              hasMore={hasMore}
-              loader={<Spinner />}
-              endMessage={<EndMessage endMessageOptions="project" />}
-              scrollableTarget="scrollableDiv"
-            >
-              <Box
-                display={{ base: "flex", xl: "grid" }}
-                gridTemplateColumns={{ xl: "repeat(2, 1fr)" }}
-                gap="1rem"
-                flexDirection="column"
-              >
-                {loading
-                  ? Array.from({ length: 8 }, (_, i) => (
-                      <CustomSkeleton key={i} skeletonType="projectCard" />
-                    ))
-                  : projects?.map((project) => (
-                      <CustomCard key={project.project_id} project={project} />
-                    ))}
+            <Sheet.Header />
+            <Sheet.Content>
+              <Box>
+                <CustomTab
+                  categoryKindOption="projectListCategory"
+                  onClickTab={onClickTab}
+                />
               </Box>
-            </InfiniteScroll>
-          </Box>
-        </Card>
+              <Box
+                mt="1rem"
+                w="100%"
+                overflow="auto"
+                id="scrollableDiv"
+                ref={scrollRefMobile}
+                px="1rem"
+              >
+                <InfiniteScroll
+                  dataLength={projects?.length ?? 0}
+                  next={fetchMore}
+                  hasMore={hasMore}
+                  loader={<Spinner />}
+                  endMessage={<EndMessage endMessageOptions="project" />}
+                  scrollableTarget="scrollableDiv"
+                >
+                  <Box
+                    display={{ base: "flex", xl: "grid" }}
+                    gridTemplateColumns={{ xl: "repeat(2, 1fr)" }}
+                    gap="1rem"
+                    flexDirection="column"
+                  >
+                    {loading
+                      ? Array.from({ length: 8 }, (_, i) => (
+                          <CustomSkeleton key={i} skeletonType="projectCard" />
+                        ))
+                      : projects?.map((project) => (
+                          <CustomCard
+                            key={project.project_id}
+                            project={project}
+                          />
+                        ))}
+                  </Box>
+                </InfiniteScroll>
+              </Box>
+            </Sheet.Content>
+          </Sheet.Container>
+        </Sheet>
       </Show>
     </Flex>
   );

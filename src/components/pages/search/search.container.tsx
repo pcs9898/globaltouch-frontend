@@ -68,6 +68,7 @@ export default function SearchContainer() {
       setSelectedSearchTab("All");
       if (tabBtnRef.current) {
         tabBtnRef?.current?.click();
+        inputRef.current.focus();
       }
       return;
     }

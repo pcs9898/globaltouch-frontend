@@ -5,11 +5,12 @@ import { useRouter } from "next/router";
 
 interface IRenderOverlayMdMapCardProps {
   project: IProject;
-  position?: { lat: number; lng: number };
+  isMd: boolean;
 }
 
-export default function OverlayMdMapCard({
+export default function MapCard({
   project,
+  isMd,
 }: IRenderOverlayMdMapCardProps) {
   const countryName = useCountryCodeToLocaleCountryName({
     country_code: project?.countryCode.country_code,
@@ -20,12 +21,13 @@ export default function OverlayMdMapCard({
     <Card
       zIndex={5}
       onClick={() => router.push(`/project/${project.project_id}`)}
-      w="20rem"
+      w={isMd ? "20rem" : "100%"}
+      maxW={isMd === false && "26rem"}
       shadow="dark-lg"
       position="relative"
     >
       <Image
-        aspectRatio={1.5 / 1}
+        aspectRatio={isMd ? "1.5 / 1" : "2/1"}
         alt="project image"
         objectFit="cover"
         src={String(
@@ -45,7 +47,7 @@ export default function OverlayMdMapCard({
 
       <Flex
         position="absolute"
-        padding="0.75rem 0.5rem"
+        padding={isMd ? "0.75rem 0.5rem" : "1rem"}
         gap="0.5rem"
         flexDir="column"
         bottom="0"
