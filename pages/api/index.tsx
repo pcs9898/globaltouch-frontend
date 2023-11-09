@@ -1,6 +1,7 @@
 import ApiContainer from "@/src/components/pages/api/api.container";
 import { withTranslations } from "@/src/commons/utils/withTranslations";
 import Head from "next/head";
+import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 
 export const getStaticProps = withTranslations();
 

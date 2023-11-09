@@ -192,8 +192,7 @@ export type IProject = {
   countryCode: ICountryCode;
   created_at: Scalars['DateTime']['output'];
   donation_count: Scalars['Int']['output'];
-  lat: Scalars['Float']['output'];
-  lng: Scalars['Float']['output'];
+  location: Scalars['String']['output'];
   projectCategory: IProjectCategory;
   projectImages: Array<IProjectImage>;
   project_id: Scalars['String']['output'];
@@ -237,6 +236,7 @@ export type IProjectImage = {
 
 export type IQuery = {
   __typename?: 'Query';
+  fetchMarkers: Array<IProject>;
   fetchProject: IProject;
   fetchProjectComments: Array<IProjectComment>;
   fetchProjectOg: IFetchProjectOgResponseDto;
@@ -248,6 +248,14 @@ export type IQuery = {
   fetchUserLoggedInDonations: Array<IProjectDonation>;
   fetchUserLoggedInProjects: Array<IProject>;
   searchProjects: Array<IProject>;
+};
+
+
+export type IQueryFetchMarkersArgs = {
+  east: Scalars['Float']['input'];
+  north: Scalars['Float']['input'];
+  south: Scalars['Float']['input'];
+  west: Scalars['Float']['input'];
 };
 
 

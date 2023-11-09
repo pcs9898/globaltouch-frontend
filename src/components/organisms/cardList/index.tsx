@@ -67,7 +67,7 @@ export default function CardList({
       </Box>
 
       <Box
-        mt="5rem"
+        mt="4.5rem"
         w="100%"
         h="calc(100vh - 8.5rem)"
         overflow="auto"

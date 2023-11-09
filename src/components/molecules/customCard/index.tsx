@@ -51,28 +51,54 @@ export default function CustomCard({ project, donation }: ICustomCard) {
         onMouseLeave={() => setIsHovered(false)}
         bgColor={isHovered ? "gray.100" : "null"}
         style={{
-          transition: "all 0.1s ease-in-out",
+          transition: "all 0.3s ease-in-out",
         }}
         shadow="none"
       >
         <CardBody width="100%" padding={0}>
           <Box
-            bgImage={`url(${
-              project?.projectImages
-                .filter((image) => image.image_index === 0)
-                .map((image) => image.image_url) ??
-              donation.project.projectImages
-                .filter((image) => image.image_index === 0)
-                .map((image) => image.image_url)
-            })`}
-            bgSize={isHovered ? "110%" : "cover"}
-            // bgRepeat="repeat"
-            bgPosition="center"
-            height="11rem"
-            style={{
-              transition: "all 3s ease-in-out",
-            }}
-          />
+            aspectRatio={{ base: "18/9", md: "2 / 1" }}
+            overflow="hidden"
+            p="0"
+          >
+            {/* <Image
+              alt="project image"
+              src={
+                project?.projectImages
+                  .filter((image) => image.image_index === 0)
+                  .map((image) => image.image_url) ??
+                donation.project.projectImages
+                  .filter((image) => image.image_index === 0)
+                  .map((image) => image.image_url)
+              }
+              w="100%"
+              h="100%"
+              bgSize="cover"
+              bgPosition="center"
+              style={{
+                transition: "all 0.1s ease-in-out",
+                transform: isHovered ? "scale(1.1)" : "none",
+              }}
+            /> */}
+            <Box
+              bgImage={`url(${
+                project?.projectImages
+                  .filter((image) => image.image_index === 0)
+                  .map((image) => image.image_url) ??
+                donation.project.projectImages
+                  .filter((image) => image.image_index === 0)
+                  .map((image) => image.image_url)
+              })`}
+              aspectRatio={{ base: "2 / 1", md: "2 / 1" }}
+              bgSize="cover"
+              bgPosition="center"
+              style={{
+                transition: "all 0.3s ease-in-out",
+                transform: isHovered ? "scale(1.1)" : "none",
+              }}
+              overflow="hidden"
+            />
+          </Box>
 
           <Flex padding="0.75rem 0.5rem" gap="0.5rem" flexDir="column">
             <Flex flexDirection="column">
