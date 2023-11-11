@@ -3,7 +3,7 @@ import SignForm from "../../molecules/signForm";
 import SignGreetingSection from "../../molecules/signGreetingSection";
 import { ISignUpPresenter } from "./signup.types";
 
-export default function SignUpPresenter({
+export default function SignupPresenter({
   onSignUpSubmit,
   signUpLoading,
   onSignGoogle,

@@ -3,12 +3,12 @@ import { Flex } from "@chakra-ui/react";
 import Head from "next/head";
 import { withTranslations } from "@/src/commons/utils/withTranslations";
 
-import SignUpContainer from "@/src/components/pages/signup/signup.container";
+import SignupContainer from "@/src/components/pages/signup/signup.container";
 import useWithoutAuth from "@/src/components/customhooks/useWithoutAuth";
 
 export const getStaticProps = withTranslations();
 
-export default function SignUp() {
+export default function Signup() {
   useWithoutAuth();
   return (
     <>
@@ -22,7 +22,7 @@ export default function SignUp() {
           content="https://storage.googleapis.com/uyvugugihohonodjiwqd/logo.svg"
         />
       </Head>
-      <SignUpContainer />
+      <SignupContainer />
     </>
   );
 }
