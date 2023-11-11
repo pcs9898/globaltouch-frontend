@@ -3,7 +3,7 @@ import { Flex } from "@chakra-ui/react";
 import Head from "next/head";
 import { withTranslations } from "@/src/commons/utils/withTranslations";
 
-import SignUpContainer from "@/src/components/pages/signUp/signUp.container";
+import SignUpContainer from "@/src/components/pages/signup/signup.container";
 import useWithoutAuth from "@/src/components/customhooks/useWithoutAuth";
 
 export const getStaticProps = withTranslations();
