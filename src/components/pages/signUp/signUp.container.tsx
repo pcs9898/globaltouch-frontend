@@ -12,9 +12,9 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { userState } from "@/src/commons/libraries/recoil/global.recoil";
 import { FETCH_USER_LOGGED_IN_QUERY } from "../signIn/signIn.queries";
-import { SIGN_UP_MUTATION } from "./signUp.queries";
+import { SIGN_UP_MUTATION } from "./signup.queries";
 import { useState } from "react";
-import SignUpPresenter from "../../templates/signUp/signUp.presenter";
+import SignUpPresenter from "../../templates/signup/signup.presenter";
 
 export default function SignUpContainer() {
   const client = useApolloClient();
