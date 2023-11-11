@@ -7,7 +7,7 @@
     "dev:docker": "next dev",
     "dev:https": "node server.js",
     "build": "next build",
-    "start": "next start -p 3003",
+    "start": "next start",
     "start:docker": "next start",
     "start:https": "node serverProd.js",
     "lint": "next lint",
