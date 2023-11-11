@@ -13,7 +13,7 @@ interface ILayouts {
 export default function Layouts({ children }: ILayouts) {
   const { pathname } = useRouter();
 
-  const isSignLayout = pathname === "/signIn" || pathname === "/signUp";
+  const isSignLayout = pathname === "/signIn" || pathname === "/signup";
 
   const isHomeLayout =
     pathname === "/" || pathname === "/country/[countryCode]";
