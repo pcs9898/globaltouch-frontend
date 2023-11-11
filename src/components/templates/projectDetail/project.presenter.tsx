@@ -41,6 +41,8 @@ import CommentList from "./components/commentList/commentList";
 import StickyBox from "react-sticky-box";
 import Head from "next/head";
 import ReactCountryFlag from "react-country-flag";
+import AsideCard from "./components/asideCard";
+import { useHandleShareBtnClick } from "../../customhooks/useHandleShareBtnClick";
 
 interface IProjectPresenter {
   projectProps: {
@@ -97,9 +99,8 @@ export default function ProjectPresenter({
   const router = useRouter();
   const toast = useToast();
   const [isSticky, setSticky] = useState(false);
+  const handleShareBtnClick = useHandleShareBtnClick();
 
-  console.log(formattedAmount);
-  console.log(formattedAmountGoal);
   const checkStickiness = () => setSticky(window.scrollY > 500); // 200을 원하는 스크롤 위치로 변경
 
   useEffect(() => {
@@ -340,8 +341,8 @@ export default function ProjectPresenter({
               bgColor="white"
               shadow="2xl"
             >
-              <Button h="100%" colorScheme="gray">
-                share
+              <Button h="100%" colorScheme="gray" onClick={handleShareBtnClick}>
+                {t("asideDonationCardShareBtn")}
               </Button>
               {loggedInUser?.user_id === project?.user?.user_id ? (
                 <CreateUpdatedProjectModalContainer isMd={false} />
@@ -373,104 +374,7 @@ export default function ProjectPresenter({
 
         {/* project aside Card */}
 
-        <Show above="md">
-          <StickyBox style={{ width: "30%" }}>
-            <Flex
-              h="calc(500vh- 2.5px)"
-              // maxH="(calc(500vh-2.5px)"
-              id="asideCard"
-              position="sticky"
-              pt="2.5px"
-              pr="2.5px"
-              pl="2.5px"
-            >
-              <Card
-                w="100%"
-                h="min-content"
-                p="1.5rem"
-                position="sticky"
-                top="0px"
-                float="right"
-              >
-                {projectLoading ? (
-                  <CustomSkeleton skeletonType="projectDetailAsideCard" />
-                ) : (
-                  <Flex flexDir="column" gap="0.625rem" w="100%">
-                    <Flex gap="0.5rem">
-                      <Flex
-                        gap="0.5rem"
-                        flexDir={{ base: "column", xl: "row" }}
-                      >
-                        <Text fontWeight="semibold" fontSize="1.5rem">
-                          {formattedAmount}
-                        </Text>
-                        <Flex
-                          gap="0.25rem"
-                          alignItems="flex-end"
-                          color="gray"
-                          fontWeight="medium"
-                        >
-                          {t("asideDonationCardTitle1") +
-                            " " +
-                            t("currency") +
-                            " "}
-                          {formattedAmountGoal}
-                          {" " + t("asideDonationCardTitle2")}
-                        </Flex>
-                      </Flex>
-                    </Flex>
-                    <Progress
-                      width="100%"
-                      value={CalculatePercentage({
-                        numerator: project?.amount_raised,
-                        denominator: project?.amount_required,
-                      })}
-                    />
-                    <Flex alignItems="flex-end" gap="0.25rem">
-                      <Text fontSize="1.25rem" fontWeight="bold">
-                        {project?.donation_count}
-                      </Text>
-                      <Text fontWeight="medium" fontSize="1rem" color="gray">
-                        {t("asideDonationCardDonations")}
-                      </Text>
-                    </Flex>
-                    <Flex flexDir="column" gap="0.5rem">
-                      <Button
-                        // onClick={} copy link 후 toast뛰우기
-                        colorScheme="gray"
-                        w="100%"
-                      >
-                        {t("asideDonationCardShareBtn")}
-                      </Button>
-                      {loggedInUser?.user_id === project?.user?.user_id ? (
-                        <CreateUpdatedProjectModalContainer isMd={true} />
-                      ) : !loggedInUser ? (
-                        <Button
-                          onClick={() => {
-                            toast({
-                              status: "info",
-                              title: "Should sign in first",
-                            });
-                            router.push("/signIn");
-                          }}
-                        >
-                          {t("asideDonationCardDonateBtn")}
-                        </Button>
-                      ) : (
-                        <CreateDonationModalContainer
-                          project_title={project?.title}
-                          project_user_name={project?.user?.name}
-                          project_id={project?.project_id}
-                          isMd={true}
-                        />
-                      )}
-                    </Flex>
-                  </Flex>
-                )}
-              </Card>
-            </Flex>
-          </StickyBox>
-        </Show>
+        <AsideCard project={project} projectLoading={projectLoading} />
       </Flex>
     </>
   );

@@ -63,12 +63,8 @@ export default function CustomCard({ project, donation }: ICustomCard) {
           >
             <Box
               bgImage={`url(${
-                project?.projectImages
-                  .filter((image) => image.image_index === 0)
-                  .map((image) => image.image_url) ??
-                donation.project.projectImages
-                  .filter((image) => image.image_index === 0)
-                  .map((image) => image.image_url)
+                project?.projectImages[0]?.image_url ??
+                donation.project.projectImages[0]?.image_url
               })`}
               aspectRatio={{ base: "2 / 1", md: "2 / 1" }}
               bgSize="cover"

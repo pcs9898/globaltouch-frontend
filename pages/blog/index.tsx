@@ -10,7 +10,6 @@ import {
 } from "react-simple-maps";
 import { Box } from "@chakra-ui/react";
 import { useState } from "react";
-import MapComponent from "@/src/components/molecules/googleMap/googleMap.md";
 
 export const getStaticProps = withTranslations();
 
@@ -31,9 +30,7 @@ export default function BlogPage() {
           content="https://storage.googleapis.com/uyvugugihohonodjiwqd/logo.svg"
         />
       </Head>
-      {/* <BlogContainer />; */}
-
-      <MapComponent />
+      <BlogContainer />;
     </>
   );
 }

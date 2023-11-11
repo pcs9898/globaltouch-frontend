@@ -16,8 +16,8 @@ import {
 import { myStyles } from "./googleMap.styles";
 import { FETCH_MARKERS } from "./googleMap.queries";
 import { ISelectedMarker } from "./googleMap.interface";
-import MapMarkerLoader from "../mapMarkerLoader";
-import MapCard from "../mapCard";
+import MapCard from "../../molecules/mapCard";
+import MapMarkerLoader from "../../molecules/mapMarkerLoader";
 
 const markerIconUrls = {
   Medical: `${process.env.NEXT_PUBLIC_GOOGLE_STORAGE_IMAGE_URL}/markerIcon/medical.png`,
@@ -30,10 +30,14 @@ const markerIconUrls = {
 };
 
 interface IGoogleMapBaseProps {
-  sheetSnapTo: (i: number) => void;
+  setSnap: any;
+  currentSnap: number;
 }
 
-export default function GoogleMapBase({ sheetSnapTo }: IGoogleMapBaseProps) {
+export default function GoogleMapBase({
+  setSnap,
+  currentSnap,
+}: IGoogleMapBaseProps) {
   const toast = useToast();
   const mapRef = useRef(null);
   const [bounds, setBounds] = useState(null);
@@ -91,6 +95,12 @@ export default function GoogleMapBase({ sheetSnapTo }: IGoogleMapBaseProps) {
     }
   }, [markerLoading]);
 
+  useEffect(() => {
+    if (currentSnap === 0) {
+      setSelectedMarker(null);
+    }
+  }, [currentSnap]);
+
   const handleLoad = (map) => {
     mapRef.current = map; // 지도 인스턴스 저장
   };
@@ -119,7 +129,8 @@ export default function GoogleMapBase({ sheetSnapTo }: IGoogleMapBaseProps) {
   };
 
   const handleMarkerClick = ({ project, position }) => {
-    sheetSnapTo(1);
+    setSnap(1);
+
     setSelectedMarker({ project: project, position });
     setCenter(position);
     setZoom(7);

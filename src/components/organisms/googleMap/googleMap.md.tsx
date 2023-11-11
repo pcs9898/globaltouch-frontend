@@ -16,8 +16,8 @@ import {
 import { myStyles } from "./googleMap.styles";
 import { FETCH_MARKERS } from "./googleMap.queries";
 import { ISelectedMarker } from "./googleMap.interface";
-import OverlayMdMapCard from "../mapCard";
-import MapMarkerLoader from "../mapMarkerLoader";
+import MapCard from "../../molecules/mapCard";
+import MapMarkerLoader from "../../molecules/mapMarkerLoader";
 
 const markerIconUrls = {
   Medical: `${process.env.NEXT_PUBLIC_GOOGLE_STORAGE_IMAGE_URL}/markerIcon/medical.png`,
@@ -132,8 +132,8 @@ export default function GoogleMapMd() {
   const handleMarkerClick = ({ project, position }) => {
     setSelectedMarker({ project: project, position });
 
-    if (window.innerWidth <= 1300) {
-      setCenter({ ...position, lng: position.lng + 1.5 });
+    if (window.innerWidth <= 1000) {
+      setCenter({ ...position, lng: position.lng + 1.9 });
     } else {
       setCenter(position);
     }
@@ -244,12 +244,8 @@ export default function GoogleMapMd() {
             lng: selectedMarker.position.lng,
           }}
           mapPaneName="floatPane"
-          // getPixelPositionOffset={(width, height) => ({
-          //   x: -(width / 2),
-          //   y: -(height + 60),
-          // })}
         >
-          <OverlayMdMapCard project={selectedMarker.project} isMd={true} />
+          <MapCard project={selectedMarker.project} isMd={true} />
         </OverlayViewF>
       )}
     </GoogleMap>

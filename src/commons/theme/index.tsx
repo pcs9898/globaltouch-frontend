@@ -10,12 +10,14 @@ import { buttonTheme } from "./components/button.theme";
 import { modalTheme } from "./components/modal.theme";
 import { shadows } from "./shadows.theme";
 import { drawerTheme } from "./components/drawer.theme";
+import { breakpoints } from "./breakpoints.theme";
 
 export const customTheme = extendTheme({
   styles: globalStyles,
   config: chakraColorModeConfig,
   colors,
   shadows,
+  breakpoints,
   components: {
     Progress: progressTheme,
     Card: cardTheme,
