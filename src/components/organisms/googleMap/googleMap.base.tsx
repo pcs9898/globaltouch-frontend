@@ -244,6 +244,7 @@ export default function GoogleMapBase({
           w="90vw"
           bottom="3.2rem"
           justifyContent="center"
+          cursor="pointer"
         >
           <MapCard project={selectedMarker.project} isMd={false} />
         </Flex>
