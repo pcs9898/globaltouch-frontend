@@ -143,7 +143,7 @@ export default function Header({}: IHeaderProps) {
         <Image
           src={`${process.env.NEXT_PUBLIC_GOOGLE_STORAGE_IMAGE_URL}/logo.svg`}
           alt="logo"
-          w="0.8rem"
+          w={{ base: "0.8rem", md: "1.2rem" }}
           onClick={() => router.push("/")}
           cursor="pointer"
         />
