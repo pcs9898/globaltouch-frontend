@@ -14,7 +14,7 @@ import { userState } from "@/src/commons/libraries/recoil/global.recoil";
 import { FETCH_USER_LOGGED_IN_QUERY } from "../signIn/signIn.queries";
 import { SIGN_UP_MUTATION } from "./signUp.queries";
 import { useState } from "react";
-import SignUpPresenter from "../../templates/signUp/signup.presenert.tsx";
+import SignUpPresenter from "@/src/components/templates/signUp/signup.presenert";
 
 export default function SignUpContainer() {
   const client = useApolloClient();
