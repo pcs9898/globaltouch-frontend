@@ -31,9 +31,7 @@ export default function CustomSimpleCard({ project }: ICustomSimpleCardProps) {
           p="0"
         >
           <Box
-            bgImage={`url(${project?.projectImages
-              .filter((image) => image.image_index === 0)
-              .map((image) => image.image_url)})`}
+            bgImage={`url(${project?.projectImages[0]?.image_url})`}
             aspectRatio={{ base: "2 / 1", md: "2 / 1" }}
             bgSize="cover"
             bgPosition="center"

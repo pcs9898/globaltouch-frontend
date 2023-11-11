@@ -34,8 +34,8 @@ import { useRef } from "react";
 import Sheet, { SheetRef } from "react-modal-sheet";
 import styled from "@emotion/styled";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-import GoogleMapMd from "../../molecules/googleMap/googleMap.md";
-import GoogleMapBase from "../../molecules/googleMap/googleMap.base";
+import GoogleMapMd from "../../organisms/googleMap/googleMap.md";
+import GoogleMapBase from "../../organisms/googleMap/googleMap.base";
 
 export interface IHomePresenterProps {
   cardListProps?: {
@@ -79,13 +79,25 @@ export default function HomePresenter({
 }: IHomePresenterProps) {
   const [height, setHeight] = useState(0);
   const [isOpen, setOpen] = useState(true);
+  const [snap, setSnap] = useState(0);
+  const [currentSnap, setCurrentSnap] = useState<number>();
   const ref = useRef<SheetRef>();
-  const snapTo = (i: number) => ref.current?.snapTo(i);
 
   useEffect(() => {
     setHeight(window.innerHeight);
   }, []);
 
+  useEffect(() => {
+    ref.current?.snapTo(snap);
+  }, [snap]);
+
+  useEffect(() => {
+    // setSnap(0);
+    if (currentSnap === 0) {
+      setSnap(0);
+    }
+    console.log(currentSnap);
+  }, [currentSnap]);
   return (
     <Flex
       w="100vw"
@@ -95,7 +107,7 @@ export default function HomePresenter({
       <Show above="md">
         <Box
           id="cardList"
-          w="50%"
+          w={{ base: "40%", xl: "50%" }}
           shadow="base"
           borderRadius="0px"
           px="1rem"
@@ -115,22 +127,28 @@ export default function HomePresenter({
             }}
           />
         </Box>
-        <Box id="map" w="50%" h="100%" borderRadius="0px">
+        <Box
+          id="map"
+          w={{ base: "60%", xl: "50%" }}
+          h="100%"
+          borderRadius="0px"
+        >
           <GoogleMapMd />
         </Box>
       </Show>
 
       <Show below="md">
         <Box id="map" w="100%" h="100%" borderRadius="0px">
-          <GoogleMapBase sheetSnapTo={snapTo} />
+          <GoogleMapBase setSnap={setSnap} currentSnap={currentSnap} />
         </Box>
         <Sheet
           ref={ref}
           isOpen={isOpen}
           onClose={() => setOpen(false)}
           snapPoints={[450, 40]}
-          initialSnap={0}
+          initialSnap={snap}
           style={{ zIndex: 2 }}
+          onSnap={(snapIndex) => setCurrentSnap(snapIndex)}
         >
           <Sheet.Container
             style={{
@@ -162,8 +180,10 @@ export default function HomePresenter({
                   scrollableTarget="scrollableDiv"
                 >
                   <Box
-                    display={{ base: "flex", xl: "grid" }}
-                    gridTemplateColumns={{ xl: "repeat(2, 1fr)" }}
+                    display={{ base: "flex", customBaseMapBreakPoints: "grid" }}
+                    gridTemplateColumns={{
+                      customBaseMapBreakPoints: "repeat(2, 1fr)",
+                    }}
                     gap="1rem"
                     flexDirection="column"
                   >

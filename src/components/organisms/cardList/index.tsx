@@ -56,7 +56,7 @@ export default function CardList({
         left="0px"
         zIndex={1}
         p="1rem"
-        width="50%"
+        w={{ base: "40%", xl: "50%" }}
         borderRadius="0"
         backgroundColor="white"
       >
@@ -82,7 +82,7 @@ export default function CardList({
           endMessage={<EndMessage endMessageOptions="project" />}
           scrollableTarget="scrollableDiv"
         >
-          <Box
+          <Flex
             display={{ base: "flex", xl: "grid" }}
             gridTemplateColumns={{ xl: "repeat(2, 1fr)" }}
             gap="1rem"
@@ -102,7 +102,7 @@ export default function CardList({
                     donation={donation}
                   />
                 ))}
-          </Box>
+          </Flex>
         </InfiniteScroll>
       </Box>
     </Flex>

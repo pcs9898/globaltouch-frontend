@@ -30,11 +30,7 @@ export default function MapCard({
         aspectRatio={isMd ? "1.5 / 1" : "2/1"}
         alt="project image"
         objectFit="cover"
-        src={String(
-          project?.projectImages
-            .filter((image) => image.image_index === 0)
-            .map((image) => image.image_url)
-        )}
+        src={String(project?.projectImages[0]?.image_url)}
       />
       <Box
         position="absolute"
