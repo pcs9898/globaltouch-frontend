@@ -138,12 +138,12 @@ export default function Header({}: IHeaderProps) {
         cursor="pointer"
         display="flex"
         flexDir="row"
-        gap="0.4rem"
+        gap={{ base: "0.4rem", md: "0.5rem" }}
       >
         <Image
           src={`${process.env.NEXT_PUBLIC_GOOGLE_STORAGE_IMAGE_URL}/logo.svg`}
           alt="logo"
-          w={{ base: "0.8rem", md: "1.2rem" }}
+          w={{ base: "0.8rem", md: "1.1rem" }}
           onClick={() => router.push("/")}
           cursor="pointer"
         />
