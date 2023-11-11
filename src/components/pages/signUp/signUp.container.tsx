@@ -14,9 +14,9 @@ import { userState } from "@/src/commons/libraries/recoil/global.recoil";
 import { FETCH_USER_LOGGED_IN_QUERY } from "../signIn/signIn.queries";
 import { SIGN_UP_MUTATION } from "./signup.queries";
 import { useState } from "react";
-import SignUpPresenter from "../../templates/signup/signup.presenter";
+import SignupPresenter from "../../templates/signup/signup.presenter";
 
-export default function SignUpContainer() {
+export default function SignupContainer() {
   const client = useApolloClient();
   const [signUpMutation, { loading: signUpMutationLoading }] = useMutation<
     Pick<IMutation, "createUser">,
@@ -88,7 +88,7 @@ export default function SignUpContainer() {
   };
 
   return (
-    <SignUpPresenter
+    <SignupPresenter
       onSignUpSubmit={onSignUpSubmit}
       signUpLoading={signUpLoading}
       onSignGoogle={onSignGoogle}

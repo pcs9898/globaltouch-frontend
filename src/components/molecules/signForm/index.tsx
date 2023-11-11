@@ -157,7 +157,7 @@ export default function SignForm({
             color="teal"
             fontWeight="medium"
             as={NextLink}
-            href={onSignInSubmit ? "/signUp" : "/signIn"}
+            href={onSignInSubmit ? "/signup" : "/signIn"}
           >
             {t(
               `${onSignInSubmit ? "signInFormSubText2" : "signUpFormSubText2"}`
