@@ -204,10 +204,11 @@ export default function Header({}: IHeaderProps) {
                     >
                       {localeObg[currentLocale][0]}
                     </MenuButton>
-                    <MenuList maxW="150px">
+                    <MenuList maxW="150px" p="0.5rem">
                       <MenuOptionGroup
                         defaultValue={currentLocale}
                         type="radio"
+                        p="1rem"
                       >
                         <MenuItemOption
                           value={currentLocale}
