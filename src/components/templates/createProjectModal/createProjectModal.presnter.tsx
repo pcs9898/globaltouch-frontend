@@ -261,6 +261,8 @@ export default function CreateProjectModalPresenter({
   const handleCityInfoInput = (e) => {
     const value = e.target.value;
     if (value === "") {
+      setValue("countryCode", undefined);
+      setValue("cityName", undefined);
       return;
     }
     debouncedCityInfoInput(e.target.value);
@@ -326,7 +328,7 @@ export default function CreateProjectModalPresenter({
                   : watch("countryCode") + " ‧ " + watch("cityName")}
               </InputLeftAddon>
               <Input
-                placeholder="cityname"
+                placeholder="Input your city name"
                 onChange={handleCityInfoInput}
                 mr="0.5rem"
                 variant="filled"
