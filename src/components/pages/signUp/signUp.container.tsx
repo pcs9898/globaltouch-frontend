@@ -1,5 +1,3 @@
-import SignInPresenter from "../../templates/signIn/signIn.presenert";
-import SignUpPresenter from "../../templates/signUp/signup.presenert";
 import { gql, useApolloClient, useMutation } from "@apollo/client";
 import {
   IMutation,
@@ -16,6 +14,7 @@ import { userState } from "@/src/commons/libraries/recoil/global.recoil";
 import { FETCH_USER_LOGGED_IN_QUERY } from "../signIn/signIn.queries";
 import { SIGN_UP_MUTATION } from "./signUp.queries";
 import { useState } from "react";
+import SignUpPresenter from "../../templates/signUp/signup.presenert";
 
 export default function SignUpContainer() {
   const client = useApolloClient();
