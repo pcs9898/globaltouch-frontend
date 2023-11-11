@@ -105,11 +105,11 @@ export default function Header({}: IHeaderProps) {
             {t("headerSearchBtn")}
           </Button>
 
-          <Button {...colorProps} as={Link} href="how-it-works">
+          <Button {...colorProps} as={Link} href="/how-it-works">
             {t("headerHowItWorksBtn")}
           </Button>
           <Show above="56.25rem">
-            <Button {...colorProps} as={Link} href="for-charities">
+            <Button {...colorProps} as={Link} href="/for-charities">
               {t("headerForCharitiesBtn")}
             </Button>
           </Show>
