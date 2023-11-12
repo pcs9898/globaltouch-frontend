@@ -82,6 +82,7 @@ export default function HomePresenter({
   const [snap, setSnap] = useState(0);
   const [currentSnap, setCurrentSnap] = useState<number>();
   const ref = useRef<SheetRef>();
+  const [snapPoints, setSnapPoints] = useState([0, 40]);
 
   useEffect(() => {
     setHeight(window.innerHeight);
@@ -97,6 +98,19 @@ export default function HomePresenter({
       setSnap(0);
     }
   }, [currentSnap]);
+
+  useEffect(() => {
+    setSnapPoints([window.innerHeight / 2, 40]);
+
+    const handleResize = () => {
+      setSnapPoints([window.innerHeight / 2, 40]);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <Flex
       w="100vw"
@@ -143,8 +157,8 @@ export default function HomePresenter({
         <Sheet
           ref={ref}
           isOpen={isOpen}
-          onClose={() => setOpen(false)}
-          snapPoints={[450, 40]}
+          onClose={() => {}}
+          snapPoints={snapPoints}
           initialSnap={snap}
           style={{ zIndex: 2 }}
           onSnap={(snapIndex) => setCurrentSnap(snapIndex)}
