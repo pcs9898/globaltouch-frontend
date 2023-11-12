@@ -40,6 +40,7 @@ export default function ApolloSetting(props) {
   const router = useRouter();
 
   useEffect(() => {
+    console.log("hi");
     const refreshTokenFromCookie = Cookie.get("refreshToken");
     if (refreshTokenFromCookie) {
       void restoreAccessToken.toPromise().then((newAccessToken) => {
@@ -113,7 +114,7 @@ export default function ApolloSetting(props) {
       // authLink,
       uploadLink as unknown as ApolloLink,
     ]),
-    uri: process.env.NEXT_PUBLIC_BACKEND_URI,
+    // uri: process.env.NEXT_PUBLIC_BACKEND_URI,
     cache: GLOBAL_STATE,
     connectToDevTools: true,
   });
