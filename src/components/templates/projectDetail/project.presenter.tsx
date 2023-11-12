@@ -157,6 +157,7 @@ export default function ProjectPresenter({
                           fontSize: "1.5rem",
                           marginRight: "0.25rem",
                         }}
+                        svg
                       />
                       {` ${countryName}, ${project?.cityName}`} &bull;{" "}
                       {project?.projectCategory.project_category} &bull;{" "}
