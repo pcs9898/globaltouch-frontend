@@ -167,7 +167,7 @@ export default function GoogleMapBase({
         zoom={zoom}
         options={{
           styles: myStyles,
-
+          gestureHandling: "greedy",
           restriction: {
             latLngBounds: {
               north: 85,
