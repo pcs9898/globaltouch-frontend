@@ -114,6 +114,7 @@ export type IMutation = {
   createUser: ICreateUserResponseDto;
   deleteProjectComment: IDeleteProjectCommentResponseDto;
   loginUser: Scalars['String']['output'];
+  logout: Scalars['String']['output'];
   restoreAccessToken: Scalars['String']['output'];
   updateProjectComment: IProjectComment;
   updateUser: IUpdateUserResponseDto;
