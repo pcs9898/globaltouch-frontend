@@ -38,7 +38,7 @@ export default function ApolloSetting(props) {
   const toast = useToast();
   const { t } = useTranslation();
   const router = useRouter();
-
+  console.log("hi2");
   useEffect(() => {
     console.log("hi");
     const refreshTokenFromCookie = Cookie.get("refreshToken");
