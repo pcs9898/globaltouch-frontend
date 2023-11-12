@@ -96,7 +96,6 @@ export default function HomePresenter({
     if (currentSnap === 0) {
       setSnap(0);
     }
-    console.log(currentSnap);
   }, [currentSnap]);
   return (
     <Flex
