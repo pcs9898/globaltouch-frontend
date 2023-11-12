@@ -54,12 +54,9 @@ export default function Settings({ drawerOnClose }: ISettingsProps) {
 
   const onClickSignOut = async () => {
     setUserLoggedInInfo(null);
-    // Cookie.remove("refreshToken");
-    // document.cookie =
-    //   "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=channitest.shop; SameSite=None; Secure";
-    const result = await logoutMutation;
-    console.log(result);
 
+    const result = await logoutMutation();
+    console.log(result);
     if (drawerOnClose) {
       drawerOnClose();
     }
