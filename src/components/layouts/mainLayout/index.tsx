@@ -12,12 +12,12 @@ export default function MainLayout({ children }: IMainLayout) {
 
   const isFullLayout =
     pathname === "/signIn" ||
-    pathname === "/signUp" ||
+    pathname === "/signup" ||
     pathname === "/" ||
     /^\/country\/[^/]+$/.test(pathname) ||
     /^\/project\/[^/]+$/.test(pathname);
 
-  const isSignLayout = pathname === "/signIn" || pathname === "/signUp";
+  const isSignLayout = pathname === "/signIn" || pathname === "/signup";
 
   return (
     <Container

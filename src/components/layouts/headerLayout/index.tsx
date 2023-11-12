@@ -4,8 +4,7 @@ import { Box, Container, Flex } from "@chakra-ui/react";
 
 export default function HeaderLayout() {
   const { pathname } = useRouter();
-  const isHomeLayout =
-    pathname === "/" || pathname === "/country/[countryCode]";
+  const isHomeLayout = pathname === "/";
 
   return (
     <Flex
