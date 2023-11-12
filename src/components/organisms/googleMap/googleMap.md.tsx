@@ -18,6 +18,7 @@ import { FETCH_MARKERS } from "./googleMap.queries";
 import { ISelectedMarker } from "./googleMap.interface";
 import MapCard from "../../molecules/mapCard";
 import MapMarkerLoader from "../../molecules/mapMarkerLoader";
+import { debounce } from "lodash";
 
 const markerIconUrls = {
   Medical: `${process.env.NEXT_PUBLIC_GOOGLE_STORAGE_IMAGE_URL}/markerIcon/medical.png`,
@@ -108,7 +109,7 @@ export default function GoogleMapMd() {
     mapRef.current = map; // 지도 인스턴스 저장
   };
 
-  const handleBoundsChanged = () => {
+  const handleBoundsChanged = debounce(() => {
     setMarkerLoadingVisible(true);
 
     const bounds2 = mapRef.current.getBounds().toJSON();
@@ -121,7 +122,7 @@ export default function GoogleMapMd() {
     };
 
     setBounds(expandedBounds);
-  };
+  }, 300);
 
   const handleZoomChanged = () => {
     if (mapRef.current) {
