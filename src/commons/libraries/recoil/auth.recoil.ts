@@ -15,6 +15,7 @@ export const restoreAccessTokenLoadable = selector({
   get: async () => {
     // const refreshTokenFromCookie = Cookie.get("refreshToken");
     // if (refreshTokenFromCookie) {
+    console.log("hi2");
     const newAccessToken = await getAccessToken();
 
     return newAccessToken;
