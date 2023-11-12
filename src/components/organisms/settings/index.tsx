@@ -19,13 +19,20 @@ import { useTranslation } from "next-i18next";
 import { useChangeLocale } from "../../customhooks/useChangeLocale";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
-import { useApolloClient } from "@apollo/client";
+import { gql, useApolloClient, useMutation } from "@apollo/client";
 import CreateProjectModalPresenter from "../../templates/createProjectModal/createProjectModal.presnter";
 import { useRef } from "react";
+import { IMutation } from "@/src/commons/types/generated/types";
 
 interface ISettingsProps {
   drawerOnClose?: () => void;
 }
+
+const LOG_OUT = gql`
+  mutation logout {
+    logout
+  }
+`;
 
 export default function Settings({ drawerOnClose }: ISettingsProps) {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -36,6 +43,7 @@ export default function Settings({ drawerOnClose }: ISettingsProps) {
   const toast = useToast();
   const client = useApolloClient();
   const btnRef = useRef<HTMLButtonElement>();
+  const [logoutMutation] = useMutation<Pick<IMutation, "logout">>(LOG_OUT);
 
   const onClickRouterPushNCloseDrawer = (path: string) => {
     if (drawerOnClose) {
@@ -44,11 +52,13 @@ export default function Settings({ drawerOnClose }: ISettingsProps) {
     router.push(path);
   };
 
-  const onClickSignOut = () => {
+  const onClickSignOut = async () => {
     setUserLoggedInInfo(null);
-    Cookie.remove("refreshToken");
-    document.cookie =
-      "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=channitest.shop; SameSite=None; Secure";
+    // Cookie.remove("refreshToken");
+    // document.cookie =
+    //   "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=channitest.shop; SameSite=None; Secure";
+    const result = await logoutMutation;
+    console.log(result);
 
     if (drawerOnClose) {
       drawerOnClose();
