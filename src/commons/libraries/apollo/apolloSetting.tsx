@@ -41,7 +41,8 @@ export default function ApolloSetting(props) {
   console.log("hi2");
   useEffect(() => {
     console.log("hi");
-    // const refreshTokenFromCookie = Cookie.get("refreshToken");
+    const refreshTokenFromCookie = Cookie.get("refreshToken");
+    console.log("huhuh12u" + refreshTokenFromCookie);
     // if (refreshTokenFromCookie) {
     //   void restoreAccessToken.toPromise().then((newAccessToken) => {
     //     setAccessToken(newAccessToken);
