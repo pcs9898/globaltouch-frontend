@@ -47,6 +47,8 @@ export default function Settings({ drawerOnClose }: ISettingsProps) {
   const onClickSignOut = () => {
     setUserLoggedInInfo(null);
     Cookie.remove("refreshToken");
+    document.cookie =
+      "name=refreshToken; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     if (drawerOnClose) {
       drawerOnClose();
     }
