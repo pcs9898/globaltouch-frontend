@@ -41,41 +41,41 @@ export default function ApolloSetting(props) {
   console.log("hi2");
   useEffect(() => {
     console.log("hi");
-    const refreshTokenFromCookie = Cookie.get("refreshToken");
-    if (refreshTokenFromCookie) {
-      void restoreAccessToken.toPromise().then((newAccessToken) => {
-        setAccessToken(newAccessToken);
+    // const refreshTokenFromCookie = Cookie.get("refreshToken");
+    // if (refreshTokenFromCookie) {
+    //   void restoreAccessToken.toPromise().then((newAccessToken) => {
+    //     setAccessToken(newAccessToken);
 
-        const fetchUserLoggedIn = async () => {
-          const { data } = await apolloClient.query<
-            Pick<IQuery, "fetchUserLoggedIn">
-          >({
-            query: FETCH_USER_LOGGED_IN_QUERY,
-            context: {
-              headers: {
-                Authorization: `Bearer ${newAccessToken}`,
-              },
-            },
-          });
+    //     const fetchUserLoggedIn = async () => {
+    //       const { data } = await apolloClient.query<
+    //         Pick<IQuery, "fetchUserLoggedIn">
+    //       >({
+    //         query: FETCH_USER_LOGGED_IN_QUERY,
+    //         context: {
+    //           headers: {
+    //             Authorization: `Bearer ${newAccessToken}`,
+    //           },
+    //         },
+    //       });
 
-          const { name, profile_image_url, user_id } = data.fetchUserLoggedIn;
+    //       const { name, profile_image_url, user_id } = data.fetchUserLoggedIn;
 
-          setUserState({
-            name,
-            profile_image_url,
-            user_id,
-          });
+    //       setUserState({
+    //         name,
+    //         profile_image_url,
+    //         user_id,
+    //       });
 
-          if (window.history.state.url !== "/payment/complete") {
-            toast({
-              status: "success",
-              title: t("signPageSignInToastGreeting") + ` ${name}`,
-            });
-          }
-        };
-        fetchUserLoggedIn();
-      });
-    }
+    //       if (window.history.state.url !== "/payment/complete") {
+    //         toast({
+    //           status: "success",
+    //           title: t("signPageSignInToastGreeting") + ` ${name}`,
+    //         });
+    //       }
+    //     };
+    //     fetchUserLoggedIn();
+    //   });
+    // }
     // }
   }, []);
 
