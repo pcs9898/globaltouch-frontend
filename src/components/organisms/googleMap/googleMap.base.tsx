@@ -72,7 +72,9 @@ export default function GoogleMapBase({
   useEffect(() => {
     if (data) {
       setMarkers((prevMarkers) => {
-        // 새로운 마커만 추가
+        if (!Array.isArray(prevMarkers)) {
+          prevMarkers = [];
+        }
         const newMarkers = data.fetchMarkers.filter(
           (marker) =>
             !prevMarkers.find((m) => m.project_id === marker.project_id)
