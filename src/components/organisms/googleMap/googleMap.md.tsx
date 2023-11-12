@@ -173,7 +173,7 @@ export default function GoogleMapMd() {
       zoom={zoom}
       options={{
         styles: myStyles,
-
+        gestureHandling: "greedy",
         restriction: {
           latLngBounds: {
             north: 85,
