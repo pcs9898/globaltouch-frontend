@@ -7,15 +7,6 @@ import { GraphQLClient } from "graphql-request";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 
-// const FETCH_PROJECT_OG = gql`
-//   query fetchProjectOg($project_id: String!) {
-//     fetchProjectOg(project_id: $project_id) {
-//       title
-//       content
-//     }
-//   }
-// `;
-
 export default function ProjectPage(props: any) {
   return (
     <>
@@ -38,8 +29,6 @@ export async function getServerSideProps(context) {
   const result = await graphqlClient.request(FETCH_PROJECT, {
     project_id: query.projectId,
   });
-
-  console.log(result);
 
   return {
     props: {

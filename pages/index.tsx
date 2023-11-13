@@ -17,7 +17,7 @@ export default function HomePage({ onClose }) {
         />
         <meta
           property="og:image"
-          content="https://storage.googleapis.com/uyvugugihohonodjiwqd/logo.svg"
+          content="https://storage.googleapis.com/uyvugugihohonodjiwqd2/ogImage.webp"
         />
       </Head>
 
