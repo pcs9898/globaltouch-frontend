@@ -95,24 +95,22 @@ export default function GoogleMapMd() {
   }, [markerLoading]);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setCenter({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-      },
-      (error) => {
-        // 위치 정보를 가져오는 데 실패했을 때의 처리
-        console.error("Error getting geolocation", error);
-      },
-      { enableHighAccuracy: true }
-    );
-  }, []);
-
-  useEffect(() => {
     if (exSelectedMarker) {
       handleMarkerClick({ ...exSelectedMarker });
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setCenter({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        (error) => {
+          // 위치 정보를 가져오는 데 실패했을 때의 처리
+          console.error("Error getting geolocation", error);
+        },
+        { enableHighAccuracy: true }
+      );
     }
   }, []);
 
