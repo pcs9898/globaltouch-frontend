@@ -104,7 +104,6 @@ export default function SearchPresenter({
             }}
           >
             <Flex
-              // gap={{ base: "0.5rem", md: "1.5rem" }}
               gap="1rem"
               flexDirection="column"
               borderRadius="0px"

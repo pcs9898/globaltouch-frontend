@@ -17,6 +17,7 @@ export default function SignupPresenter({
       alignItems={{ md: "center" }}
       bgColor={{ md: "#FBF8F6" }}
       borderRadius="0px"
+      pb="5.5rem"
     >
       <Box
         w={{ md: "40%" }}

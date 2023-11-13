@@ -1,4 +1,4 @@
-import { Flex, HStack, Select, Text } from "@chakra-ui/react";
+import { Flex, HStack, Select, Text, useColorMode } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useChangeLocale } from "../../customhooks/useChangeLocale";
@@ -14,7 +14,7 @@ export default function Footer() {
   const router = useRouter();
   const changeLocale = useChangeLocale();
   const { t } = useTranslation();
-
+  const { colorMode } = useColorMode();
   const [currentLocale, setCurrentLocale] = useState(router.locale);
 
   useEffect(() => {
@@ -37,7 +37,8 @@ export default function Footer() {
       // flexDir={{ base: "column", md: "row" }}
       flexDir="column"
       gap="1rem"
-      bg="white"
+      bg={colorMode === "light" ? "white" : "#1a202c"}
+      borderRadius="0px"
     >
       <Flex gap="0.5rem" justifyContent="center" fontSize="0.75rem">
         <Link href="/about">{t("footerLinkAbout")}</Link>
