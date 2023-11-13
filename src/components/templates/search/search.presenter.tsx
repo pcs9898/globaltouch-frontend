@@ -143,6 +143,7 @@ export default function SearchPresenter({
               display={{ base: "flex", md: "grid" }}
               flexDirection={{ base: "column", md: "initial" }}
               gridTemplateColumns={{ base: "initial", md: "repeat(2, 1fr)" }}
+              pb={{ base: "4rem", md: "0px" }}
               gap="1rem"
               h="min-content"
             >
