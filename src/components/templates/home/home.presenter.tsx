@@ -103,16 +103,8 @@ export default function HomePresenter({
 
   useEffect(() => {
     setSnapPoints([window.innerHeight / 2, 40]);
-
-    const handleResize = () => {
-      setSnapPoints([window.innerHeight / 2, 40]);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
   }, []);
+
   return (
     <Flex
       w="100vw"
