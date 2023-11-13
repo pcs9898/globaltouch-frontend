@@ -29,7 +29,7 @@ export default function SectionLayout({ children }: ISectionLayout) {
   // );
 
   return (
-    <Box as="section" w="100%" m="0">
+    <Box as="section" w="100%" m="0" pb={{ base: "5.5rem", md: "0px" }}>
       {children}
     </Box>
   );
