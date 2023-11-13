@@ -13,7 +13,7 @@ export default function TermsPage() {
         <meta property="og:description" content="globalTouch Terms" />
         <meta
           property="og:image"
-          content="https://storage.googleapis.com/uyvugugihohonodjiwqd2/ogImage.png"
+          content="https://storage.googleapis.com/uyvugugihohonodjiwqd2/ogImage.jpg"
         />
       </Head>
       <TermsContainer />;
