@@ -13,13 +13,8 @@ export const accessTokenState = atom({
 export const restoreAccessTokenLoadable = selector({
   key: "restoreAccessTokenLoadable",
   get: async () => {
-    // const refreshTokenFromCookie = Cookie.get("refreshToken");
-    // if (refreshTokenFromCookie) {
-    console.log("hi2");
     const newAccessToken = await getAccessToken();
 
     return newAccessToken;
-    // }
-    // }
   },
 });

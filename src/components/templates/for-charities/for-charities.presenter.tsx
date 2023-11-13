@@ -107,7 +107,13 @@ export default function ForCharitiesPresenter() {
             <Heading fontSize="1.5rem">
               How to fundraise for a nonprofit on globalTouch for
             </Heading>
-            <Stepper index={0} orientation="vertical" gap="3rem" mt="2rem">
+            <Stepper
+              index={0}
+              orientation="vertical"
+              gap="3rem"
+              mt="2rem"
+              w="90%"
+            >
               <Step key={0}>
                 <StepIndicator>
                   <StepStatus
@@ -117,10 +123,15 @@ export default function ForCharitiesPresenter() {
                   />
                 </StepIndicator>
 
-                <Box flexShrink="0">
-                  <StepTitle>Choose a nonprofit</StepTitle>
+                <Box h="100%" w="100%">
+                  <StepTitle>
+                    <Text>Choose a nonprofit</Text>
+                  </StepTitle>
                   <StepDescription>
-                    Choose from our list of registered 501(c)(3) charities.
+                    <Text>
+                      {" "}
+                      Choose from our list of registered 501(c)(3) charities.
+                    </Text>
                   </StepDescription>
                 </Box>
 
@@ -135,11 +146,15 @@ export default function ForCharitiesPresenter() {
                   />
                 </StepIndicator>
 
-                <Box flexShrink="0">
-                  <StepTitle>Launch your fundraiser</StepTitle>
+                <Box h="100%" w="100%">
+                  <StepTitle>
+                    <Text>Launch your fundraiser</Text>
+                  </StepTitle>
                   <StepDescription>
-                    Easily share your fundraiser with friends and family to
-                    raise donations.
+                    <Text>
+                      Easily share your fundraiser with friends and family to
+                      raise donations.
+                    </Text>
                   </StepDescription>
                 </Box>
 
@@ -154,11 +169,15 @@ export default function ForCharitiesPresenter() {
                   />
                 </StepIndicator>
 
-                <Box flexShrink="0">
-                  <StepTitle>Make a difference</StepTitle>
+                <Box h="100%" w="100%">
+                  <StepTitle>
+                    <Text>Make a difference</Text>
+                  </StepTitle>
                   <StepDescription>
-                    Funds are safely and automatically delivered to the
-                    nonprofit.
+                    <Text>
+                      Funds are safely and automatically delivered to the
+                      nonprofit.
+                    </Text>
                   </StepDescription>
                 </Box>
 

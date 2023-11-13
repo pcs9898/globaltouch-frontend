@@ -1,5 +1,12 @@
 import { IProject } from "@/src/commons/types/generated/types";
-import { Box, Card, CardBody, Flex, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Card,
+  CardBody,
+  Flex,
+  Heading,
+  useColorMode,
+} from "@chakra-ui/react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -9,6 +16,7 @@ interface ICustomSimpleCardProps {
 
 export default function CustomSimpleCard({ project }: ICustomSimpleCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const { colorMode } = useColorMode();
 
   return (
     <Card
@@ -19,7 +27,9 @@ export default function CustomSimpleCard({ project }: ICustomSimpleCardProps) {
       href={`/project/${project?.project_id}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      bgColor={isHovered ? "gray.100" : "null"}
+      bgColor={
+        isHovered ? (colorMode === "light" ? "gray.100" : "gray.700") : "null"
+      }
       style={{
         transition: "all 0.3s ease-in-out",
       }}

@@ -14,8 +14,6 @@ export default function PaymentCompleteContainer({
   const router = useRouter();
   const toast = useToast();
 
-  console.log(query);
-
   useEffect(() => {
     const project_id = query.merchant_uid.slice(0, -4);
 

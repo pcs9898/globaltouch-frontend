@@ -61,8 +61,6 @@ export default function SignInContainer() {
 
         const { name, profile_image_url, user_id } = data.fetchUserLoggedIn;
 
-        console.log("hi");
-        console.log(name);
         setUserState({
           name,
           profile_image_url,

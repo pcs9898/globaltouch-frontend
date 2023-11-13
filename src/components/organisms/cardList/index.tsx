@@ -58,7 +58,6 @@ export default function CardList({
         p="1rem"
         w={{ base: "40%", xl: "50%" }}
         borderRadius="0"
-        backgroundColor="white"
       >
         <CustomTab
           onClickTab={onClickTab}

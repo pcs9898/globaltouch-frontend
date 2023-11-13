@@ -17,6 +17,7 @@ import {
   Skeleton,
   Text,
   VStack,
+  useColorMode,
   useToast,
 } from "@chakra-ui/react";
 import { useCountryCodeToLocaleCountryName } from "../../customhooks/useCountryCodeToLocaleCountryName";
@@ -100,6 +101,7 @@ export default function ProjectPresenter({
   const toast = useToast();
   const [isSticky, setSticky] = useState(false);
   const handleShareBtnClick = useHandleShareBtnClick();
+  const { colorMode } = useColorMode();
 
   const checkStickiness = () => setSticky(window.scrollY > 500); // 200을 원하는 스크롤 위치로 변경
 
@@ -146,16 +148,23 @@ export default function ProjectPresenter({
                 {/* project */}
                 <Flex gap="1rem" flexDir="column">
                   <Flex flexDirection="column">
-                    <Heading fontSize="2rem" fontWeight="bold" pb="0.25rem">
+                    <Heading fontSize="2rem" fontWeight="bold" pb="0.5rem">
                       {project?.title}
                     </Heading>
-                    <Flex fontSize="1rem" fontWeight="medium" color="gray">
+                    <Flex
+                      fontSize="1rem"
+                      fontWeight="medium"
+                      color="gray"
+                      pb="0.25rem"
+                      gap="0.25rem"
+                    >
                       <ReactCountryFlag
                         countryCode={project?.countryCode.country_code}
                         className="emojiFlag"
                         style={{
                           fontSize: "1.5rem",
                           marginRight: "0.25rem",
+                          borderRadius: "0px",
                         }}
                         svg
                       />
@@ -165,7 +174,7 @@ export default function ProjectPresenter({
                     </Flex>
                   </Flex>
 
-                  <Flex flexDir="column" gap="0.25rem">
+                  <Flex flexDir="column" gap="0.5rem">
                     {project && (
                       <Progress
                         width="100%"
@@ -339,8 +348,9 @@ export default function ProjectPresenter({
               p="1rem"
               gap="0.5rem"
               zIndex={12}
-              bgColor="white"
+              bgColor={colorMode === "light" ? "white" : "gray.700"}
               shadow="2xl"
+              borderRadius="0px"
             >
               <Button h="100%" colorScheme="gray" onClick={handleShareBtnClick}>
                 {t("asideDonationCardShareBtn")}

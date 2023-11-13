@@ -17,7 +17,6 @@ export async function getAccessToken() {
       Pick<IMutation, "restoreAccessToken">
     >(RESTORE_ACCESS_TOKEN);
 
-    // console.log("ihaosdias");
     return result.restoreAccessToken;
   } catch (error) {
     console.log(error.message);

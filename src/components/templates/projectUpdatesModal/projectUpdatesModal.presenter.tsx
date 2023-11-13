@@ -26,20 +26,6 @@ export default function ProjectUpdatesModalPresenter({
 }: IProjectUpdatesModalPresenterProps) {
   const { t } = useTranslation();
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
     <CustomModal
       modalHeaderTxt={
@@ -51,28 +37,28 @@ export default function ProjectUpdatesModalPresenter({
         index={1}
         orientation="vertical"
         height="100%"
-        gap="0"
+        gap="2rem"
         w="100%"
         overflow="scroll"
         colorScheme="teal"
+        display="block"
       >
         {updatedProjects.map((project, i) => (
-          <Box pb="1rem" key={i}>
+          <Box pb="2rem" key={i}>
             <Step>
               <StepIndicator>
                 <StepStatus />
               </StepIndicator>
 
-              <Box
-                flexShrink="0"
-                width={{
-                  base: `${windowWidth - 100}px`,
-                  md: "72vh",
-                }}
-                whiteSpace="normal"
-              >
-                <StepTitle>{formatTimeAgo(project.created_at)}</StepTitle>
-                <StepDescription>{project.content}</StepDescription>
+              <Box h="100%" w="100%">
+                <StepTitle>
+                  <Text whiteSpace="normal">
+                    {formatTimeAgo(project.created_at)}
+                  </Text>
+                </StepTitle>
+                <StepDescription>
+                  <Text>{project.content}</Text>
+                </StepDescription>
               </Box>
 
               <StepSeparator />

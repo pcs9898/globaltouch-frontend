@@ -56,7 +56,7 @@ export default function Settings({ drawerOnClose }: ISettingsProps) {
     setUserLoggedInInfo(null);
 
     const result = await logoutMutation();
-    console.log(result);
+
     if (drawerOnClose) {
       drawerOnClose();
     }

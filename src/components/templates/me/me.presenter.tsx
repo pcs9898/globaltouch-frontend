@@ -14,6 +14,7 @@ import {
   Skeleton,
   Spinner,
   useBreakpointValue,
+  useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
@@ -72,6 +73,7 @@ export default function MePresenter({
 }: IMePresenterProps) {
   const { t } = useTranslation();
   const user = useRecoilValue(userState);
+  const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const scrollBehavior = useBreakpointValue({ base: "outside", md: "inside" });
 
@@ -94,7 +96,7 @@ export default function MePresenter({
               style={{
                 width: "100%",
                 zIndex: 1,
-                backgroundColor: "white",
+                backgroundColor: colorMode === "light" ? "white" : "#1a202c",
                 paddingBottom: "1rem",
                 paddingTop: "1rem",
                 borderRadius: "0px",
@@ -130,12 +132,13 @@ export default function MePresenter({
                   <Box
                     display={{
                       base: "flex",
-                      md: donations?.length === 0 ? "flex" : "grid",
+                      customBaseMapBreakPoints:
+                        donations?.length === 0 ? "flex" : "grid",
                     }}
                     flexDirection={{ base: "column", md: "initial" }}
                     gridTemplateColumns={{
                       base: "initial",
-                      md: "repeat(2, 1fr)",
+                      customBaseMapBreakPoints: "repeat(2, 1fr)",
                     }}
                     gap="1rem"
                   >

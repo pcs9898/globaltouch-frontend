@@ -1,4 +1,4 @@
-import { Tab, TabList, TabPanel, Tabs } from "@chakra-ui/react";
+import { Tab, TabList, TabPanel, Tabs, useColorMode } from "@chakra-ui/react";
 import { MutableRefObject, Suspense, useEffect, useRef, useState } from "react";
 import { useTranslation } from "next-i18next";
 
@@ -49,6 +49,7 @@ export default function CustomTab({
   const { t } = useTranslation();
   const [isOverflowing, setIsOverflowing] = useState(false);
   const overflowCheckRef = useRef<HTMLDivElement>(null);
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
     const checkOverflow = () => {
@@ -122,7 +123,10 @@ export default function CustomTab({
                     borderRadius: "50px",
                   },
                   "::-webkit-scrollbar-thumb": {
-                    backgroundColor: "rgba(0, 0, 0, 0.2)",
+                    backgroundColor:
+                      colorMode === "light"
+                        ? "rgba(0, 0, 0, 0.2)"
+                        : "rgba(0, 0, 0, 0.1)",
                     borderRadius: "50px",
                   },
                 },
