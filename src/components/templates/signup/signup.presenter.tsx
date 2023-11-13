@@ -28,6 +28,7 @@ export default function SignupPresenter({
         display="flex"
         justifyContent="center"
         alignItems={{ base: "flex-end", md: "center" }}
+        pb={{ base: "2rem", md: "0px" }}
       >
         <SignGreetingSection signGreetingSectionOption="signIn" />
       </Box>
