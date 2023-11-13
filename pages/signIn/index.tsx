@@ -19,7 +19,7 @@ export default function SignInPage() {
         <meta property="og:description" content="Sign In globalTouch" />
         <meta
           property="og:image"
-          content="https://storage.googleapis.com/uyvugugihohonodjiwqd2/ogImage.png"
+          content="https://storage.googleapis.com/uyvugugihohonodjiwqd2/ogImage.jpg"
         />
       </Head>
 

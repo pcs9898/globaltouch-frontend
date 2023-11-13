@@ -13,7 +13,7 @@ export default function ForCharitiesPage() {
         <meta property="og:description" content="For Charities" />
         <meta
           property="og:image"
-          content="https://storage.googleapis.com/uyvugugihohonodjiwqd2/ogImage.png"
+          content="https://storage.googleapis.com/uyvugugihohonodjiwqd2/ogImage.jpg"
         />
       </Head>
       <ForCharitiesContainer />

@@ -13,7 +13,7 @@ export default function HelpCenterPage() {
         <meta property="og:description" content="How can i help you?" />
         <meta
           property="og:image"
-          content="https://storage.googleapis.com/uyvugugihohonodjiwqd2/ogImage.png"
+          content="https://storage.googleapis.com/uyvugugihohonodjiwqd2/ogImage.jpg"
         />
       </Head>
       <HelpCenterContainer />;
