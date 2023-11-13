@@ -80,7 +80,7 @@ export default function HomePresenter({
 }: IHomePresenterProps) {
   const [height, setHeight] = useState(0);
   const [isOpen, setOpen] = useState(true);
-  const [snap, setSnap] = useState(0);
+  const [snap, setSnap] = useState(1);
   const [currentSnap, setCurrentSnap] = useState<number>();
   const ref = useRef<SheetRef>();
   const [snapPoints, setSnapPoints] = useState([0, 40]);
@@ -96,13 +96,13 @@ export default function HomePresenter({
 
   useEffect(() => {
     // setSnap(0);
-    if (currentSnap === 0) {
-      setSnap(0);
+    if (currentSnap === 1) {
+      setSnap(1);
     }
   }, [currentSnap]);
 
   useEffect(() => {
-    setSnapPoints([window.innerHeight / 2, 40]);
+    setSnapPoints([window.innerHeight - 3.5 * 17, window.innerHeight / 2, 40]);
   }, []);
 
   return (
