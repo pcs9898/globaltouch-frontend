@@ -19,6 +19,8 @@ import { ISelectedMarker } from "./googleMap.interface";
 import MapCard from "../../molecules/mapCard";
 import MapMarkerLoader from "../../molecules/mapMarkerLoader";
 import { debounce } from "lodash";
+import { useRecoilState } from "recoil";
+import { exSelectedMarkerState } from "@/src/commons/libraries/recoil/home.recoil";
 
 const markerIconUrls = {
   Medical: `${process.env.NEXT_PUBLIC_GOOGLE_STORAGE_IMAGE_URL}/markerIcon/medical.png`,
@@ -54,6 +56,9 @@ export default function GoogleMapBase({
   const [markerLoadingVisible, setMarkerLoadingVisible] = useState(false);
   const [zoom, setZoom] = useState(6);
   const { colorMode } = useColorMode();
+  const [exSelectedMarker, setExSelectedMarker] = useRecoilState(
+    exSelectedMarkerState
+  );
 
   const {
     data,
@@ -104,6 +109,28 @@ export default function GoogleMapBase({
       setSelectedMarker(null);
     }
   }, [currentSnap]);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setCenter({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      },
+      (error) => {
+        // 위치 정보를 가져오는 데 실패했을 때의 처리
+        console.error("Error getting geolocation", error);
+      },
+      { enableHighAccuracy: true }
+    );
+  }, []);
+
+  useEffect(() => {
+    if (exSelectedMarker) {
+      handleMarkerClick({ ...exSelectedMarker });
+    }
+  }, []);
 
   const handleLoad = (map) => {
     mapRef.current = map; // 지도 인스턴스 저장
@@ -251,7 +278,11 @@ export default function GoogleMapBase({
           justifyContent="center"
           cursor="pointer"
         >
-          <MapCard project={selectedMarker.project} isMd={false} />
+          <MapCard
+            project={selectedMarker.project}
+            position={selectedMarker.position}
+            isMd={false}
+          />
         </Flex>
       )}
     </>

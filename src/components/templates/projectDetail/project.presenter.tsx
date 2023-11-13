@@ -288,7 +288,7 @@ export default function ProjectPresenter({
 
                     <Flex px="0.75rem" gap="8px" flexDir="column">
                       <Flex gap="0.5rem">
-                        <Text fontSize="1rem" fontWeight="bold" color="black">
+                        <Text fontSize="1rem" fontWeight="bold">
                           {formatCreatedAtForUpdatedProject}
                         </Text>
                         <Text fontSize="1rem" fontWeight="medium" color="gray">

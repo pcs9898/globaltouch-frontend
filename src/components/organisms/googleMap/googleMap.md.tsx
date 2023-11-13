@@ -19,6 +19,8 @@ import { ISelectedMarker } from "./googleMap.interface";
 import MapCard from "../../molecules/mapCard";
 import MapMarkerLoader from "../../molecules/mapMarkerLoader";
 import { debounce } from "lodash";
+import { useRecoilState } from "recoil";
+import { exSelectedMarkerState } from "@/src/commons/libraries/recoil/home.recoil";
 
 const markerIconUrls = {
   Medical: `${process.env.NEXT_PUBLIC_GOOGLE_STORAGE_IMAGE_URL}/markerIcon/medical.png`,
@@ -43,6 +45,9 @@ export default function GoogleMapMd() {
   const [zoom, setZoom] = useState(6);
   const [markerLoadingVisible, setMarkerLoadingVisible] = useState(false);
   const { colorMode } = useColorMode();
+  const [exSelectedMarker, setExSelectedMarker] = useRecoilState(
+    exSelectedMarkerState
+  );
   const {
     data,
     loading: markerLoading,
@@ -103,6 +108,12 @@ export default function GoogleMapMd() {
       },
       { enableHighAccuracy: true }
     );
+  }, []);
+
+  useEffect(() => {
+    if (exSelectedMarker) {
+      handleMarkerClick({ ...exSelectedMarker });
+    }
   }, []);
 
   const handleLoad = (map) => {
@@ -250,7 +261,11 @@ export default function GoogleMapMd() {
           }}
           mapPaneName="floatPane"
         >
-          <MapCard project={selectedMarker.project} isMd={true} />
+          <MapCard
+            project={selectedMarker.project}
+            position={selectedMarker.position}
+            isMd={true}
+          />
         </OverlayViewF>
       )}
     </GoogleMap>

@@ -108,7 +108,7 @@ export type IMutation = {
   __typename?: 'Mutation';
   createProject: IProject;
   createProjectComment: IProjectComment;
-  createProjectDonation: ICreateProjectDonationResponseDto;
+  createProjectDonation: IProjectDonation;
   createProjectDonationForMobile: ICreateProjectDonationResponseDto;
   createUpdatedProject: IUpdatedProject;
   createUser: ICreateUserResponseDto;

@@ -1,6 +1,7 @@
+import { ISelectedMarker } from "@/src/components/organisms/googleMap/googleMap.interface";
 import { atom } from "recoil";
 
-export const lastCenterState = atom({
-  key: "lastCenterState",
-  default: "",
+export const exSelectedMarkerState = atom<ISelectedMarker>({
+  key: "exSelectedMarkerState",
+  default: null,
 });

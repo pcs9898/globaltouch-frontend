@@ -25,7 +25,21 @@ export const CREATE_PROJECT_DONATION = gql`
     $createProjectDonationDTO: CreateProjectDonationDTO!
   ) {
     createProjectDonation(createProjectDonationDTO: $createProjectDonationDTO) {
-      success
+      projectDonation_id
+      amount
+      created_at
+      project {
+        project_id
+        title
+        cityName
+        countryCode {
+          country_code
+        }
+        projectImages {
+          image_url
+          image_index
+        }
+      }
     }
   }
 `;
@@ -92,12 +106,7 @@ export default function CreateDonationModalContainer({
               },
             },
             update(cache, { data }) {
-              const id = cache.identify({
-                __typename: "Project",
-                id: project_id,
-              });
-
-              console.log(id);
+              const newDonation = data?.createProjectDonation;
 
               cache.modify({
                 fields: {
@@ -119,9 +128,16 @@ export default function CreateDonationModalContainer({
                   },
                 },
               });
+              cache.modify({
+                fields: {
+                  fetchUserLoggedInDonations: (prev, { readField }) => {
+                    return [newDonation, ...prev];
+                  },
+                },
+              });
             },
           });
-          if (result.data.createProjectDonation.success) {
+          if (result.data.createProjectDonation) {
             toast({
               status: "success",
               title: `Thanks so much your support, ${t(
