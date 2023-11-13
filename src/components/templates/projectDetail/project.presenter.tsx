@@ -295,11 +295,14 @@ export default function ProjectPresenter({
                           by {project.user.name}
                         </Text>
                       </Flex>
+
                       <Box fontSize="1rem" fontWeight="regular">
                         {updatedProjects[0].content}
-                        <ProjectUpdatesModalPresenter
-                          updatedProjects={updatedProjects}
-                        />
+                        {updatedProjects.length > 1 && (
+                          <ProjectUpdatesModalPresenter
+                            updatedProjects={updatedProjects}
+                          />
+                        )}
                       </Box>
                     </Flex>
                   </Flex>
