@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, useColorMode } from "@chakra-ui/react";
 import SignForm from "../../molecules/signForm";
 import SignGreetingSection from "../../molecules/signGreetingSection";
 import { ISignUpPresenter } from "./signup.types";
@@ -8,6 +8,8 @@ export default function SignupPresenter({
   signUpLoading,
   onSignGoogle,
 }: ISignUpPresenter) {
+  const { colorMode } = useColorMode();
+
   return (
     <Flex
       flexDir={{ base: "column", md: "row" }}
@@ -17,7 +19,7 @@ export default function SignupPresenter({
       alignItems={{ md: "center" }}
       bgColor={{ md: "#FBF8F6" }}
       borderRadius="0px"
-      pb="5.5rem"
+      pb={{ base: "5.5rem", md: "0px" }}
     >
       <Box
         w={{ md: "40%" }}
@@ -35,8 +37,9 @@ export default function SignupPresenter({
         px={{ base: "1rem", md: "3rem" }}
         shadow={{ md: "base" }}
         h={{ base: "60%", md: "100%" }}
+        borderRadius="0px"
         borderTopLeftRadius="50px"
-        bgColor="white"
+        bgColor={colorMode === "light" ? "white" : "gray.700"}
         justifyContent="center"
         alignItems={{ base: "flex-start", md: "center" }}
       >

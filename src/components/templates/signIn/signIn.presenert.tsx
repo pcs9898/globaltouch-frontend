@@ -19,7 +19,7 @@ export default function SignInPresenter({
       alignItems={{ md: "center" }}
       bgColor={{ md: colorMode === "light" ? "#FBF8F6" : "#1a202c" }}
       borderRadius="0px"
-      pb="5.5rem"
+      pb={{ base: "5.5rem", md: "0px" }}
     >
       <Box
         w={{ md: "40%" }}
@@ -37,6 +37,7 @@ export default function SignInPresenter({
         px={{ base: "1rem", md: "3rem" }}
         shadow={{ md: "base" }}
         h={{ base: "60%", md: "100%" }}
+        borderRadius="0px"
         borderTopLeftRadius="50px"
         bgColor={colorMode === "light" ? "white" : "gray.700"}
         justifyContent="center"
