@@ -13,7 +13,7 @@ export default function PrivacyPage() {
         <meta property="og:description" content="How we keep privacy" />
         <meta
           property="og:image"
-          content="https://storage.googleapis.com/uyvugugihohonodjiwqd/logo.svg"
+          content="https://storage.googleapis.com/uyvugugihohonodjiwqd2/ogImage.png"
         />
       </Head>
       <PrivacyContainer />;

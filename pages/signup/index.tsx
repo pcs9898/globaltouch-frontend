@@ -19,7 +19,7 @@ export default function Signup() {
         <meta property="og:description" content="Sign Up globalTouch" />
         <meta
           property="og:image"
-          content="https://storage.googleapis.com/uyvugugihohonodjiwqd/logo.svg"
+          content="https://storage.googleapis.com/uyvugugihohonodjiwqd2/ogImage.png"
         />
       </Head>
       <SignupContainer />

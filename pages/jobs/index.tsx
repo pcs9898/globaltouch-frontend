@@ -13,7 +13,7 @@ export default function JobsPage() {
         <meta property="og:description" content="Join globalTouch" />
         <meta
           property="og:image"
-          content="https://storage.googleapis.com/uyvugugihohonodjiwqd/logo.svg"
+          content="https://storage.googleapis.com/uyvugugihohonodjiwqd2/ogImage.png"
         />
       </Head>
       <JobsContainer />;

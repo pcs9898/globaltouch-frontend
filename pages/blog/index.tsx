@@ -27,7 +27,7 @@ export default function BlogPage() {
         <meta property="og:description" content="globalTouch Blog" />
         <meta
           property="og:image"
-          content="https://storage.googleapis.com/uyvugugihohonodjiwqd/logo.svg"
+          content="https://storage.googleapis.com/uyvugugihohonodjiwqd2/ogImage.png"
         />
       </Head>
       <BlogContainer />;
