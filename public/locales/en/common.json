@@ -133,5 +133,16 @@
   "endMessageTextForProject": "No more project found",
   "endMessageTextForDonationHistory": "No more donation history found",
   "countryDetailCardListHeaderText": "'s Projects",
-  "countryDetailCardListNoMoreText": "No ongoing projects in "
+  "countryDetailCardListNoMoreText": "No ongoing projects in ",
+  "footer2ProjectFor": "Project for",
+  "footer2Medical": "Medical",
+  "footer2Emergency": "Emergency",
+  "footer2PMemorial": "Memorial",
+  "footer2Education": "Education",
+  "footer2Nonprofit": "Nonprofit",
+  "footer2LearnMore": "Learn more",
+  "footer2whyGlobalTouch": "Why globalTouch",
+  "footer2CommonQuestions": "Common questions",
+  "footer2SupportedCountries": "Supported countries",
+  "footer2Resources": "Resources"
 }

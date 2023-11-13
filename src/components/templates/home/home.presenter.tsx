@@ -8,6 +8,7 @@ import {
   Show,
   Spinner,
   Text,
+  useColorMode,
 } from "@chakra-ui/react";
 import CardList from "../../organisms/cardList";
 import { IProject } from "@/src/commons/types/generated/types";
@@ -83,6 +84,7 @@ export default function HomePresenter({
   const [currentSnap, setCurrentSnap] = useState<number>();
   const ref = useRef<SheetRef>();
   const [snapPoints, setSnapPoints] = useState([0, 40]);
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
     setHeight(window.innerHeight);
@@ -160,12 +162,19 @@ export default function HomePresenter({
           onClose={() => {}}
           snapPoints={snapPoints}
           initialSnap={snap}
-          style={{ zIndex: 2 }}
+          style={{
+            zIndex: 2,
+            borderBottomLeftRadius: "0px",
+            borderBottomRightRadius: "0px",
+          }}
           onSnap={(snapIndex) => setCurrentSnap(snapIndex)}
         >
           <Sheet.Container
             style={{
-              borderRadius: "12px",
+              borderBottomLeftRadius: "0px",
+              borderBottomRightRadius: "0px",
+
+              backgroundColor: colorMode === "light" ? "white" : "#1a202c",
             }}
           >
             <Sheet.Header />

@@ -133,5 +133,16 @@
   "endMessageTextForProject": "더 이상의 프로젝트가 없습니다",
   "endMessageTextForDonationHistory": "더 이상의 후원기록이 없습니다",
   "countryDetailCardListHeaderText": "의 프로젝트들",
-  "countryDetailCardListNoMoreText": "에서 진행 중인 프로젝트가 없습니다"
+  "countryDetailCardListNoMoreText": "에서 진행 중인 프로젝트가 없습니다",
+  "footer2ProjectFor": "프로젝트",
+  "footer2Medical": "의료",
+  "footer2Emergency": "응급",
+  "footer2PMemorial": "기념",
+  "footer2Education": "교육",
+  "footer2Nonprofit": "비영리",
+  "footer2LearnMore": "더 배우기",
+  "footer2whyGlobalTouch": "왜 globalTouch",
+  "footer2CommonQuestions": "자주묻는 질문",
+  "footer2SupportedCountries": "지원 국가",
+  "footer2Resources": "자원"
 }

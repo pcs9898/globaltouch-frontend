@@ -1,4 +1,4 @@
-import { Flex, Spinner, useToast } from "@chakra-ui/react";
+import { Flex, Spinner, useColorMode, useToast } from "@chakra-ui/react";
 import {
   GoogleMap,
   MarkerF,
@@ -13,7 +13,7 @@ import {
   IQueryFetchMarkersArgs,
 } from "@/src/commons/types/generated/types";
 
-import { myStyles } from "./googleMap.styles";
+import { myDarkThemeStyles, myLightThemeStyles } from "./googleMap.styles";
 import { FETCH_MARKERS } from "./googleMap.queries";
 import { ISelectedMarker } from "./googleMap.interface";
 import MapCard from "../../molecules/mapCard";
@@ -53,6 +53,7 @@ export default function GoogleMapBase({
   const [selectedMarker, setSelectedMarker] = useState<ISelectedMarker>();
   const [markerLoadingVisible, setMarkerLoadingVisible] = useState(false);
   const [zoom, setZoom] = useState(6);
+  const { colorMode } = useColorMode();
 
   const {
     data,
@@ -167,7 +168,8 @@ export default function GoogleMapBase({
         center={center}
         zoom={zoom}
         options={{
-          styles: myStyles,
+          styles:
+            colorMode === "light" ? myLightThemeStyles : myDarkThemeStyles,
           gestureHandling: "greedy",
           restriction: {
             latLngBounds: {

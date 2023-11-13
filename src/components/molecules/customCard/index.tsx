@@ -8,6 +8,7 @@ import {
   Progress,
   Stack,
   Text,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import { useCountryCodeToLocaleCountryName } from "../../customhooks/useCountryCodeToLocaleCountryName";
@@ -38,6 +39,7 @@ export default function CustomCard({ project, donation }: ICustomCard) {
     amount: project?.amount_raised ?? donation?.amount,
   });
   const formatCreatedAt = useFormatTimeAgo({ timestamp: donation?.created_at });
+  const { colorMode } = useColorMode();
 
   return (
     (project || donation) && (
@@ -49,7 +51,9 @@ export default function CustomCard({ project, donation }: ICustomCard) {
         href={`/project/${project?.project_id ?? donation?.project.project_id}`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        bgColor={isHovered ? "gray.100" : "null"}
+        bgColor={
+          isHovered ? (colorMode === "light" ? "gray.100" : "gray.700") : "null"
+        }
         style={{
           transition: "all 0.3s ease-in-out",
         }}
@@ -104,7 +108,7 @@ export default function CustomCard({ project, donation }: ICustomCard) {
                   <Text fontWeight="semibold">{formattedAmount}</Text>
                 )}
                 {donation && <Text>‧</Text>}
-                <Text color={project ? "black" : "gray"} fontWeight="medium">
+                <Text color={project ? null : "gray"} fontWeight="medium">
                   {project ? t("projectCardRaised") : formatCreatedAt}
                 </Text>
               </Flex>

@@ -64,8 +64,6 @@ export default function PaymentCompletePage({ query }) {
             },
           });
 
-          console.log(result.data.createProjectDonationForMobile.success);
-          console.log(query.imp_uid);
           if (result.data.createProjectDonationForMobile.success === true) {
             toast({
               status: "success",

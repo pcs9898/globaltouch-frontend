@@ -135,14 +135,7 @@ export default function CustomModal({
           h={{ base: "100vh", md: "80%" }}
           position="relative"
         >
-          <ModalHeader
-            p="1rem"
-            w="100%"
-            position="sticky"
-            top={0}
-            zIndex={1}
-            bg="white"
-          >
+          <ModalHeader p="1rem" w="100%" position="sticky" top={0} zIndex={1}>
             <Flex width="100%" alignItems="center">
               {(modalHeaderBtn ||
                 (!modalHeaderBtn && breakpoint === "base")) && (

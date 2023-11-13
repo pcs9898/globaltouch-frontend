@@ -13,6 +13,7 @@ import {
   InputRightElement,
   Spinner,
   Text,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import CardList from "../../organisms/cardList";
@@ -63,6 +64,7 @@ export default function SearchPresenter({
   cardListProps: { projects, loading, fetchMore, hasMore, scrollRef },
 }: ISearchPresenterProps) {
   const { t } = useTranslation();
+  const { colorMode } = useColorMode();
 
   return (
     <Box
@@ -96,7 +98,7 @@ export default function SearchPresenter({
             offsetBottom={20}
             style={{
               zIndex: "1",
-              backgroundColor: "white",
+              backgroundColor: colorMode === "light" ? "white" : "#1a202c",
               borderRadius: "0px",
               width: "100%",
             }}
@@ -106,7 +108,6 @@ export default function SearchPresenter({
               gap="1rem"
               flexDirection="column"
               borderRadius="0px"
-              bg="white"
               pb="1rem"
               width="100%"
             >

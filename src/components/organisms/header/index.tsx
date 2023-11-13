@@ -96,6 +96,7 @@ export default function Header({}: IHeaderProps) {
       px={{ base: "0.5rem", md: "1rem" }}
       w="100%"
       borderRadius="0px"
+      bgColor={colorMode === "light" ? "white" : "#1a202c"}
     >
       {/* have to add shadow up to uri */}
       <Show above="md">
@@ -138,12 +139,12 @@ export default function Header({}: IHeaderProps) {
         cursor="pointer"
         display="flex"
         flexDir="row"
-        gap={{ base: "0.4rem", md: "0.5rem" }}
+        gap={{ base: "0.4rem", md: "0.6rem" }}
       >
         <Image
           src={`${process.env.NEXT_PUBLIC_GOOGLE_STORAGE_IMAGE_URL}/logo.svg`}
           alt="logo"
-          w={{ base: "0.8rem", md: "1.1rem" }}
+          w={{ base: "0.8rem", md: "1rem" }}
           onClick={() => router.push("/")}
           cursor="pointer"
         />

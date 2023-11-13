@@ -75,7 +75,7 @@ export default function FooterForStatic() {
         >
           <Flex flexDir="column">
             <Text fontWeight="semibold" ml="1rem" mb="0.25rem">
-              Project for
+              {t("footer2ProjectFor")}
             </Text>
             <Button
               variant="ghost"
@@ -83,7 +83,7 @@ export default function FooterForStatic() {
               fontWeight="normal"
               justifyContent="flex-start"
             >
-              Medical
+              {t("footer2Medical")}
             </Button>
             <Button
               variant="ghost"
@@ -91,7 +91,7 @@ export default function FooterForStatic() {
               fontWeight="normal"
               justifyContent="flex-start"
             >
-              Emergency
+              {t("footer2Emergency")}
             </Button>
             <Button
               variant="ghost"
@@ -99,7 +99,7 @@ export default function FooterForStatic() {
               fontWeight="normal"
               justifyContent="flex-start"
             >
-              Memorial
+              {t("footer2PMemorial")}
             </Button>
             <Button
               variant="ghost"
@@ -107,7 +107,7 @@ export default function FooterForStatic() {
               fontWeight="normal"
               justifyContent="flex-start"
             >
-              Education
+              {t("footer2Education")}
             </Button>
             <Button
               variant="ghost"
@@ -115,12 +115,12 @@ export default function FooterForStatic() {
               fontWeight="normal"
               justifyContent="flex-start"
             >
-              Nonprofit
+              {t("footer2Nonprofit")}
             </Button>
           </Flex>
           <Flex flexDir="column">
             <Text fontWeight="semibold" ml="1rem" mb="0.25rem">
-              Learn more
+              {t("footer2LearnMore")}
             </Text>
             <Button
               variant="ghost"
@@ -138,7 +138,7 @@ export default function FooterForStatic() {
               fontWeight="normal"
               justifyContent="flex-start"
             >
-              Why globalTouch
+              {t("footer2whyGlobalTouch")}
             </Button>
             <Button
               variant="ghost"
@@ -156,7 +156,7 @@ export default function FooterForStatic() {
               fontWeight="normal"
               justifyContent="flex-start"
             >
-              Common questions
+              {t("footer2CommonQuestions")}
             </Button>
             <Button
               variant="ghost"
@@ -164,13 +164,13 @@ export default function FooterForStatic() {
               fontWeight="normal"
               justifyContent="flex-start"
             >
-              Supported countries
+              {t("footer2SupportedCountries")}
             </Button>
           </Flex>
 
           <Flex flexDir="column">
             <Text fontWeight="semibold" ml="1rem" mb="0.25rem">
-              Resources
+              {t("footer2Resources")}
             </Text>
             <Button
               as={Link}
