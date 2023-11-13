@@ -100,7 +100,7 @@ export default function GoogleMapBase({
   }, [markerLoading]);
 
   useEffect(() => {
-    if (currentSnap === 0) {
+    if (currentSnap === 0 || currentSnap === 1) {
       setSelectedMarker(null);
     }
   }, [currentSnap]);
@@ -133,7 +133,7 @@ export default function GoogleMapBase({
   };
 
   const handleMarkerClick = ({ project, position }) => {
-    setSnap(1);
+    setSnap(2);
 
     setSelectedMarker({ project: project, position });
     setCenter(position);
