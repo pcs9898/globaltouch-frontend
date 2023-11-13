@@ -14,7 +14,7 @@ export default function ApiPage() {
         <meta property="og:description" content="API globalTouch" />
         <meta
           property="og:image"
-          content="https://storage.googleapis.com/uyvugugihohonodjiwqd/logo.svg"
+          content="https://storage.googleapis.com/uyvugugihohonodjiwqd2/ogImage.png"
         />
       </Head>
       <ApiContainer />

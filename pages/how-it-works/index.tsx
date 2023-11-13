@@ -13,7 +13,7 @@ export default function HowItWorksPage() {
         <meta property="og:description" content="How start a new project" />
         <meta
           property="og:image"
-          content="https://storage.googleapis.com/uyvugugihohonodjiwqd/logo.svg"
+          content="https://storage.googleapis.com/uyvugugihohonodjiwqd2/ogImage.png"
         />
       </Head>
       <HowItWorksContainer />

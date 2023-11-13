@@ -13,7 +13,7 @@ export default function LocationsPage() {
         <meta property="og:description" content="Locations globalTouch" />
         <meta
           property="og:image"
-          content="https://storage.googleapis.com/uyvugugihohonodjiwqd/logo.svg"
+          content="https://storage.googleapis.com/uyvugugihohonodjiwqd2/ogImage.png"
         />
       </Head>
       <LocationsContainer />;
