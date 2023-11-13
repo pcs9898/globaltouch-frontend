@@ -17,6 +17,9 @@ import Head from "next/head.js";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
+  if (process.env.NODE_ENV !== "production") {
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+  }
 
   useEffect(() => {
     const preferredLocale = Cookies.get("locale");

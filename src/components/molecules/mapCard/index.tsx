@@ -2,25 +2,36 @@ import { IProject } from "@/src/commons/types/generated/types";
 import { Box, Card, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { useCountryCodeToLocaleCountryName } from "../../customhooks/useCountryCodeToLocaleCountryName";
 import { useRouter } from "next/router";
+import { useSetRecoilState } from "recoil";
+import { exSelectedMarkerState } from "@/src/commons/libraries/recoil/home.recoil";
 
 interface IRenderOverlayMdMapCardProps {
   project: IProject;
+  position: {
+    lat: number;
+    lng: number;
+  };
   isMd: boolean;
 }
 
 export default function MapCard({
   project,
+  position,
   isMd,
 }: IRenderOverlayMdMapCardProps) {
   const countryName = useCountryCodeToLocaleCountryName({
     country_code: project?.countryCode.country_code,
   });
   const router = useRouter();
+  const setExSelectedMarker = useSetRecoilState(exSelectedMarkerState);
 
   return (
     <Card
       zIndex={5}
-      onClick={() => router.push(`/project/${project.project_id}`)}
+      onClick={() => {
+        setExSelectedMarker({ project, position });
+        router.push(`/project/${project.project_id}`);
+      }}
       w={isMd ? "20rem" : "100%"}
       maxW={isMd === false && "26rem"}
       shadow="dark-lg"

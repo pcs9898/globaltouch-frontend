@@ -37,6 +37,8 @@ import styled from "@emotion/styled";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import GoogleMapMd from "../../organisms/googleMap/googleMap.md";
 import GoogleMapBase from "../../organisms/googleMap/googleMap.base";
+import { exSelectedMarkerState } from "@/src/commons/libraries/recoil/home.recoil";
+import { useRecoilState } from "recoil";
 
 export interface IHomePresenterProps {
   cardListProps?: {
@@ -86,6 +88,10 @@ export default function HomePresenter({
   const [snapPoints, setSnapPoints] = useState([0, 40]);
   const { colorMode } = useColorMode();
 
+  const [exSelectedMarker, setExSelectedMarker] = useRecoilState(
+    exSelectedMarkerState
+  );
+
   useEffect(() => {
     setHeight(window.innerHeight);
   }, []);
@@ -103,6 +109,10 @@ export default function HomePresenter({
 
   useEffect(() => {
     setSnapPoints([window.innerHeight - 3.5 * 17, window.innerHeight / 2, 40]);
+
+    if (exSelectedMarker) {
+      setSnap(2);
+    }
   }, []);
 
   return (
