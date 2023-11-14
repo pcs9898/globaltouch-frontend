@@ -24,11 +24,49 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
+import ReactCountryFlag from "react-country-flag";
 
 const localeObg = {
-  en: ["🇺🇸 English", "🇰🇷 Korean"],
-  ko: ["🇰🇷 한국어", "🇺🇸 영어"],
+  en: [
+    <Flex key="en">
+      <ReactCountryFlag
+        countryCode="US"
+        svg
+        className="emojiFlag"
+        style={{ borderRadius: "0px" }}
+      />
+      <Text>English</Text>
+    </Flex>,
+    <Flex key="kr">
+      <ReactCountryFlag
+        countryCode="KR"
+        svg
+        className="emojiFlag"
+        style={{ borderRadius: "0px" }}
+      />
+      <Text>Korean</Text>
+    </Flex>,
+  ],
+  ko: [
+    <Flex key="en">
+      <ReactCountryFlag
+        countryCode="KR"
+        svg
+        className="emojiFlag"
+        style={{ borderRadius: "0px" }}
+      />
+      <Text>한국어</Text>
+    </Flex>,
+    <Flex key="kr">
+      <ReactCountryFlag
+        countryCode="US"
+        svg
+        className="emojiFlag"
+        style={{ borderRadius: "0px" }}
+      />
+      <Text>영어</Text>
+    </Flex>,
+  ],
 };
 
 export default function FooterForStatic() {
