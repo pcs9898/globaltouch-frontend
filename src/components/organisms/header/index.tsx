@@ -54,15 +54,15 @@ interface IHeaderProps {}
 
 const localeObg = {
   en: [
-    <ReactCountryFlag key="us" countryCode="US" svg />,
+    <ReactCountryFlag key="us" countryCode="US" svg className="emojiFlag" />,
     " English",
-    <ReactCountryFlag countryCode="KR" key="us" svg />,
+    <ReactCountryFlag countryCode="KR" key="us" svg className="emojiFlag" />,
     " Korean",
   ],
   ko: [
-    <ReactCountryFlag key="kr" countryCode="KR" svg />,
+    <ReactCountryFlag key="kr" countryCode="KR" svg className="emojiFlag" />,
     " 한국어",
-    <ReactCountryFlag countryCode="US" key="kr" svg />,
+    <ReactCountryFlag countryCode="US" key="kr" svg className="emojiFlag" />,
     " 영어",
   ],
 };
