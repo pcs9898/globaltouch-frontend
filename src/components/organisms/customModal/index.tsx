@@ -13,6 +13,7 @@ import {
   Show,
   Text,
   useBreakpointValue,
+  useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
 import { ArrowBackIosNew, Close } from "@mui/icons-material";
@@ -62,6 +63,7 @@ export default function CustomModal({
   const breakpoint = useBreakpointValue({ base: "base", md: "md" });
   const scrollBehavior = useBreakpointValue({ base: "outside", md: "inside" });
   const router = useRouter();
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
     onClose();
@@ -135,7 +137,17 @@ export default function CustomModal({
           h={{ base: "100vh", md: "80%" }}
           position="relative"
         >
-          <ModalHeader p="1rem" w="100%" position="sticky" top={0} zIndex={1}>
+          <ModalHeader
+            p="1rem"
+            w="100%"
+            position="sticky"
+            top={0}
+            zIndex={1}
+            style={{
+              zIndex: 2,
+              backgroundColor: colorMode === "light" ? "white" : "#1a202c",
+            }}
+          >
             <Flex width="100%" alignItems="center">
               {(modalHeaderBtn ||
                 (!modalHeaderBtn && breakpoint === "base")) && (

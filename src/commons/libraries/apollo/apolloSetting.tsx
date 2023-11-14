@@ -38,6 +38,7 @@ export default function ApolloSetting(props) {
   const toast = useToast();
   const { t } = useTranslation();
   const router = useRouter();
+
   useEffect(() => {
     void restoreAccessToken.toPromise().then((newAccessToken) => {
       if (!newAccessToken) return;
@@ -59,7 +60,11 @@ export default function ApolloSetting(props) {
           profile_image_url,
           user_id,
         });
-        if (window.history.state.url !== "/payment/complete") {
+        if (
+          !["/payment/complete", "/sign-google"].includes(
+            window.history.state.url
+          )
+        ) {
           toast({
             status: "success",
             title: t("signPageSignInToastGreeting") + ` ${name}`,
