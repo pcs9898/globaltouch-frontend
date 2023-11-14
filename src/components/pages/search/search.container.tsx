@@ -10,6 +10,8 @@ import {
 import { SEARCH_PROJECTS } from "./search.queries";
 import { debounce } from "lodash";
 
+let isAndroid;
+
 export default function SearchContainer() {
   const [selectedTabs, setSelectedTabs] = useState("Basic");
   const [basicSelectedTab, setSelectedBasicTab] = useState("Trending");
@@ -43,6 +45,10 @@ export default function SearchContainer() {
     SEARCH_PROJECTS
   );
 
+  useEffect(() => {
+    isAndroid = /Android/i.test(navigator.userAgent);
+  }, []);
+
   const onClickTabBasicTab = (tab: string) => {
     scrollRefSearchCardList?.current?.scrollTo(0, 0);
     setSelectedBasicTab(tab);
@@ -64,7 +70,9 @@ export default function SearchContainer() {
   const debouncedSearch = debounce((searchedTerm) => {
     if (tabBtnRef.current && document.activeElement !== tabBtnRef.current) {
       tabBtnRef.current.click();
-      inputRef.current.focus();
+      if (!isAndroid) {
+        inputRef.current.focus();
+      }
     }
     setSearchTerm(searchedTerm);
     setSelectedTabs("Search");
@@ -86,7 +94,9 @@ export default function SearchContainer() {
       setSelectedSearchTab("All");
       if (tabBtnRef.current) {
         tabBtnRef?.current?.click();
-        inputRef.current.focus();
+        if (!isAndroid) {
+          inputRef.current.focus();
+        }
       }
       return;
     }
