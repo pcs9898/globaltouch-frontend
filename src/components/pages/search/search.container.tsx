@@ -67,7 +67,9 @@ export default function SearchContainer() {
     });
   };
 
-  const debouncedSearch = debounce((searchedTerm) => {
+  let timerId;
+
+  const onSearch = (searchedTerm) => {
     if (tabBtnRef.current && document.activeElement !== tabBtnRef.current) {
       tabBtnRef.current.click();
       if (!isAndroid) {
@@ -85,7 +87,7 @@ export default function SearchContainer() {
         offset: 1,
       },
     });
-  }, 500);
+  };
 
   const onChangeInput = (searchedTerm: string) => {
     if (searchedTerm === "") {
@@ -101,7 +103,13 @@ export default function SearchContainer() {
       return;
     }
 
-    debouncedSearch(searchedTerm);
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+
+    timerId = setTimeout(() => {
+      onSearch(searchedTerm);
+    }, 300);
   };
 
   const fetchMoreSearchData = () => {
