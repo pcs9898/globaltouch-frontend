@@ -61,6 +61,24 @@ export default function SearchContainer() {
     });
   };
 
+  const debouncedSearch = debounce((searchedTerm) => {
+    if (tabBtnRef.current && document.activeElement !== tabBtnRef.current) {
+      tabBtnRef.current.click();
+      inputRef.current.focus();
+    }
+    setSearchTerm(searchedTerm);
+    setSelectedTabs("Search");
+    setSelectedBasicTab("Trending");
+
+    searchProjects({
+      variables: {
+        searchTerm: searchedTerm,
+        project_category: "All",
+        offset: 1,
+      },
+    });
+  }, 500);
+
   const onChangeInput = (searchedTerm: string) => {
     if (searchedTerm === "") {
       setSelectedTabs("Basic");
@@ -73,26 +91,7 @@ export default function SearchContainer() {
       return;
     }
 
-    const search = () => {
-      if (tabBtnRef.current && document.activeElement !== tabBtnRef.current) {
-        tabBtnRef.current.click();
-        inputRef.current.focus();
-      }
-      setSearchTerm(searchedTerm);
-      setSelectedTabs("Search");
-      setSelectedBasicTab("Trending");
-
-      searchProjects({
-        variables: {
-          searchTerm: searchedTerm,
-          project_category: "All",
-          offset: 1,
-        },
-      });
-    };
-
-    const debouncedSearch = debounce(search, 500);
-    debouncedSearch();
+    debouncedSearch(searchedTerm);
   };
 
   const fetchMoreSearchData = () => {
