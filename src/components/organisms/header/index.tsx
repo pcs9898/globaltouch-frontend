@@ -43,12 +43,28 @@ import { userState } from "@/src/commons/libraries/recoil/global.recoil";
 import Settings from "../settings";
 import CreateProjectModalPresenter from "../../templates/createProjectModal/createProjectModal.presnter";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import ReactCountryFlag from "react-country-flag";
 
 interface IHeaderProps {}
 
+// const localeObg = {
+//   en: ["🇺🇸 English", "🇰🇷 Korean"],
+//   ko: ["🇰🇷 한국어", "🇺🇸 영어"],
+// };
+
 const localeObg = {
-  en: ["🇺🇸 English", "🇰🇷 Korean"],
-  ko: ["🇰🇷 한국어", "🇺🇸 영어"],
+  en: [
+    <ReactCountryFlag key="us" countryCode="US" svg />,
+    " English",
+    <ReactCountryFlag countryCode="KR" key="us" svg />,
+    " Korean",
+  ],
+  ko: [
+    <ReactCountryFlag key="kr" countryCode="KR" svg />,
+    " 한국어",
+    <ReactCountryFlag countryCode="US" key="kr" svg />,
+    " 영어",
+  ],
 };
 
 const colorProps = {
@@ -71,6 +87,11 @@ export default function Header({}: IHeaderProps) {
   const [userLoggedInInfo, setUserLoggedInInfo] = useRecoilState(userState);
 
   const currentLocale = router.locale;
+
+  const localeObg = {
+    en: ["🇺🇸 English", "🇰🇷 Korean"],
+    ko: ["🇰🇷 한국어", "🇺🇸 영어"],
+  };
 
   useEffect(() => {
     const handleRouteChange = () => {
