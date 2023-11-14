@@ -29,8 +29,6 @@ import CustomSkeleton from "../../molecules/customSkeleton";
 import CustomCard from "../../molecules/customCard";
 import StickyBox from "react-sticky-box";
 import CustomSimpleCard from "../../molecules/customSimpleCard";
-import { StickyContainer, Sticky } from "react-sticky";
-import Headroom from "react-headroom";
 
 export interface ISearchPresenterProps {
   onChangeInput: (searchedTerm: string) => void;
