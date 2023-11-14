@@ -88,11 +88,6 @@ export default function Header({}: IHeaderProps) {
 
   const currentLocale = router.locale;
 
-  const localeObg = {
-    en: ["🇺🇸 English", "🇰🇷 Korean"],
-    ko: ["🇰🇷 한국어", "🇺🇸 영어"],
-  };
-
   useEffect(() => {
     const handleRouteChange = () => {
       if (isOpen) {
