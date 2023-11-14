@@ -161,7 +161,7 @@ export default function HomePresenter({
         <Sheet
           ref={ref}
           isOpen={isOpen}
-          onClose={() => ref.current?.snapTo(1)}
+          onClose={() => ref.current?.snapTo(2)}
           snapPoints={snapPoints}
           initialSnap={snap}
           style={{

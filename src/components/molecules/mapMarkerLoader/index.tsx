@@ -1,7 +1,8 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, useColorMode } from "@chakra-ui/react";
 import PulseLoader from "react-spinners/PulseLoader";
 
 export default function MapMarkerLoader() {
+  const { colorMode } = useColorMode();
   return (
     <Flex
       position="absolute"
@@ -9,7 +10,7 @@ export default function MapMarkerLoader() {
       left="50%"
       transform="translate(-50%, -50%)"
       height="2.5rem"
-      bgColor="white"
+      bgColor={colorMode === "light" ? "white" : "gray.700"}
       justifyContent="center"
       alignItems="center"
       w="4rem"
