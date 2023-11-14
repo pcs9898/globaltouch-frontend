@@ -54,16 +54,48 @@ interface IHeaderProps {}
 
 const localeObg = {
   en: [
-    <ReactCountryFlag key="us" countryCode="US" svg className="emojiFlag" />,
-    " English",
-    <ReactCountryFlag countryCode="KR" key="us" svg className="emojiFlag" />,
-    " Korean",
+    <>
+      <ReactCountryFlag
+        countryCode="US"
+        key="kr"
+        svg
+        className="emojiFlag"
+        style={{ borderRadius: "0px" }}
+      />
+      <Text>English</Text>
+    </>,
+    <>
+      <ReactCountryFlag
+        key="kr"
+        countryCode="KR"
+        svg
+        className="emojiFlag"
+        style={{ borderRadius: "0px" }}
+      />
+      <Text>Korean</Text>
+    </>,
   ],
   ko: [
-    <ReactCountryFlag key="kr" countryCode="KR" svg className="emojiFlag" />,
-    " 한국어",
-    <ReactCountryFlag countryCode="US" key="kr" svg className="emojiFlag" />,
-    " 영어",
+    <>
+      <ReactCountryFlag
+        key="kr"
+        countryCode="KR"
+        svg
+        className="emojiFlag"
+        style={{ borderRadius: "0px" }}
+      />
+      <Text>한국어</Text>
+    </>,
+    <>
+      <ReactCountryFlag
+        countryCode="US"
+        key="kr"
+        svg
+        className="emojiFlag"
+        style={{ borderRadius: "0px" }}
+      />
+      <Text>영어</Text>
+    </>,
   ],
 };
 
