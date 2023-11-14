@@ -92,7 +92,7 @@ export default function SearchPresenter({
             {t("topSearchHeaderText")}
           </Text>
           <StickyBox
-            offsetTop={10}
+            offsetTop={0}
             offsetBottom={20}
             style={{
               zIndex: "1",
