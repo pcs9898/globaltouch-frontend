@@ -9,6 +9,7 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
+  Flex,
   HStack,
   Hide,
   IconButton,
@@ -47,55 +48,46 @@ import ReactCountryFlag from "react-country-flag";
 
 interface IHeaderProps {}
 
-// const localeObg = {
-//   en: ["🇺🇸 English", "🇰🇷 Korean"],
-//   ko: ["🇰🇷 한국어", "🇺🇸 영어"],
-// };
-
 const localeObg = {
   en: [
-    <>
+    <Flex key="en">
       <ReactCountryFlag
         countryCode="US"
-        key="kr"
         svg
         className="emojiFlag"
         style={{ borderRadius: "0px" }}
       />
       <Text>English</Text>
-    </>,
-    <>
+    </Flex>,
+    <Flex key="kr">
       <ReactCountryFlag
-        key="kr"
         countryCode="KR"
         svg
         className="emojiFlag"
         style={{ borderRadius: "0px" }}
       />
       <Text>Korean</Text>
-    </>,
+    </Flex>,
   ],
   ko: [
-    <>
+    <Flex key="en">
       <ReactCountryFlag
-        key="kr"
         countryCode="KR"
         svg
         className="emojiFlag"
         style={{ borderRadius: "0px" }}
       />
       <Text>한국어</Text>
-    </>,
-    <>
+    </Flex>,
+    <Flex key="kr">
       <ReactCountryFlag
         countryCode="US"
-        key="kr"
         svg
         className="emojiFlag"
         style={{ borderRadius: "0px" }}
       />
       <Text>영어</Text>
-    </>,
+    </Flex>,
   ],
 };
 
