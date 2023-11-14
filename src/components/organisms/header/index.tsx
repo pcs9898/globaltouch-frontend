@@ -50,7 +50,7 @@ interface IHeaderProps {}
 
 const localeObg = {
   en: [
-    <Flex key="en">
+    <Flex key="en" gap="0.25rem" alignItems="center">
       <ReactCountryFlag
         countryCode="US"
         svg
@@ -59,7 +59,7 @@ const localeObg = {
       />
       <Text>English</Text>
     </Flex>,
-    <Flex key="kr">
+    <Flex key="kr" gap="0.25rem" alignItems="center">
       <ReactCountryFlag
         countryCode="KR"
         svg
@@ -70,7 +70,7 @@ const localeObg = {
     </Flex>,
   ],
   ko: [
-    <Flex key="en">
+    <Flex key="en" gap="0.25rem" alignItems="center">
       <ReactCountryFlag
         countryCode="KR"
         svg
@@ -79,7 +79,7 @@ const localeObg = {
       />
       <Text>한국어</Text>
     </Flex>,
-    <Flex key="kr">
+    <Flex key="kr" gap="0.25rem" alignItems="center">
       <ReactCountryFlag
         countryCode="US"
         svg
