@@ -40,6 +40,9 @@ const App = ({ Component, pageProps }: AppProps) => {
           rel="icon"
           href={`${process.env.NEXT_PUBLIC_GOOGLE_STORAGE_IMAGE_URL}/favicon.ico`}
         />
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
       </Head>
       <ChakraProvider theme={customTheme}>
         <RecoilRoot>
