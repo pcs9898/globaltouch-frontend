@@ -13,7 +13,7 @@
 - [GlobalTouch Figma 디자인](https://www.figma.com/design/Ox761mMCN4pyo54zBv9rUG/globalTouch-beta?node-id=2273-12870&p=f&t=WiYBci88ts3nwuiQ-0)
 
 ## 프론트엔드 프로젝트 🌐
-- [프론트엔드 프로젝트 깃헙 링크](https://github.com/pcs9898/globaltouch-frontend)
+- [백엔드 프로젝트 깃헙 링크](https://github.com/pcs9898/globaltouch-backend)
 
 ## 제작 기간 📅 && 참여 인원 🧑‍🤝‍🧑
 - 2023.10.15 ~ 2023.11.14 (약 4주)
